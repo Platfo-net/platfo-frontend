@@ -1,0 +1,14 @@
+@import "../utils//variables";
+
+.select-box {
+  label {
+    margin: 8px 14px;
+    color: $light-text;
+    font-weight: 500;
+  }
+  &:hover {
+    label {
+      color: $primary;
+    }
+  }
+}

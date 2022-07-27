@@ -1,0 +1,64 @@
+@import "../utils/variables";
+
+.price-box {
+    padding: 32px;
+    border-radius: $border-radius;
+    &.active {
+        background-color: $primary;
+
+        [class~="ant-typography"] {
+            color: $on-primary;
+            font-size: $font-size-sm;
+        }
+
+        [class~="anticon"] {
+            font-size: 10px;
+            color: $on-primary
+        }
+    
+
+        
+    }
+
+    &.disabled {
+        opacity: 0.7;
+        [class~="ant-typography"] {
+            color: $on-gray-disabled;
+            font-size: $font-size-sm;
+            &.light {
+                color: $on-gray-disabled;
+            }
+        }
+
+        [class~="anticon"] {
+            font-size: 10px;
+            color:  $on-gray-disabled;
+        }
+    
+
+        
+    }
+
+    .price {
+        text-align: center;
+        [class~="ant-typography"] {
+        font-size: $font-size-lg;
+        }
+    }
+    .type {
+        padding: 4px;
+        border-radius: $border-radius;
+        text-align: center;
+        [class~="ant-typography"] {
+            color: #fff;
+            font-size: $font-size-md;
+            font-weight: 500;
+        }
+
+        &.bronze {
+            background: linear-gradient(90deg, rgba(199,137,85,1) 0%, rgba(240,174,116,1) 18%, rgba(90,52,30,1) 49%, rgba(214,154,119,1) 100%);
+        }
+        &.gold {background: linear-gradient(90deg, rgba(199,139,56,1) 0%, rgba(252,253,136,1) 29%, rgba(190,123,42,1) 68%, rgba(235,218,110,1) 100%);}
+        &.silver {background: linear-gradient(90deg, rgba(212,212,212,1) 0%, rgba(112,114,119,1) 21%, rgba(212,212,212,1) 77%, rgba(116,116,116,1) 100%);}
+    }
+}

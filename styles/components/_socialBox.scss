@@ -1,0 +1,15 @@
+.social-box {
+  border-radius: $border-radius;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 1px solid #fff;
+  &:hover {
+    border: $border;
+  }
+  .avatar-container {
+    border-radius: 9999px;
+    border: $border;
+    margin: auto;
+    width: 50%;
+    max-width: 80px;
+  }
+}

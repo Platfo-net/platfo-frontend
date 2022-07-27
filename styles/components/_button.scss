@@ -1,0 +1,24 @@
+@import "../utils/variables";
+button {
+  cursor: pointer;
+  border-radius: $border-radius;
+  background-color: transparent;
+  padding: 8px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  &.secondary {
+    background-color: $secondary;
+    color: $on-secondary;
+  }
+
+  &.accent {
+    background-color: $accent;
+    color: $on-accent;
+  }
+
+  &.primary {
+    background-color: $primary;
+    color: $on-primary;
+  }
+}

@@ -1,0 +1,48 @@
+// *** colors
+$primary: #32297c;
+$on-primary: #fff;
+$secondary: #ffa000;
+$on-secondary: #fff;
+$accent: #88e0f4;
+$on-accent: #fff;
+$dark-text: #171043;
+$light-text: #554f75;
+$gray: #c2cde2;
+$gray-disabled: #e0e0e0;
+$on-gray-disabled: #9b9b9b;
+$gray-background: #f6f6fc;
+$background: #fff;
+$warning: #f88818;
+$danger: #fc5226;
+$success: #60d6a4;
+
+$facebook: #4267b2;
+$on-facebook: #fff;
+
+// *** border
+$border-radius: 24px;
+$border: 1px solid $gray;
+$border-primary: 1px solid $primary;
+
+// *** font
+$font-family: "IRANSans", "Sans Serif", monospace;
+$font-size-xlg: 24px;
+$font-size-lg: 20px;
+$font-size-md: 16px;
+$font-size-xsm: 14px;
+$font-size-sm: 12px;
+
+// *** landing Layout ***
+$landing-header-height: 64px;
+$landing-header-background: #fff;
+$on-landing-header-background: #554f75;
+
+// *** dashboard Layout ***
+$dashboard-header-height: 64px;
+$dashboard-sider-width: 220px;
+$dashboard-footer-height: 32px;
+$dashboard-background: #fff;
+
+// *** chat flow ***
+$edge-color: $light-text;
+$edge-color-selected: $primary;
