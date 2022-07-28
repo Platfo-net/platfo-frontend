@@ -11,11 +11,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    let dir = router.locale == "fa-IR" ? "rtl" : "ltr";
+    console.log(router.locale);
+    let dir = router.locale === "fa-IR" ? "rtl" : "ltr";
     document.querySelector("html").setAttribute("dir", dir);
+    document.querySelector("body").style.direction = dir;
   }, [router.locale]);
 
   useEffect(() => {
+    // Default language
+    document.querySelector("html").setAttribute("dir", "rtl");
+    document.querySelector("body").style.direction = "rtl";
+    router.push(router.pathname, router.pathname, { locale: "fa-IR" });
+
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "551990259962247",

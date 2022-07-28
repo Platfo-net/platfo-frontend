@@ -7,13 +7,9 @@ import Logo from "./components/Logo";
 
 interface Props {
   mobileNavsidebar: boolean;
-  onChangeLanguage: any;
 }
 
-const DashboardSideDrawer: React.FC<Props> = ({
-  mobileNavsidebar,
-  onChangeLanguage,
-}) => {
+const DashboardSideDrawer: React.FC<Props> = ({ mobileNavsidebar }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   const sidebarRef = useRef(null);
@@ -45,13 +41,13 @@ const DashboardSideDrawer: React.FC<Props> = ({
       <aside
         className={`${
           mobileNavsidebar ? "block" : "hidden"
-        } side-drawer sm:w-14 sm:flex sm:flex-col z-50 md:w-24`}
+        } side-drawer sm:w-14 sm:flex sm:flex-col z-50 md:w-16 ltr:pl-2 rtl:pr-2`}
         ref={sidebarRef}
       >
         <div className="flex-grow flex flex-col justify-between ">
           <Logo />
           <Nav />
-          <SettingButton onChangeLanguage={onChangeLanguage} />
+          <SettingButton />
         </div>
       </aside>
       {/* <Modal

@@ -1,19 +1,19 @@
 import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { AuthState } from "stores/reducers/authReducer";
+import { useSelector } from "react-redux";
 
 const ChatbotPage: NextPage = () => {
+  const { language } = useSelector((state: AuthState) => ({
+    language: state.auth.language,
+  }));
   const router = useRouter();
   const { locale } = router;
 
-  const onChangeLanguage = useCallback(() => {
-    const newLocale = router.locale === "fa-IR" ? "en" : "fa-IR";
-    router.push(router.pathname, router.pathname, { locale: newLocale });
-  }, [router]);
-
   return (
-    <DashboardLayout onChangeLanguage={onChangeLanguage}>
+    <DashboardLayout>
       <div> hi</div>
     </DashboardLayout>
   );

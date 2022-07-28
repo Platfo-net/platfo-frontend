@@ -4,6 +4,8 @@ import DashboardSideDrawer from "./components/DashboardSideDrawer/DashboardSideD
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { tokenObj } from "helpers/token";
+import { useSelector } from "react-redux";
+import { AuthState } from "stores/reducers/authReducer";
 
 interface Props {
   children: ReactNode;
@@ -11,12 +13,10 @@ interface Props {
   subTitle?: string;
 }
 
-const DashboardLayout: NextPage<Props> = ({
-  title,
-  subTitle,
-  children,
-  onChangeLanguage,
-}) => {
+const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
+  const { language } = useSelector((state: AuthState) => ({
+    language: state.auth.language,
+  }));
   const [mobileNavsidebar, setMobileNavsidebar] = useState(false);
 
   const router = useRouter();
@@ -27,6 +27,13 @@ const DashboardLayout: NextPage<Props> = ({
       router.push("/auth/login");
     }
   };
+
+  useEffect(() => {
+    if (router.locale === language) {
+      const newLocale = language === "fa-IR" ? "en" : "fa-IR";
+      router.push(router.pathname, router.pathname, { locale: newLocale });
+    }
+  }, [language]);
 
   useEffect(() => {
     checkLogin();
@@ -42,10 +49,7 @@ const DashboardLayout: NextPage<Props> = ({
       </Head>
 
       <div className="dashboard-layout flex min-h-screen relative">
-        <DashboardSideDrawer
-          mobileNavsidebar={mobileNavsidebar}
-          onChangeLanguage={onChangeLanguage}
-        />
+        <DashboardSideDrawer mobileNavsidebar={mobileNavsidebar} />
         <div className="flex flex-1  flex-row my-7 ">{children}</div>
       </div>
     </Fragment>

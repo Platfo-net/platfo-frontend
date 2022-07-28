@@ -28,3 +28,10 @@ export const register = (data) => async () => {
     //TODO : add notify
   } catch (e) {}
 };
+
+export const changeLanguage = (value) => (dispatch) => {
+  dispatch({
+    type: actionTypes.LANGUAGE,
+    language: value,
+  });
+};

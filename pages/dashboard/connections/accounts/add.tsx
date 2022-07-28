@@ -5,24 +5,13 @@ import { useCallback, useEffect } from "react";
 import ConnectionSidebar from "containers/dashboard/connections/ConnectionSidebar";
 import SocialBox from "components/SocialBox/SocialBox";
 import InstagramIcon from "../../../../assets/img/instagram-icon.png";
+import { AiFillInstagram } from "@react-icons/all-files/ai/AiFillInstagram";
 import useTranslation from "next-translate/useTranslation";
 import InstagramService from "services/endpoints/InstagramService";
 
 const AddAccountPage: NextPage = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
-  // const { data: session } = useSession();
-
-  /* useEffect(() => {
-    if (session) {
-      console.log(session);
-    }
-  }, [session]); */
-
-  const onChangeLanguage = useCallback(() => {
-    const newLocale = router.locale === "fa-IR" ? "en" : "fa-IR";
-    router.push(router.pathname, router.pathname, { locale: newLocale });
-  }, [router]);
 
   const onClickSocialBox = (id) => {
     window.FB.login(
@@ -47,15 +36,15 @@ const AddAccountPage: NextPage = () => {
   };
 
   return (
-    <DashboardLayout onChangeLanguage={onChangeLanguage}>
-      <div className="basis-1/5">
+    <DashboardLayout>
+      <div className="lg:basis-1/7 md:basis-1/6 sm:basis-1/3 ltr:mr-7 rtl:ml-7">
         <ConnectionSidebar />
       </div>
-      <div className="grow mx-7">
-        <div className="grid grid-cols-4 gap-12 ">
+      <div className="flex flex-1  flex-row ">
+        <div className="basis-1/5">
           <SocialBox
-            id="facebook"
-            imageUrl={InstagramIcon}
+            id="instagram"
+            icon={<AiFillInstagram />}
             title={t("connect-to-instagram")}
             buttonText={t("connect")}
             onClick={onClickSocialBox}

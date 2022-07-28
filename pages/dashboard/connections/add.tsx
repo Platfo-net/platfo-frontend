@@ -8,16 +8,10 @@ import AddNewConnectionForm from "containers/dashboard/connections/AddNewConnect
 
 const AddAccountPage: NextPage = () => {
   const { t } = useTranslation("common");
-  const router = useRouter();
-
-  const onChangeLanguage = useCallback(() => {
-    const newLocale = router.locale === "fa-IR" ? "en" : "fa-IR";
-    router.push(router.pathname, router.pathname, { locale: newLocale });
-  }, [router]);
 
   return (
-    <DashboardLayout onChangeLanguage={onChangeLanguage}>
-      <div className="basis-1/5">
+    <DashboardLayout>
+      <div className="lg:basis-1/7 md:basis-1/6 sm:basis-1/3 ltr:mr-7 rtl:ml-7">
         <ConnectionSidebar />
       </div>
       <div className="grow mx-7">

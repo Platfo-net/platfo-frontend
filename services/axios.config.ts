@@ -13,7 +13,7 @@ const $axios = axios.create({
 
 $axios.interceptors.request.use(
   (config) => {
-    if (isServer) return config;
+    // if (isServer) return config;
     const token = tokenObj.getAccessToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

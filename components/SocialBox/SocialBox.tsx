@@ -8,11 +8,13 @@ const SocialBox: React.FC<SocialBoxProps> = ({
   title,
   buttonText,
   id,
+  icon,
 }) => {
   return (
     <div className="social-box flex-col justify-center text-center p-5">
       <div className="avatar-container  justify-center flex p-1 ">
-        <Avatar imageUrl={imageUrl} />
+        {imageUrl && <Avatar imageUrl={imageUrl} />}
+        {icon && <Avatar icon={icon} className={id} />}
       </div>
 
       <p className="py-5">{title} </p>
