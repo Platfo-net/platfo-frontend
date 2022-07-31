@@ -11,10 +11,8 @@ const AddAccountPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="lg:basis-1/7 md:basis-1/6 sm:basis-1/3 ltr:mr-7 rtl:ml-7">
-        <ConnectionSidebar />
-      </div>
-      <div className="grow mx-7">
+      <ConnectionSidebar />
+      <div className="content basis-full ">
         <AddNewConnectionForm />
       </div>
     </DashboardLayout>

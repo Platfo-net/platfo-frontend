@@ -1,10 +1,8 @@
 import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
-import { useCallback, useEffect } from "react";
 import ConnectionSidebar from "containers/dashboard/connections/ConnectionSidebar";
 import SocialBox from "components/SocialBox/SocialBox";
-import InstagramIcon from "../../../../assets/img/instagram-icon.png";
 import { AiFillInstagram } from "@react-icons/all-files/ai/AiFillInstagram";
 import useTranslation from "next-translate/useTranslation";
 import InstagramService from "services/endpoints/InstagramService";
@@ -37,11 +35,9 @@ const AddAccountPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="lg:basis-1/7 md:basis-1/6 sm:basis-1/3 ltr:mr-7 rtl:ml-7">
-        <ConnectionSidebar />
-      </div>
-      <div className="flex flex-1  flex-row ">
-        <div className="basis-1/5">
+      <ConnectionSidebar />
+      <div className="content basis-full flex flex-1  flex-row ">
+        <div className="basis-1/6">
           <SocialBox
             id="instagram"
             icon={<AiFillInstagram />}

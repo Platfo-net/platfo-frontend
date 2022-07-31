@@ -2,7 +2,7 @@ import React, { Fragment, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Nav from "./components/Nav";
-import SettingButton from "./components/SettingButton";
+import Tools from "./components/Tools";
 import Logo from "./components/Logo";
 
 interface Props {
@@ -41,13 +41,13 @@ const DashboardSideDrawer: React.FC<Props> = ({ mobileNavsidebar }) => {
       <aside
         className={`${
           mobileNavsidebar ? "block" : "hidden"
-        } side-drawer sm:w-14 sm:flex sm:flex-col z-50 md:w-16 ltr:pl-2 rtl:pr-2`}
+        } side-drawer  sm:flex sm:flex-col z-50`}
         ref={sidebarRef}
       >
         <div className="flex-grow flex flex-col justify-between ">
           <Logo />
           <Nav />
-          <SettingButton />
+          <Tools />
         </div>
       </aside>
       {/* <Modal

@@ -1,13 +1,13 @@
 // *** colors
-$primary: #32297c;
+$primary: #303030;
 $on-primary: #fff;
-$secondary: #ffa000;
+$secondary: #70d3ba;
 $on-secondary: #fff;
 $accent: #88e0f4;
 $on-accent: #fff;
-$dark-text: #171043;
+$dark-text: #303030;
 $light-text: #554f75;
-$gray: #c2cde2;
+$gray: #c2bfd8;
 $gray-disabled: #e0e0e0;
 $on-gray-disabled: #9b9b9b;
 $gray-background: #f6f6fc;
@@ -41,8 +41,12 @@ $on-landing-header-background: #554f75;
 $dashboard-header-height: 64px;
 $dashboard-sider-width: 220px;
 $dashboard-footer-height: 32px;
-$dashboard-background: #fff;
+$dashboard-background: #f2f8ff;
+$dashboard-sider-background: #fff;
 
 // *** chat flow ***
 $edge-color: $light-text;
 $edge-color-selected: $primary;
+
+// *** other
+$box-shadow: 5px 5px 16px 0px rgba(85, 79, 117, 0.3);

@@ -29,13 +29,6 @@ const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
   };
 
   useEffect(() => {
-    if (router.locale === language) {
-      const newLocale = language === "fa-IR" ? "en" : "fa-IR";
-      router.push(router.pathname, router.pathname, { locale: newLocale });
-    }
-  }, [language]);
-
-  useEffect(() => {
     checkLogin();
   }, []);
 
@@ -50,7 +43,7 @@ const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
 
       <div className="dashboard-layout flex min-h-screen relative">
         <DashboardSideDrawer mobileNavsidebar={mobileNavsidebar} />
-        <div className="flex flex-1  flex-row my-7 ">{children}</div>
+        <div className="flex flex-col w-full bg-white">{children}</div>
       </div>
     </Fragment>
   );

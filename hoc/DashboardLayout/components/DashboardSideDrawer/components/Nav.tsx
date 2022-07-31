@@ -7,10 +7,10 @@ import NavItem from "./NavItem";
 const Nav = () => {
   return (
     <>
-      <nav className="flex flex-col  ">
+      <nav className="flex flex-col ">
         {DashboardMenu.products.map((item: IMenu) => {
           return (
-            <NavItem key={item.key} name={item.key} hrefLink={item.path} />
+            <NavItem key={item.key} item={item} icons={DashboardMenu.Icons} />
           );
         })}
       </nav>

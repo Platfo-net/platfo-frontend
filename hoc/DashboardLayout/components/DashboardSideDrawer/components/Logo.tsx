@@ -1,15 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BotinowLogo from "../../../../../assets/svg/botinow-logo.svg";
+// import BotinowLogo from "../../../../../assets/img/botinow_g.png";
 
 const Logo = () => {
   return (
     <Link href="/">
-      <span className="logo flex-col items-center justify-center  w-full ltr:pl-0 ltr:pr-2 rtl:pr-0 rtl:pl-2 pt-2">
+      <span className="logo flex-col items-center justify-center  w-full ">
         <BotinowLogo />
-        <p>
-          boti<b>Now</b>
-        </p>
+        {/* <Image src={BotinowLogo} width={"50px"} height={50} /> */}
       </span>
     </Link>
   );

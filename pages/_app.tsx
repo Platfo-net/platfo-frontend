@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(router.locale);
     let dir = router.locale === "fa-IR" ? "rtl" : "ltr";
     document.querySelector("html").setAttribute("dir", dir);
     document.querySelector("body").style.direction = dir;
