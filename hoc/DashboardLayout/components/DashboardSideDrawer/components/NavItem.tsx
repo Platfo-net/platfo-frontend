@@ -12,7 +12,6 @@ const NavItem = ({ item, icons }) => {
     language: state.auth.language,
   }));
   const router = useRouter();
-  let { t } = useTranslation("common");
   const dispatch = useDispatch();
 
   const onClick = (key) => {
