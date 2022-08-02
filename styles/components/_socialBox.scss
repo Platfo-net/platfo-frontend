@@ -1,4 +1,30 @@
 .social-box {
+  max-width: 280px;
+  min-width: 225px;
+  padding: 10px;
+  height: 100%;
+  min-height: 255px;
+  &.empty {
+    background: transparent;
+    border: 3px dashed $gray;
+    box-shadow: none;
+    &:hover {
+      border: 3px dashed $secondary;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      margin: auto;
+      background-color: $secondary;
+      border-radius: 50%;
+      padding: 16px;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
   border-radius: $border-radius;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border: 1px solid #fff;

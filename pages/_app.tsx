@@ -17,11 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.locale]);
 
   useEffect(() => {
-    // Default language
-    document.querySelector("html").setAttribute("dir", "rtl");
-    document.querySelector("body").style.direction = "rtl";
-    router.push(router.pathname, router.pathname, { locale: "fa-IR" });
-
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: "551990259962247",
@@ -30,6 +25,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         version: "v14.0",
       });
     };
+
+    // Default language
+    document.querySelector("html").setAttribute("dir", "rtl");
+    document.querySelector("body").style.direction = "rtl";
+    router.push(router.pathname, router.pathname, { locale: "fa-IR" });
   }, []);
 
   return (

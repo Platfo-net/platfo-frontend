@@ -7,25 +7,9 @@ import Signout from "../../assets/svg/icons/sign-out-alt.svg";
 
 const ConnectionMenu = [
   {
-    key: "add-account",
-    path: "/dashboard/connections/accounts/add",
-    type: "button",
-  },
-  {
     key: "accounts",
     path: "/dashboard/connections/accounts",
     type: "button",
-  },
-  {
-    key: "new-connection",
-    path: "/dashboard/connections/add",
-    type: "button",
-  },
-  {
-    key: "connections",
-    path: "",
-    type: "button",
-    disabled: true,
   },
 ];
 

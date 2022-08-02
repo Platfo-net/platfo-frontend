@@ -32,8 +32,8 @@ const NavItem = ({ item, icons }) => {
                 <span
                   className={`${
                     router.pathname.includes(item.path) ? "active" : ""
-                  } menuItem ${
-                    language === "fa-IR" ? "rtl" : "ltr"
+                  } menuItem ${language === "fa-IR" ? "rtl" : "ltr"} ${
+                    item.className
                   } inline-flex items-center justify-center  cursor-pointer relative group `}
                 >
                   <span className="icon block group-hover:hidden">
@@ -48,6 +48,8 @@ const NavItem = ({ item, icons }) => {
               <span
                 className={`menuItem disabled ${
                   language === "fa-IR" ? "rtl" : "ltr"
+                } ${
+                  item.className
                 } inline-flex items-center justify-center  relative group `}
               >
                 <span className="icon block group-hover:hidden">

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 type Props = {};
 
-const ConnectionSidebar: React.FC<Props> = () => {
+const Connectionbar: React.FC<Props> = () => {
   let { t } = useTranslation("common");
   const router = useRouter();
 
@@ -34,4 +34,4 @@ const ConnectionSidebar: React.FC<Props> = () => {
   );
 };
 
-export default ConnectionSidebar;
+export default Connectionbar;

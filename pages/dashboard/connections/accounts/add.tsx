@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
-import ConnectionSidebar from "containers/dashboard/connections/ConnectionSidebar";
+import Connectionbar from "containers/dashboard/connections/Connectionbar";
 import SocialBox from "components/SocialBox/SocialBox";
 import { AiFillInstagram } from "@react-icons/all-files/ai/AiFillInstagram";
 import useTranslation from "next-translate/useTranslation";
@@ -35,7 +35,7 @@ const AddAccountPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <ConnectionSidebar />
+      <Connectionbar />
       <div className="content basis-full flex flex-1  flex-row ">
         <div className="basis-1/6">
           <SocialBox

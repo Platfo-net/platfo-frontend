@@ -2,7 +2,7 @@ import { NextPage, NextPageContext } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import ConnectionSidebar from "containers/dashboard/connections/ConnectionSidebar";
+import Connectionbar from "containers/dashboard/connections/Connectionbar";
 import SocialBox from "components/SocialBox/SocialBox";
 import InstagramIcon from "../../../assets/img/instagram-icon.png";
 import useTranslation from "next-translate/useTranslation";
@@ -15,7 +15,7 @@ const ConnectionsPage: NextPage = ({ connectionResponse }) => {
   console.log(connectionResponse);
   return (
     <DashboardLayout>
-      <ConnectionSidebar />
+      <Connectionbar />
       <div className="content basis-full "></div>
     </DashboardLayout>
   );

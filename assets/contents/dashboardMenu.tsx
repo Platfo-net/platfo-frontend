@@ -12,34 +12,40 @@ const DashboardMenu = {
       path: "/dashboard",
       disabled: true,
       type: "link",
+      className: "",
     },
     {
       key: "chatbot",
       path: "/dashboard/chatbot",
       type: "link",
+      className: "chatbot",
     },
     {
       key: "liveChat",
       path: "/dashboard/liveChat",
       disabled: true,
       type: "link",
+      className: "liveChat",
     },
   ],
   tools: [
     {
       key: "connections",
-      path: "/dashboard/connections",
+      path: "/dashboard/connections/accounts",
       type: "link",
+      className: "",
     },
     {
       key: "profile",
       path: "/dashboard/profile",
       disabled: true,
       type: "link",
+      className: "",
     },
     {
       key: "signout",
       type: "button",
+      className: "",
     },
   ],
   Icons: {

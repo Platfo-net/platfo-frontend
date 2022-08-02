@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import ConnectionSidebar from "containers/dashboard/connections/ConnectionSidebar";
+import Connectionbar from "containers/dashboard/connections/Connectionbar";
 import useTranslation from "next-translate/useTranslation";
 import AddNewConnectionForm from "containers/dashboard/connections/AddNewConnectionForm";
 
@@ -11,7 +11,7 @@ const AddAccountPage: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <ConnectionSidebar />
+      <Connectionbar />
       <div className="content basis-full ">
         <AddNewConnectionForm />
       </div>
