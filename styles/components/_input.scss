@@ -7,10 +7,11 @@
     font-weight: 500;
   }
   input {
+    background: transparent;
     border-radius: $border-radius !important;
     color: $dark-text;
     border: $border;
-    padding: 8px;
+    padding: 16px;
     &.number {
       direction: ltr;
     }

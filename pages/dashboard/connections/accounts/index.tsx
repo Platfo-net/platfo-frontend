@@ -8,14 +8,13 @@ import $axios from "services/axios.config";
 import SocialBox from "components/SocialBox/SocialBox";
 import { useEffect } from "react";
 import InstagramService from "services/endpoints/InstagramService";
+import TopMenu from "components/TopMenu/TopMenu";
+import ConnectionMenu from "assets/contents/connectionMenu";
 
-const AccountsPage: NextPage = ({ accountResponse }) => {
+const AccountsPage: NextPage = () => {
   const { t } = useTranslation("common");
   const router = useRouter();
   const { locale } = router;
-
-  console.log(accountResponse);
-  const onClickAdd = () => {};
 
   const onClickAddAccount = () => {
     try {
@@ -55,42 +54,26 @@ const AccountsPage: NextPage = ({ accountResponse }) => {
 
   return (
     <DashboardLayout>
-      <Connectionbar />
+      <TopMenu items={ConnectionMenu} />
       <div className="content basis-full ">
         {/* <h3 className="mb-5 mx-5">{t("accounts")}</h3> */}
         <div className="flex flex-wrap">
           <SocialBox empty onClick={onClickAddAccount} />
-          {accountResponse && (
+          {/*  {accountResponse && (
             <div className="basis-1/6">
-              {/*  <SocialBox
+                <SocialBox
             id="instagram"
             icon={<AiFillInstagram />}
             title={t("connect-to-instagram")}
             buttonText={t("connect")}
             onClick={onClickSocialBox}
-          /> */}
+          /> 
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </DashboardLayout>
   );
 };
-
-export async function getServerSideProps(ctx: NextPageContext) {
-  let accountResponse = null;
-  try {
-    const res: AxiosResponse = await $axios.get(`user-services/api/v1/account`);
-    accountResponse = res.data;
-  } catch (err) {
-    console.log(err);
-    /*   const { res } = ctx;
-    res.setHeader("location", "/404");
-    res.statusCode = 307;
-    res.end(); */
-    return {};
-  }
-  return { props: { accountResponse } };
-}
 
 export default AccountsPage;

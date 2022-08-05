@@ -8,7 +8,7 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, icon, className }) => {
     <>
       {imageUrl && (
         <Image
-          className="avatar inline-block rounded-full ring-2 ring-white w-full h-full"
+          className={`avatar inline-block rounded-full ring-2 ring-white w-full h-full ${className}`}
           src={imageUrl}
           alt=""
         />

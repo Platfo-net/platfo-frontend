@@ -1,0 +1,17 @@
+.message-box {
+  padding: 16px;
+  color: $primary;
+  display: flex;
+  height: fit-content;
+  &.user {
+    background: $chatbot;
+    border-radius: $border-radius $border-radius $border-radius 0;
+    justify-content: end;
+  }
+
+  &.bot {
+    background: $secondary;
+
+    border-radius: $border-radius $border-radius 0 $border-radius;
+  }
+}

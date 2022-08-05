@@ -1,9 +1,7 @@
 import DashboardMenu from "assets/contents/dashboardMenu";
 import { useRouter } from "next/router";
 import React from "react";
-import { IMenu } from "types/types";
 import NavItem from "./NavItem";
-import { TranslateIcon } from "@heroicons/react/outline";
 import { useSelector } from "react-redux";
 import { AuthState } from "stores/reducers/authReducer";
 import { useDispatch } from "react-redux";

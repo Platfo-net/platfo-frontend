@@ -34,10 +34,12 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           className="social-box empty flex-col justify-center text-center p-5"
           onClick={onClick}
         >
-          <div className="icon">
-            <PlusIcon />
+          <div className="content">
+            <div className="icon">
+              <PlusIcon />
+            </div>
+            <span>{t("add-new-account")}</span>
           </div>
-          <span>{t("add-new-account")}</span>
         </button>
       )}
     </div>

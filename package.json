@@ -10,8 +10,6 @@
     "ngrok": "ngrok http 3000"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.6",
-    "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^0.27.2",
     "next": "12.2.3",
