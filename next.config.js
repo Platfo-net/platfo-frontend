@@ -10,7 +10,7 @@ const nextConfig = {
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
   trailingSlash: true,
   sassOptions: {
