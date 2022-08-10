@@ -10,9 +10,9 @@ const nextConfig = {
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
-  trailingSlash: true,
+  // trailingSlash: false,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   },
