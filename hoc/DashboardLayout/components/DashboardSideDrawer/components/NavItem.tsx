@@ -1,18 +1,15 @@
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/router";
-import useTranslation from "next-translate/useTranslation";
-import { useSelector } from "react-redux";
-import { AuthState } from "stores/reducers/authReducer";
-import { useDispatch } from "react-redux";
-import { loggedOut } from "stores/actions/authAction";
+import { loggedOut } from "stores/actions";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 
 const NavItem = ({ item, icons }) => {
-  const { language } = useSelector((state: AuthState) => ({
+  const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClick = (key) => {
     if (key === "signout") {

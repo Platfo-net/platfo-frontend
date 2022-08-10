@@ -3,18 +3,16 @@ import Head from "next/head";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { AuthState } from "../stores/reducers/authReducer";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { loggedIn, loggedOut } from "../stores/actions/authAction";
+import { loggedIn, loggedOut } from "../stores/actions";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 
 const Home: NextPage = () => {
-  const { isLoggedIn } = useSelector((state: AuthState) => ({
+  const { isLoggedIn } = useAppSelector((state) => ({
     isLoggedIn: state.auth.isLoggedIn,
   }));
   let { t } = useTranslation("common");
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { locale } = router;
 
   const changeLocale = useCallback(

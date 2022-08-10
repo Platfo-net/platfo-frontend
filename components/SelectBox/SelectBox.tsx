@@ -1,21 +1,26 @@
+import useTranslation from "next-translate/useTranslation";
+
 type SelectBoxProps = {};
 
 const SelectBox: React.FC<SelectBoxProps> = ({
   className,
   label,
   options,
-  ...props,
   id,
+  ...props
 }) => {
+  let { t } = useTranslation("common");
+
   return (
-    <div
-      className={`select-box w-full md:w-1/2 px-3 mb-6 md:mb-0 ${className}`}
-    >
-      <label className="block  tracking-wide  text-xs ">{label}</label>
+    <div className={`select-box w-full  ${className}`}>
+      <label className="block  tracking-wide text-xs rtl:text-right ltr:text-left ">
+        {label}
+      </label>
       <div className="relative">
         <select
-          className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className="block appearance-none w-full"
           id="grid-state"
+          placeholder={t("select-trigger")}
           {...props}
         >
           {options.map((item) => {

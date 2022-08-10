@@ -25,11 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         version: "v14.0",
       });
     };
-
-    // Default language
-    document.querySelector("html").setAttribute("dir", "rtl");
-    document.querySelector("body").style.direction = "rtl";
-    router.push(router.pathname, router.pathname, { locale: "fa-IR" });
   }, []);
 
   return (

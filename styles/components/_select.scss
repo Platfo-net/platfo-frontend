@@ -6,6 +6,14 @@
     color: $light-text;
     font-weight: 500;
   }
+
+  select {
+    background: transparent;
+    border-radius: 16px !important;
+    color: $dark-text;
+    border: $border;
+    padding: 16px;
+  }
   &:hover {
     label {
       color: $primary;

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import useTranslation from "next-translate/useTranslation";
-import { register } from "stores/actions/authAction";
+import { register } from "stores/actions";
 import Link from "next/link";
+import { useAppDispatch } from "hooks/reduxHooks";
 
 interface Props {}
 const RegisterForm: React.FC<Props> = () => {
   let { t } = useTranslation("common");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 

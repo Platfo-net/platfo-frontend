@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import AuthService from "services/endpoints/AuthService";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { loggedIn } from "stores/actions/authAction";
+import { loggedIn } from "stores/actions";
 import Link from "next/link";
+import { useAppDispatch } from "hooks/reduxHooks";
 
 interface Props {}
 const SigninForm: React.FC<Props> = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 

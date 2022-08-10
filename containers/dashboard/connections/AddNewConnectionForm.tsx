@@ -1,77 +1,41 @@
 import Input from "components/Input/Input";
+import SelectBox from "components/SelectBox/SelectBox";
 import useTranslation from "next-translate/useTranslation";
 
 type AddNewConnectionProps = {};
 
-const AddNewConnectionForm: React.FC<AddNewConnectionProps> = () => {
+const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
+  triggerOptions,
+  chatflowsOptions,
+}) => {
   let { t } = useTranslation("common");
+
   return (
-    <div>
-      <form className="w-full max-w-lg">
-        <div className="flex flex-wrap -mx-3 mb-3">
-          <Input label={t("connection-name")} id="connection-name" />
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <Input label={t("details")} id="details" />
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-state"
-            >
-              {t("connection-type")}
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-state"
-            >
-              {t("connection-to-accoutnt")}
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+    <form className="w-full  flex flex-wrap">
+      <div className="m-5 w-full rtl:text-right ltr:text-left">
+        <strong>{t("application-name")} : Bot Builder </strong>
+      </div>
+      <div className="basis-1/3 sm:w-full px-2">
+        <Input label={t("connection-name")} id="name" />
+      </div>
+      <div className="basis-2/3 sm:w-full  px-2">
+        <Input label={t("details")} id="description" />
+      </div>
+      <div className="basis-1/2 sm:w-full  px-2">
+        <SelectBox
+          options={triggerOptions}
+          label={t("trigger")}
+          id="trigger_id"
+        />
+      </div>
+      <div className="basis-1/2 sm:w-full  px-2">
+        <SelectBox
+          options={triggerOptions}
+          label={t("chatflows")}
+          id="chatflow_id"
+        />
+      </div>
+    </form>
   );
 };
 

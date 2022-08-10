@@ -1,9 +1,10 @@
 @import "../utils/variables";
 button {
+  font-family: inherit;
   cursor: pointer;
-  border-radius: $border-radius;
+  border-radius: 16px;
   background-color: transparent;
-  padding: 8px;
+  padding: 12px 32px;
   border: none;
   font-weight: 500;
   font-size: 14px;

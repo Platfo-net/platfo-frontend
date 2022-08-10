@@ -2,16 +2,14 @@ import DashboardMenu from "assets/contents/dashboardMenu";
 import { useRouter } from "next/router";
 import React from "react";
 import NavItem from "./NavItem";
-import { useSelector } from "react-redux";
-import { AuthState } from "stores/reducers/authReducer";
-import { useDispatch } from "react-redux";
-import { changeLanguage } from "stores/actions/authAction";
+import { changeLanguage } from "stores/actions";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 
 const Tools = () => {
-  const { language } = useSelector((state: AuthState) => ({
+  const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const onChangeLanguage = () => {

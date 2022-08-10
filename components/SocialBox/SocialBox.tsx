@@ -12,20 +12,26 @@ const SocialBox: React.FC<SocialBoxProps> = ({
   id,
   icon,
   empty,
+  data,
+  imageUrlKey,
+  titleKey,
 }) => {
   let { t } = useTranslation("common");
 
   return (
     <div className="basis-1/6 m-4">
       {!empty ? (
-        <div className="social-box flex-col justify-center text-center p-5">
+        <div className="social-box flex-col justify-center text-center">
           <div className="avatar-container  justify-center flex p-1 ">
-            {imageUrl && <Avatar imageUrl={imageUrl} />}
-            {icon && <Avatar icon={icon} className={id} />}
+            {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
           </div>
-
-          <p className="py-5">{title} </p>
-          <button className="primary w-full" onClick={() => onClick(id)}>
+          {data.platform && (
+            <div className="platform-container ">
+              <Avatar iconKey={data.platform} />{" "}
+            </div>
+          )}
+          <p className="pt-4 pb-2">{data[titleKey]} </p>
+          <button className="secondary w-full" onClick={() => onClick(data)}>
             {buttonText}
           </button>
         </div>
@@ -38,7 +44,7 @@ const SocialBox: React.FC<SocialBoxProps> = ({
             <div className="icon">
               <PlusIcon />
             </div>
-            <span>{t("add-new-account")}</span>
+            <span>{title}</span>
           </div>
         </button>
       )}

@@ -2,5 +2,9 @@ export const actionTypes = {
   LANGUAGE: "LANGUAGE",
   LOGGED_IN: "LOGGED_IN",
   LOGGED_OUT: "LOGGED_OUT",
+  CHANGE_NODES: "CHANGE_NODES",
+  CHANGE_EDGES: "CHANGE_EDGES",
+  CHANGE_SELECTIONS: "CHANGE_SELECTIONS",
+  ACCOUNT_LIST: "ACCOUNT_LIST",
 };
 export { actionTypes as default };
