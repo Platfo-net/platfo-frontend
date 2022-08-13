@@ -12,7 +12,7 @@
   "submit": "Submit",
   "fullname": "Fullname",
   "phone-number": "Phone-number",
-  "register": "Register",
+  "register": "ثبت نام",
   "privacy": "Privacy",
   "login": "ورود",
   "about-us": "About us",
@@ -20,5 +20,7 @@
   "pricing": "Pricing",
   "online-demo": "Online demo",
   "erorr-enter-fullname": "Erorr enter fullname",
-  "erorr-enter-phone-number": "Erorr enter phone number"
+  "erorr-enter-phone-number": "Erorr enter phone number",
+  "email": "ایمیل",
+  "password": "پسورد"
 }
