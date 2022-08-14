@@ -22,7 +22,7 @@ export const loggedIn = (data) => async (dispatch) => {
   } catch (e) {}
 };
 
-export const register = (data) => async () => {
+export const registerUser = (data) => async () => {
   try {
     const response = await UserService.postRegisterUser(data);
     //TODO : add notify

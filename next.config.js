@@ -4,10 +4,13 @@ const path = require('path');
 
 const nextConfig = {
   ...nextTranslate(),
+  images: {
+    domains: ['scontent-frx5-1.xx.fbcdn.net', 'scontent-frt3-1.xx.fbcdn.net']
+  },
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL
   },
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   trailingSlash: true,
   sassOptions: {
@@ -20,6 +23,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+
 }
 
 module.exports = nextConfig

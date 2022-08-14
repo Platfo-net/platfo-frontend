@@ -1,9 +1,29 @@
 .social-box {
   max-width: 280px;
   min-width: 225px;
-  padding: 10px;
+  padding: 16px;
   height: 100%;
   min-height: 255px;
+  p {
+    font-weight: 600;
+    margin-top: 0;
+    margin: 4px;
+
+    &.subtitle {
+      font-weight: normal;
+      color: $gray;
+    }
+  }
+
+  .remove-btn {
+    position: relative;
+
+    button {
+      position: absolute;
+      top: -125px;
+      left: -11px;
+    }
+  }
   &.empty {
     background: transparent;
     border: 3px dashed $gray;
@@ -35,13 +55,20 @@
   border: 1px solid #fff;
   background: #fff;
   &:hover {
-    border: $border;
+    // border: $border;
   }
   .avatar-container {
     border-radius: 9999px;
-    border: $border;
     margin: auto;
-    width: 5rem;
-    height: 5rem;
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .platform-container {
+    width: 1.8rem;
+    height: 1.8rem;
+    position: relative;
+    top: -2.5rem;
+    left: -2.7rem;
   }
 }
