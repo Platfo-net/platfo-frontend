@@ -2,7 +2,7 @@
 $primary: #303030;
 $on-primary: #fff;
 $secondary: #70d3ba;
-$on-secondary: #fff;
+$on-secondary: #303030;
 $accent: #88e0f4;
 $on-accent: #fff;
 $dark-text: #303030;
@@ -13,7 +13,8 @@ $on-gray-disabled: #9b9b9b;
 $gray-background: #f6f6fc;
 $background: #fff;
 $warning: #f88818;
-$danger: #fc5226;
+$danger: #fe8182;
+$on-danger: #303030;
 $success: #60d6a4;
 $chatbot: #fec823;
 $liveChat: #666fc1;
@@ -23,6 +24,7 @@ $on-facebook: #fff;
 
 // *** border
 $border-radius: 24px;
+$border-radius-sm: 12px;
 $border: 1px solid $gray;
 $border-primary: 1px solid $primary;
 
@@ -52,3 +54,5 @@ $edge-color-selected: $primary;
 
 // *** other
 $box-shadow: 5px 5px 16px 0px rgba(85, 79, 117, 0.3);
+
+$element-height: 42px;

@@ -7,8 +7,10 @@ const TopMenu: React.FC<Props> = ({ items }) => {
   let { t } = useTranslation("common");
   const router = useRouter();
 
-  const goto = (path) => {
-    router.push(`${path}`);
+  const goto = (path, isActive) => {
+    if (!isActive) {
+      router.push(`${path}`);
+    }
   };
 
   return (
@@ -21,7 +23,7 @@ const TopMenu: React.FC<Props> = ({ items }) => {
               className={`inline-menu-items ${
                 router.pathname === item.path ? "active" : ""
               }`}
-              onClick={() => goto(item.path)}
+              onClick={() => goto(item.path, router.pathname === item.path)}
               disabled={item.disabled}
             >
               <span>{t(item.key)}</span>

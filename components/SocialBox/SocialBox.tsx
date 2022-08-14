@@ -1,31 +1,45 @@
 import Avatar from "components/Avatar/Avatar";
 import useTranslation from "next-translate/useTranslation";
 import PlusIcon from "../../assets/svg/icons/plus.svg";
+import CrossIcon from "../../assets/svg/icons/cross.svg";
 
 type SocialBoxProps = {};
 
 const SocialBox: React.FC<SocialBoxProps> = ({
-  imageUrl,
   onClick,
   title,
   buttonText,
-  id,
-  icon,
   empty,
+  data,
+  imageUrlKey,
+  titleKey,
+  removeable,
+  onClickRemove,
 }) => {
   let { t } = useTranslation("common");
 
   return (
     <div className="basis-1/6 m-4">
       {!empty ? (
-        <div className="social-box flex-col justify-center text-center p-5">
+        <div className="social-box flex-col justify-center text-center">
           <div className="avatar-container  justify-center flex p-1 ">
-            {imageUrl && <Avatar imageUrl={imageUrl} />}
-            {icon && <Avatar icon={icon} className={id} />}
+            {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
           </div>
+          {removeable && (
+            <div className="remove-btn">
+              <button className="icon-only" onClick={() => onClickRemove(data)}>
+                <CrossIcon />
+              </button>
+            </div>
+          )}
 
-          <p className="py-5">{title} </p>
-          <button className="primary w-full" onClick={() => onClick(id)}>
+          {data.platform && (
+            <div className="platform-container ">
+              <Avatar iconKey={data.platform} />{" "}
+            </div>
+          )}
+          <p>{data[titleKey]} </p>
+          <button className="secondary w-full" onClick={() => onClick(data)}>
             {buttonText}
           </button>
         </div>
@@ -38,7 +52,7 @@ const SocialBox: React.FC<SocialBoxProps> = ({
             <div className="icon">
               <PlusIcon />
             </div>
-            <span>{t("add-new-account")}</span>
+            <span>{title}</span>
           </div>
         </button>
       )}

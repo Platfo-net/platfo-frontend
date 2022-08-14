@@ -4,8 +4,7 @@ import DashboardSideDrawer from "./components/DashboardSideDrawer/DashboardSideD
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { tokenObj } from "helpers/token";
-import { useSelector } from "react-redux";
-import { AuthState } from "stores/reducers/authReducer";
+import { useAppSelector } from "hooks/reduxHooks";
 
 interface Props {
   children: ReactNode;
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
-  const { language } = useSelector((state: AuthState) => ({
+  const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
   const [mobileNavsidebar, setMobileNavsidebar] = useState(false);
