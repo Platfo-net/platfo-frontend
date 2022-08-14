@@ -5,8 +5,8 @@ class Connection {
     $axios.get(`user-services/api/v1/connection/all`, { params });
   postCreateConnection = (data) =>
     $axios.post(`user-services/api/v1/connection/`, data);
-  getConnectionDetails = (params, id) =>
-    $axios.get(`user-services/api/v1/connection/${id}`, { params });
+  getConnectionDetails = (id) =>
+    $axios.get(`user-services/api/v1/connection/${id}`);
   putUpdateConnection = (data, id) =>
     $axios.put(`user-services/api/v1/connection/${id}`, { data });
   deleteConnection = (id) =>

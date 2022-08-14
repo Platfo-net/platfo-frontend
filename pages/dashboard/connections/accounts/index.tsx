@@ -63,8 +63,8 @@ const AccountsPage: NextPage = () => {
 
   const onDisconnect = async (item) => {
     try {
-      await ConnectionService.deleteConnection(item.id);
-      router.push("/dashboard/connections/accounts");
+      // await ConnectionService.deleteConnection(item.id);
+      // router.push("/dashboard/connections/accounts");
       // Todo: notification
     } catch (e) {}
   };
@@ -83,7 +83,7 @@ const AccountsPage: NextPage = () => {
             return (
               <div className="basis-1/6" key={item.id}>
                 <SocialBox
-                  removeable={true}
+                  removeable={false}
                   data={item}
                   imageUrlKey="profile_image_url"
                   titleKey="username"

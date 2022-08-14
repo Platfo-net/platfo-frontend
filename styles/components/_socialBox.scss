@@ -7,7 +7,14 @@
   p {
     font-weight: 600;
     margin-top: 0;
+    margin: 4px;
+
+    &.subtitle {
+      font-weight: normal;
+      color: $gray;
+    }
   }
+
   .remove-btn {
     position: relative;
 

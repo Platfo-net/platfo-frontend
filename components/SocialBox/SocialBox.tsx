@@ -15,6 +15,8 @@ const SocialBox: React.FC<SocialBoxProps> = ({
   titleKey,
   removeable,
   onClickRemove,
+  descriptionKey,
+  iconKey,
 }) => {
   let { t } = useTranslation("common");
 
@@ -22,9 +24,16 @@ const SocialBox: React.FC<SocialBoxProps> = ({
     <div className="basis-1/6 m-4">
       {!empty ? (
         <div className="social-box flex-col justify-center text-center">
-          <div className="avatar-container  justify-center flex p-1 ">
-            {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
-          </div>
+          {!iconKey ? (
+            <div className="avatar-container  justify-center flex p-1 ">
+              {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
+            </div>
+          ) : (
+            <div className="avatar-container  justify-center flex p-1 ">
+              <Avatar iconKey={iconKey} />
+            </div>
+          )}
+
           {removeable && (
             <div className="remove-btn">
               <button className="icon-only" onClick={() => onClickRemove(data)}>
@@ -39,7 +48,13 @@ const SocialBox: React.FC<SocialBoxProps> = ({
             </div>
           )}
           <p>{data[titleKey]} </p>
-          <button className="secondary w-full" onClick={() => onClick(data)}>
+          {descriptionKey && (
+            <p className="subtitle"> {data[descriptionKey]} </p>
+          )}
+          <button
+            className="secondary w-full mt-3"
+            onClick={() => onClick(data)}
+          >
             {buttonText}
           </button>
         </div>

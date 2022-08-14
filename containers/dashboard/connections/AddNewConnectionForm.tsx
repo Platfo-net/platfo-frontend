@@ -2,7 +2,7 @@ import Input from "components/Input/Input";
 import SelectBox from "components/SelectBox/SelectBox";
 import { useSetState } from "hooks/useSetState";
 import useTranslation from "next-translate/useTranslation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import ConnectionService from "services/endpoints/ConnectionService";
 import PlusIcon from "../../../assets/svg/icons/plus.svg";
@@ -27,9 +27,12 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
   chatflowOptions,
   submitRef,
   account_id,
+  record,
+  status,
+  onSuccess,
 }) => {
-  const { register, handleSubmit, control } = useForm<FormData>();
-  const { fields, append, remove, prepend } = useFieldArray({
+  const { register, handleSubmit, control, reset } = useForm<FormData>();
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "connection_chatflows",
   });
@@ -50,10 +53,26 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
       const data = {
         ...values,
         account_id,
-        application_name: "bot-builder",
+        application_name: "BOT_BUILDER",
       };
-      const response = await ConnectionService.postCreateConnection(data);
+      if (!record) {
+        await ConnectionService.postCreateConnection(data);
+        onSuccess();
+      } else {
+        await ConnectionService.putUpdateConnection(data, record.id);
+        onSuccess();
+      }
     } catch (e) {}
+  };
+
+  const onClear = () => {
+    reset({
+      name: "",
+      description: "",
+      connection_chatflows: [],
+    });
+    setControls({ trigger_id: { options: [], value: "" } });
+    setControls({ chatflow_id: { options: [], value: "" } });
   };
 
   const onAddToList = () => {
@@ -84,6 +103,37 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
   useEffect(() => {
     setControls({ chatflow_id: { options: chatflowOptions } });
   }, [chatflowOptions]);
+
+  useEffect(() => {
+    if (!status) {
+      onClear();
+    }
+  }, [status]);
+
+  useEffect(() => {
+    console.log(record);
+    (async () => {
+      if (record) {
+        try {
+          const response = await ConnectionService.getConnectionDetails(
+            record.id
+          );
+          const data = response.data;
+          const connection_chatflows = response.data.connection_chatflows.map(
+            (item) => ({
+              chatflow_id: item.chatflow_id,
+              trigger_id: item.trigger_id,
+            })
+          );
+          reset({
+            name: data.name,
+            description: data.description,
+            connection_chatflows: connection_chatflows,
+          });
+        } catch (e) {}
+      }
+    })();
+  }, [record]);
 
   useEffect(() => {
     setControls({ trigger_id: { options: triggerOptions } });
