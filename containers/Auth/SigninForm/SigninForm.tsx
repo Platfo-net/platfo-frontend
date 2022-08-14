@@ -26,7 +26,7 @@ const SigninForm: React.FC<Props> = () => {
 
       await dispatch(loggedIn(data));
       setLoading(false);
-      router.push("/dashboard");
+      router.push("/dashboard/connections/accounts");
     } catch (e) {
       setLoading(false);
     }

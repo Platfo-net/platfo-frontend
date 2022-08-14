@@ -83,7 +83,7 @@ const AccountsPage: NextPage = () => {
             return (
               <div className="basis-1/6" key={item.id}>
                 <SocialBox
-                  removeable={true}
+                  removeable={false}
                   data={item}
                   imageUrlKey="profile_image_url"
                   titleKey="username"

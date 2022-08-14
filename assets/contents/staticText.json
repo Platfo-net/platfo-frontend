@@ -1,0 +1,20 @@
+{
+    "chatFlows": "Chat Flows",
+    "bronze": "Bronze",
+    "gold": "Gold",
+    "silver": "Silver",
+    "monthly": "Monthly",
+    "buy": "Buy",
+    "submit": "Submit",
+    "fullname": "Fullname",
+    "phone-number": "Phone-number",
+    "register": "Register",
+    "privacy": "Privacy",
+    "login": "Login",
+    "about-us": "About us",
+    "contact-us": "Contact us",
+    "pricing": "Pricing",
+    "online-demo": "Online demo",
+    "erorr-enter-fullname": "Erorr enter fullname",
+    "erorr-enter-phone-number": "Erorr enter phone number"
+}

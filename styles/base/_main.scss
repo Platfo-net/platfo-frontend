@@ -34,9 +34,9 @@ a {
 .gradient-card {
   background: linear-gradient(
     34deg,
-    rgba(202, 233, 250, 1) 0%,
-    rgba(202, 202, 236, 1) 35%,
-    rgba(236, 236, 248, 1) 100%
+    rgba(242, 252, 254, 1) 0%,
+    #70d3ba 30%,
+    rgba(242, 252, 254, 1) 0%
   );
   border-radius: $border-radius;
   padding: 64px;
@@ -47,7 +47,7 @@ a {
   background: linear-gradient(
     34deg,
     rgba(242, 252, 254, 1) 0%,
-    rgba(231, 231, 255, 1) 35%,
+    #70d3ba 35%,
     rgba(242, 252, 254, 1) 100%
   );
   border-radius: $border-radius;

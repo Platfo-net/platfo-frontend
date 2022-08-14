@@ -50,7 +50,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
       const data = {
         ...values,
         account_id,
-        application_name: "bot-builder",
+        application_name: "BOT_BUILDER",
       };
       const response = await ConnectionService.postCreateConnection(data);
     } catch (e) {}

@@ -6,7 +6,7 @@ $on-secondary: #303030;
 $accent: #88e0f4;
 $on-accent: #fff;
 $dark-text: #303030;
-$light-text: #554f75;
+$light-text: #466960;
 $gray: #c2bfd8;
 $gray-disabled: #e0e0e0;
 $on-gray-disabled: #9b9b9b;
@@ -39,7 +39,7 @@ $font-size-sm: 12px;
 // *** landing Layout ***
 $landing-header-height: 64px;
 $landing-header-background: #fff;
-$on-landing-header-background: #554f75;
+$on-landing-header-background: #466960;
 
 // *** dashboard Layout ***
 $dashboard-header-height: 64px;
@@ -53,6 +53,6 @@ $edge-color: $light-text;
 $edge-color-selected: $primary;
 
 // *** other
-$box-shadow: 5px 5px 16px 0px rgba(85, 79, 117, 0.3);
+$box-shadow: 5px 5px 16px 0px rgb(224, 246, 240);
 
 $element-height: 42px;

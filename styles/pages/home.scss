@@ -1,0 +1,50 @@
+.homePage {
+    #intro {
+        height: 50vh;
+        width: 80%;
+        @include breakpoint(smallerTablet) {
+            width: 100%;
+            height: auto;
+            .iphone {
+                top: 16px !important
+            }
+        }
+        .iphone {
+            position: relative;
+            top: -140px;
+            display: flex;
+            justify-content: flex-end;
+            &:first-child {
+                 position: absolute !important;
+            }
+            img {
+                 width: 40vh !important;
+            }
+        }
+    }
+
+    #support {
+        width: 80%;
+    }
+    
+    .sections {
+        width: 100%;
+        padding: 0 11rem;
+
+        @include breakpoint(smallerTablet) {
+            padding: 0 8px;
+        }
+    }
+
+    .fullsection {
+        width: 100%;
+        &.brands {
+            svg {
+                width: 150px;
+                padding: 16px;
+            }
+        }
+    }
+    
+
+}
