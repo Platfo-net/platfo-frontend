@@ -28,7 +28,7 @@
     background: transparent;
     border: 3px dashed $gray;
     box-shadow: none;
-    display: flex;
+    display: flex !important;
     &:hover {
       border: 3px dashed $secondary;
     }
