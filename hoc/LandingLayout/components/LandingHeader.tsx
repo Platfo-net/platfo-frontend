@@ -42,10 +42,11 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
           <Link href="/">
             <a href="replace">
               <Logo />
-              <Text className="xlg">boti</Text>
+
               <Text className="xlg" strong>
                 Now
               </Text>
+              <Text className="xlg">boti</Text>
             </a>
           </Link>
         </Col>
