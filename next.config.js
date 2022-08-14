@@ -12,7 +12,7 @@ const nextConfig = {
   },
   reactStrictMode: false,
   swcMinify: true,
-  // trailingSlash: false,
+  trailingSlash: true,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   },

@@ -6,5 +6,6 @@ export const actionTypes = {
   CHANGE_EDGES: "CHANGE_EDGES",
   CHANGE_SELECTIONS: "CHANGE_SELECTIONS",
   ACCOUNT_LIST: "ACCOUNT_LIST",
+  CHANGE_LAYOUT: "CHANGE_LAYOUT",
 };
 export { actionTypes as default };

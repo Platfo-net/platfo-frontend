@@ -1,10 +1,7 @@
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
-import Connectionbar from "containers/dashboard/connections/Connectionbar";
 import useTranslation from "next-translate/useTranslation";
-import { AxiosResponse } from "axios";
-import $axios from "services/axios.config";
 import SocialBox from "components/SocialBox/SocialBox";
 import { useEffect } from "react";
 import InstagramService from "services/endpoints/InstagramService";
@@ -12,6 +9,7 @@ import TopMenu from "components/TopMenu/TopMenu";
 import ConnectionMenu from "assets/contents/connectionMenu";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { getAccounts } from "stores/actions";
+import ConnectionService from "services/endpoints/ConnectionService";
 
 const AccountsPage: NextPage = () => {
   const { accountList } = useAppSelector((state) => ({
@@ -63,6 +61,14 @@ const AccountsPage: NextPage = () => {
     );
   };
 
+  const onDisconnect = async (item) => {
+    try {
+      await ConnectionService.deleteConnection(item.id);
+      router.push("/dashboard/connections/accounts");
+      // Todo: notification
+    } catch (e) {}
+  };
+
   return (
     <DashboardLayout>
       <TopMenu items={ConnectionMenu} />
@@ -77,11 +83,13 @@ const AccountsPage: NextPage = () => {
             return (
               <div className="basis-1/6" key={item.id}>
                 <SocialBox
+                  removeable={true}
                   data={item}
                   imageUrlKey="profile_image_url"
                   titleKey="username"
                   buttonText={t("details")}
                   onClick={onClickConnect}
+                  onClickRemove={onDisconnect}
                 />
               </div>
             );

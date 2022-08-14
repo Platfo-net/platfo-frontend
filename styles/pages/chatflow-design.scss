@@ -1,8 +1,17 @@
+@keyframes dashdraw {
+  0% {
+    stroke-dashoffset: 10;
+  }
+}
 .chatflow-design {
   padding: 0 9px !important;
   .playground {
     direction: ltr !important;
     position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     background-color: transparent;
@@ -12,5 +21,12 @@
     background-position: right -109px bottom -39px;
     transform: scale(1);
     z-index: -10000;
+
+    .edge {
+      stroke: #b1b1b7;
+      stroke-dasharray: 5;
+      animation: dashdraw 0.5s linear infinite;
+      stroke-width: 1;
+    }
   }
 }

@@ -24,10 +24,15 @@ export const initialState = {
   ],
   edges: [],
   selections: [],
+  layout: [],
 };
 
 export const chatflowReducer = (state = initialState, action: Action) => {
   switch (action.type) {
+    case actionTypes.CHANGE_LAYOUT:
+      return updateObject(state, {
+        layout: action.layout,
+      });
     case actionTypes.CHANGE_NODES:
       return updateObject(state, {
         nodes: action.nodes,

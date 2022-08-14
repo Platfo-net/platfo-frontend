@@ -9,8 +9,8 @@ class Connection {
     $axios.get(`user-services/api/v1/connection/${id}`, { params });
   putUpdateConnection = (data, id) =>
     $axios.put(`user-services/api/v1/connection/${id}`, { data });
-  deleteConnection = (params, id) =>
-    $axios.delete(`user-services/api/v1/connection/${id}`, { params });
+  deleteConnection = (id) =>
+    $axios.delete(`user-services/api/v1/connection/${id}`);
   getRelatedChatflow = (params, page_id, trigger_name) =>
     $axios.get(
       `user-services/api/v1/connectionrelated_chatflow/${page_id}/${trigger_name}`,

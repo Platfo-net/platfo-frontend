@@ -1,20 +1,20 @@
 import Avatar from "components/Avatar/Avatar";
 import useTranslation from "next-translate/useTranslation";
 import PlusIcon from "../../assets/svg/icons/plus.svg";
+import CrossIcon from "../../assets/svg/icons/cross.svg";
 
 type SocialBoxProps = {};
 
 const SocialBox: React.FC<SocialBoxProps> = ({
-  imageUrl,
   onClick,
   title,
   buttonText,
-  id,
-  icon,
   empty,
   data,
   imageUrlKey,
   titleKey,
+  removeable,
+  onClickRemove,
 }) => {
   let { t } = useTranslation("common");
 
@@ -25,12 +25,20 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           <div className="avatar-container  justify-center flex p-1 ">
             {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
           </div>
+          {removeable && (
+            <div className="remove-btn">
+              <button className="icon-only" onClick={() => onClickRemove(data)}>
+                <CrossIcon />
+              </button>
+            </div>
+          )}
+
           {data.platform && (
             <div className="platform-container ">
               <Avatar iconKey={data.platform} />{" "}
             </div>
           )}
-          <p className="pt-4 pb-2">{data[titleKey]} </p>
+          <p>{data[titleKey]} </p>
           <button className="secondary w-full" onClick={() => onClick(data)}>
             {buttonText}
           </button>

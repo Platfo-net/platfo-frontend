@@ -2,6 +2,7 @@
 
 .dashboard-layout {
   background: $dashboard-background;
+  overflow: hidden;
   .side-drawer {
     background: $dashboard-sider-background;
     .menuItem {
@@ -141,8 +142,10 @@
     justify-content: center;
     .inline-menu-items {
       margin: 0 8px;
-      border-radius: 16px 16px 0 0;
-      padding: 18px;
+      border-radius: $border-radius-sm $border-radius-sm 0 0;
+      padding: 0 18px;
+      position: relative;
+      top: -10px;
       span {
         padding: 3px 0;
       }

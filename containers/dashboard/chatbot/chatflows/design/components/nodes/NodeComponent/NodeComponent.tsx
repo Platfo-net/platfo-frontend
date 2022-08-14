@@ -10,10 +10,10 @@ const NodeComponent: React.FC<NodeProps> = (props) => {
     node: NodeData
   ) => {
     console.log("Selecting Node", event, node);
-    dispatch(changeSelections([node.id]));
+    // dispatch(changeSelections([node.id]));
   };
 
-  return <Node onClick={onClick} {...props} />;
+  return <Node className="node" onClick={onClick} {...props} />;
 };
 
 export default NodeComponent;

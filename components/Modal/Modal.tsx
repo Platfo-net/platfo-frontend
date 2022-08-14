@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
               </button>
               <button
                 type="button"
-                className="secondary inline-flex justify-center mx-3"
+                className="primary inline-flex justify-center mx-3"
                 onClick={onSubmit}
               >
                 {t("save")}

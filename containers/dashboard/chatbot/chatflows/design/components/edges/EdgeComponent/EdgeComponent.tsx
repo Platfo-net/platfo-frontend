@@ -10,10 +10,10 @@ const EdgeComponent: React.FC<EdgeProps> = (props) => {
     edge: EdgeData
   ) => {
     console.log("Selecting edge", event, edge);
-    dispatch(changeSelections([edge.id]));
+    // dispatch(changeSelections([edge.id]));
   };
 
-  return <Edge onClick={onClick} {...props} />;
+  return <Edge className="edge" onClick={onClick} {...props} />;
 };
 
 export default EdgeComponent;

@@ -60,3 +60,9 @@ a {
   border-radius: $border-radius;
   padding: 16px;
 }
+
+.border-box {
+  border: $border;
+  border-radius: $border-radius-sm;
+  padding: 0;
+}

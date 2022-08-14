@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { AxiosResponse } from "axios";
 import SocialBox from "components/SocialBox/SocialBox";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TopMenu from "components/TopMenu/TopMenu";
 import ConnectionMenu from "assets/contents/connectionMenu";
 import ConnectionService from "services/endpoints/ConnectionService";
@@ -13,6 +13,8 @@ import AddNewConnectionForm from "containers/dashboard/connections/AddNewConnect
 import { useAppSelector } from "hooks/reduxHooks";
 import Avatar from "components/Avatar/Avatar";
 import TriggersService from "services/endpoints/TriggersService";
+import ChatflowService from "services/endpoints/ChatflowService";
+import { tokenObj } from "helpers/token";
 
 const AccountDetailsPage: NextPage = () => {
   const { accountList } = useAppSelector((state) => ({
@@ -26,6 +28,17 @@ const AccountDetailsPage: NextPage = () => {
   const [connections, setConections] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [triggerOptions, setTriggerOptions] = useState([]);
+  const [chatflowOptions, setChatflowOptions] = useState([]);
+  const submitRef = useRef();
+
+  const updateConnectionMenu = [
+    ...ConnectionMenu,
+    {
+      key: "account-info",
+      path: "/dashboard/connections/accounts/[id]",
+      type: "button",
+    },
+  ];
 
   useEffect(() => {
     if (accountList.length > 0) {
@@ -37,13 +50,7 @@ const AccountDetailsPage: NextPage = () => {
 
     (async () => {
       try {
-        const params = {
-          account_id: id,
-        };
-        const response: AxiosResponse = await ConnectionService.getConnections(
-          params
-        );
-        setConections(response.data);
+        getData();
       } catch (e) {}
     })();
   }, []);
@@ -56,25 +63,68 @@ const AccountDetailsPage: NextPage = () => {
             null
           );
           setTriggerOptions(response.data);
+          const token = tokenObj.getAccessToken();
+          const headers = {
+            token: `Bearer ${token}`,
+          };
+          const responseFlow: AxiosResponse =
+            await ChatflowService.getUserChatflows(null, headers);
+          setChatflowOptions(responseFlow.data);
         }
       } catch (e) {}
     })();
   }, [openModal]);
 
+  const getData = async () => {
+    try {
+      const params = {
+        account_id: id,
+      };
+      const response: AxiosResponse = await ConnectionService.getConnections(
+        params
+      );
+      setConections(response.data);
+    } catch (e) {}
+  };
   const modalHandler = () => setOpenModal(!openModal);
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    submitRef.current.click();
+  };
+
+  const onSuccess = async () => {
+    modalHandler();
+    getData();
+  };
+
+  const onDisconnect = async () => {
+    try {
+      await ConnectionService.deleteConnection(id);
+      router.push("/dashboard/connections/accounts");
+      // Todo: notification
+    } catch (e) {}
+  };
 
   return (
     <DashboardLayout>
-      <TopMenu items={ConnectionMenu} />
+      <TopMenu items={updateConnectionMenu} />
       <div className="content basis-full ">
         {accountInfo && (
-          <div className="flex-col mb-5">
-            <h3 className="mb-5 mx-5">{t("account-info")}</h3>
-            <div className="flex mx-4 mb-5">
-              <Avatar imageUrl={accountInfo.profile_image_url} />
-              <span className="my-auto mx-5">{accountInfo.username}</span>
+          <div className="flex flex-wrap mb-5">
+            <div className="basis-1/2 ">
+              {/* <h3 className="mb-5 mx-5">{t("account-info")}</h3> */}
+              <div className="flex mx-4 my-auto">
+                <Avatar imageUrl={accountInfo.profile_image_url} />
+                <b className="my-auto mx-5">{accountInfo.username}</b>
+              </div>
+            </div>
+            <div className="basis-1/2 flex">
+              <button
+                className="primary my-auto rtl:mr-auto"
+                onClick={onDisconnect}
+              >
+                {t("disconnect")}
+              </button>
             </div>
           </div>
         )}
@@ -110,7 +160,13 @@ const AccountDetailsPage: NextPage = () => {
         size="lg"
         onSubmit={onSubmit}
       >
-        <AddNewConnectionForm triggerOptions={triggerOptions} />
+        <AddNewConnectionForm
+          triggerOptions={triggerOptions}
+          chatflowOptions={chatflowOptions}
+          submitRef={submitRef}
+          account_id={id}
+          onSuccess={onSuccess}
+        />
       </Modal>
     </DashboardLayout>
   );
