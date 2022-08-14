@@ -4,55 +4,58 @@ import { useDispatch } from "react-redux";
 import { loggedIn } from "stores/actions/authAction";
 import Input from "components/Input/Input";
 import useTranslation from "next-translate/useTranslation";
+import { useForm } from "react-hook-form";
 
 interface Props {}
+type FormData = {
+  email: "string";
+  password: "string";
+};
+
 const SigninForm: React.FC<Props> = () => {
   const dispatch = useDispatch<any>();
   const [loading, setLoading] = useState(false);
+  const { register, handleSubmit } = useForm<FormData>();
   const router = useRouter();
   const { t } = useTranslation("common");
 
-  const onSubmit = async (event: any) => {
-    console.log("it;s ok");
-    event.preventDefault();
+  const onSubmit = async (data: any) => {
+    console.log(data);
+    try {
+      setLoading(true);
 
-    setLoading(true);
-    const data = {
-      email: event.target.email.value,
-      password: event.target.password.value,
-    };
-    await dispatch(loggedIn(data));
-    setLoading(false);
-    router.push("/dashboard");
-
-    // setLoading(false);
+      await dispatch(loggedIn(data));
+      setLoading(false);
+      router.push("/dashboard");
+    } catch (e) {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full max-w-md">
       <h3 className="flex justify-center">{t("login")}</h3>
-      <form className="px-12 pb-8 mb-4" onSubmit={onSubmit}>
+      <form className="px-16 pb-0 mb-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-8">
-          <Input label={t("email")} id="ad" />
+          <Input label={t("email")} {...register("email")} />
           <Input
-            id="password"
+            {...register("password")}
             type="password"
-            placeholder="*******"
             label={t("password")}
           />
         </div>
         <div className="flex flex-col items-center justify-between">
-          <button className="w-full primary py-4" type="submit">
+          <button className="w-full primary" type="submit">
             {t("login")}
-          </button>
-          <button
-            className="w-full py-4"
-            onClick={() => router.push("/auth/register")}
-          >
-            {t("register")}
           </button>
         </div>
       </form>
+      <button
+        className="w-full mb-4"
+        onClick={() => router.push("/auth/register")}
+      >
+        {t("register")}
+      </button>
     </div>
   );
 };

@@ -28,13 +28,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
   submitRef,
   account_id,
 }) => {
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
+  const { register, handleSubmit, control } = useForm<FormData>();
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "connection_chatflows",
@@ -52,7 +46,6 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
     try {
       const data = {
         ...values,
