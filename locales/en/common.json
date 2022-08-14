@@ -1,13 +1,22 @@
 {
+  "application-name": "application name",
+  "details": "Details",
   "add-new-account": "Add new account",
   "accounts": "Accounts",
   "add-account": "Add Account",
   "chatbot": "ChatBot",
+  "messages": "Messages",
   "chatFlows": "Chat Flows",
   "bronze": "Bronze",
   "gold": "Gold",
   "silver": "Silver",
   "monthly": "Monthly",
+  "search": "Search",
+  "connect": "Connect",
+  "connection-name": "Connection name",
+  "connection-type": "Connection type",
+  "connection-to-accoutnt": "Connection to account",
+  "connect-to-instagram": "Connect to instagram",
   "buy": "Buy",
   "submit": "Submit",
   "fullname": "Fullname",
@@ -20,5 +29,7 @@
   "pricing": "Pricing",
   "online-demo": "Online demo",
   "erorr-enter-fullname": "Erorr enter fullname",
-  "erorr-enter-phone-number": "Erorr enter phone number"
+  "erorr-enter-phone-number": "Erorr enter phone number",
+  "email": "Email",
+  "password": "Password"
 }
