@@ -10,9 +10,15 @@ interface Props {
   children: ReactNode;
   title?: string;
   subTitle?: string;
+  className?: string;
 }
 
-const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
+const DashboardLayout: NextPage<Props> = ({
+  title,
+  subTitle,
+  children,
+  className,
+}) => {
   const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
@@ -40,7 +46,9 @@ const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="dashboard-layout flex min-h-screen relative">
+      <div
+        className={`dashboard-layout ${className} flex min-h-screen relative`}
+      >
         <DashboardSideDrawer mobileNavsidebar={mobileNavsidebar} />
         <div className="flex flex-col w-full bg-white">{children}</div>
       </div>

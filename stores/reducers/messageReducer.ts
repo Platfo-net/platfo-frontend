@@ -3,20 +3,20 @@ import { actionTypes } from "../actionTypes";
 import { updateObject } from "./updateObject";
 
 export const initialState = {
-  accountList: [],
+  selectedAccount: null,
 };
 
-export type ConnectionState = {
-  connections: {
-    accountList: any;
+export type MessageState = {
+  message: {
+    selectedAccount: any;
   };
 };
 
-export const connectionsReducer = (state = initialState, action: Action) => {
+export const messageReducer = (state = initialState, action: Action) => {
   switch (action.type) {
-    case actionTypes.ACCOUNT_LIST:
+    case actionTypes.SELECTED_ACCOUNT:
       return updateObject(state, {
-        accountList: action.accountList,
+        selectedAccount: action.selectedAccount,
       });
     default:
       return state;

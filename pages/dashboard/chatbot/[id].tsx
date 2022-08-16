@@ -32,7 +32,7 @@ const ChatbotDesignPage: NextPage = () => {
   const { locale } = router;
 
   return (
-    <DashboardLayout>
+    <DashboardLayout className="chatbot">
       <TopMenu items={ChatbotMenu} />
       <div className="chatflow-design content basis-full ">
         {/* <ChatFlowDesign /> */}

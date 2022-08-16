@@ -7,5 +7,6 @@ export const actionTypes = {
   CHANGE_SELECTIONS: "CHANGE_SELECTIONS",
   ACCOUNT_LIST: "ACCOUNT_LIST",
   CHANGE_LAYOUT: "CHANGE_LAYOUT",
+  SELECTED_ACCOUNT: "SELECTED_ACCOUNT",
 };
 export { actionTypes as default };

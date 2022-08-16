@@ -111,7 +111,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
   }, [status]);
 
   useEffect(() => {
-    console.log(record);
+    // console.log(record);
     (async () => {
       if (record) {
         try {
@@ -182,7 +182,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
               <span className="my-auto">
                 {
                   controls.trigger_id.options.find(
-                    (item) => item.id === controls.trigger_id.value
+                    (x) => x.id === item.trigger_id
                   )?.persian_name
                 }
               </span>
@@ -196,7 +196,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
               <span className="my-auto">
                 {
                   controls.chatflow_id.options.find(
-                    (item) => item.id === controls.chatflow_id.value
+                    (x) => x.id === item.chatflow_id
                   )?.name
                 }
               </span>

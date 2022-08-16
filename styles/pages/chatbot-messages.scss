@@ -1,8 +1,24 @@
 .chatbot-messages {
+  .container {
+    height: 90vh;
+  }
+
+  .user-list {
+    .items {
+      height: 83vh;
+    }
+  }
   .user-info {
     .avatar {
       width: 60% !important;
       max-height: 100px;
+    }
+  }
+
+  .account-list {
+    width: 4.5rem;
+    height: 4.5rem;
+    .avatar {
     }
   }
 }
