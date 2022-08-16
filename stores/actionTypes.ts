@@ -8,5 +8,6 @@ export const actionTypes = {
   ACCOUNT_LIST: "ACCOUNT_LIST",
   CHANGE_LAYOUT: "CHANGE_LAYOUT",
   SELECTED_ACCOUNT: "SELECTED_ACCOUNT",
+  SELECTED_USER: "SELECTED_USER",
 };
 export { actionTypes as default };

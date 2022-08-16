@@ -2,19 +2,27 @@ import Avatar from "components/Avatar/Avatar";
 import MessageBox from "components/MessageBox/MessageBox";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import useTranslation from "next-translate/useTranslation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import MessagesService from "services/endpoints/MessagesService";
 import { getAccounts, selectAccount } from "stores/actions";
-import Img from "../../../../assets/img/p.png";
 
 type MessageListProps = {};
 
 const MessageList: React.FC<MessageListProps> = () => {
-  const { accountList, selectedAccount } = useAppSelector((state) => ({
-    accountList: state.connections.accountList,
-    selectedAccount: state.message.selectedAccount,
-  }));
+  const { accountList, selectedAccount, selectedUser } = useAppSelector(
+    (state) => ({
+      accountList: state.connections.accountList,
+      selectedAccount: state.message.selectedAccount,
+      selectedUser: state.message.selectedUser,
+    })
+  );
   const dispatch = useAppDispatch();
   const { t } = useTranslation("common");
+  const [messages, setMessages] = useState([]);
+
+  const onSelectAccount = (item) => {
+    dispatch(selectAccount(item));
+  };
 
   useEffect(() => {
     (async () => {
@@ -24,10 +32,28 @@ const MessageList: React.FC<MessageListProps> = () => {
     })();
   }, []);
 
-  const onSelectAccount = (item) => {
-    dispatch(selectAccount(item));
-  };
-  console.log(selectedAccount);
+  useEffect(() => {
+    (async () => {
+      if (selectedAccount) {
+        setMessages([]);
+      }
+    })();
+  }, [selectedAccount]);
+
+  useEffect(() => {
+    (async () => {
+      if (selectedUser) {
+        try {
+          const response = await MessagesService.getArchive(
+            null,
+            selectedUser.user_page_id,
+            selectedUser.contact_igs_id
+          );
+          setMessages(response.data);
+        } catch (e) {}
+      }
+    })();
+  }, [selectedUser]);
 
   return (
     <div className="flex flex-col h-full">
@@ -53,10 +79,23 @@ const MessageList: React.FC<MessageListProps> = () => {
           );
         })}
       </div>
-      <div className="w-full flex flex-col card h-full mt-2">
-        <MessageBox className="user w-1/2" text="سلام خوبی؟" />
-        <MessageBox className="bot w-1/2" text="ممنون" />
-      </div>
+      {messages.length > 0 && (
+        <div className="w-full flex flex-col card h-full mt-2 overflow-y-auto">
+          {messages?.map((item) => {
+            return (
+              <MessageBox
+                key={item.id}
+                className={`${
+                  selectedUser.user_page_id === item.from_page_id
+                    ? "bot"
+                    : "user"
+                }  w-1/2`}
+                data={item}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

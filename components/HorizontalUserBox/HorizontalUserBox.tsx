@@ -3,24 +3,23 @@ import Avatar from "components/Avatar/Avatar";
 type HorizontalUserBoxProps = {};
 
 const HorizontalUserBox: React.FC<HorizontalUserBoxProps> = ({
-  imageUrl,
-  title,
-  subTitle,
   className,
   onClick,
-  id,
+  item,
 }) => {
   return (
     <button
       className={`${className} horizontal-user-box flex flex-row justify-content-between my-2`}
-      onClick={() => onClick(id)}
+      onClick={() => onClick(item)}
     >
       <div className="avatar-container  justify-center flex p-1 ">
-        {imageUrl && <Avatar imageUrl={imageUrl} />}
+        {item.information?.profile_image && (
+          <Avatar imageUrl={item.information?.profile_image} />
+        )}
       </div>
       <div className="flex flex-col rtl:text-right ltr:text-left">
-        <p className="title">{title} </p>
-        <span className="subtitle">{subTitle} </span>
+        <p className="title m-auto">{item.information?.username} </p>
+        {/* <span className="subtitle">{subTitle} </span> */}
       </div>
     </button>
   );

@@ -18,6 +18,10 @@
   &:hover,
   &.active {
     background: $chatbot;
+    img {
+      box-shadow: inset 3px 3px 10px 0 #000000;
+      border-radius: 999px;
+    }
     .subtitle {
       color: $dark-text;
     }

@@ -7,3 +7,10 @@ export const selectAccount = (value) => (dispatch: AppDispatch) => {
     selectedAccount: value,
   });
 };
+
+export const selectUser = (value) => (dispatch: AppDispatch) => {
+  dispatch({
+    type: actionTypes.SELECTED_USER,
+    selectedUser: value,
+  });
+};

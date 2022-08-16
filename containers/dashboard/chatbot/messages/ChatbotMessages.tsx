@@ -10,10 +10,10 @@ const ChatbotMessages: React.FC<ChatbotMessagesProps> = () => {
       <div className="basis-1/4 mx-2 ">
         <UsersList />
       </div>
-      <div className="basis-1/2 mx-2 overflow-y-auto">
+      <div className="basis-1/2 mx-2 ">
         <MessageList />
       </div>
-      <div className="basis-1/4 mx-2 overflow-y-auto">
+      <div className="basis-1/4 mx-2 ">
         <UserInfo />
       </div>
     </div>

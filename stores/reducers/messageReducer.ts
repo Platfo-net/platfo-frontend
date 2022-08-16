@@ -4,11 +4,13 @@ import { updateObject } from "./updateObject";
 
 export const initialState = {
   selectedAccount: null,
+  selectedUser: null,
 };
 
 export type MessageState = {
   message: {
     selectedAccount: any;
+    selectedUser: any;
   };
 };
 
@@ -17,6 +19,10 @@ export const messageReducer = (state = initialState, action: Action) => {
     case actionTypes.SELECTED_ACCOUNT:
       return updateObject(state, {
         selectedAccount: action.selectedAccount,
+      });
+    case actionTypes.SELECTED_USER:
+      return updateObject(state, {
+        selectedUser: action.selectedUser,
       });
     default:
       return state;
