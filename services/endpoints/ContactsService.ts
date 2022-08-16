@@ -8,7 +8,7 @@ class Contacts {
     $axios.post(`contact-services/api/v1/contact/profile/${igs_id}`, data);
 
   getContacts = (params, page_id) =>
-    $axios.get(`contact-services/api/v1/contact/Page/${page_id}`, { params });
+    $axios.get(`contact-services/api/v1/contact/page/${page_id}`, { params });
 }
 
 const ContactsService = new Contacts();
