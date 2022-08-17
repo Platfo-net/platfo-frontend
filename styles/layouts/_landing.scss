@@ -1,79 +1,66 @@
 @import '../utils/variables';
 @import '../base/mixins';
 
-.landingLayout {
-  background: #fff;
-  [class~='landing-layout'] {
-    background: $landing-header-background;
-    color: $on-landing-header-background;
-    height: $landing-header-height;
-    font-size: $font-size-md;
-    @include breakpoint(mobileonly) {
-      padding: 0 8px;
+.landing-layout {
+  background: $landing-header-background;
+  color: $on-landing-header-background;
+  height: $landing-header-height;
+  font-size: $font-size-md;
+  font-family: $font-family;
+  #intro {
+    height: 50vh;
+    width: 80%;
+    .main-title {
+      font-size: $font-size-xlg;
+      color: $dark-text;
+      font-weight: bold;
     }
-    #intro {
-      p {
-        font-size: $font-size-xlg;
-      }
+    .slogan {
+      font-size: $font-size-lg;
+      color: $light-text;
+      font-weight: bold;
     }
-
-    [class~='ant-row'] {
-      height: 100%;
+    .description {
+      font-size: $font-size-xsm;
+    }
+    .iphone {
+      display: flex;
+      width: 40vh !important;
+      top: -140px;
+    }
+    .iphone img {
       width: 100%;
-      .logo {
-        display: flex;
-        [class~='ant-typography'] {
-          color: $on-landing-header-background;
-        }
-        a {
-          height: $landing-header-height;
-          display: flex;
-          svg {
-            padding: 12px 8px;
-            width: 100%;
-            height: 100%;
-            fill: $primary;
-            margin: auto;
-          }
-        }
+      height: 100%;
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+  #cards {
+    .title {
+      font-size: $font-size-xlg;
+      color: $dark-text;
+      font-weight: bold;
+    }
+    .advantagesCard {
+      .title {
+        font-size: $font-size-md;
+        color: $dark-text;
+        font-weight: bold;
       }
-
-      .auth {
-        display: flex;
-        justify-content: flex-end;
-      }
-
-      .menu {
-        a {
-          color: $on-landing-header-background;
-          &:hover {
-            color: $primary;
-          }
-        }
+      .description {
+        font-size: $font-size-xsm;
       }
     }
   }
-  [class~='ant-layout-content'] {
-    .main {
-      min-height: 100vh;
-      padding: 6rem 1rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-
-  footer {
-    background: #fff;
-
-    .mapBox {
-      display: flex;
-      flex-direction: column;
+  #support {
+    .title {
+      font-size: $font-size-xlg;
+      color: $dark-text;
+      font-weight: bold;
     }
 
-    .brands {
-      text-align: center;
+    .description {
+      font-size: $font-size-xsm;
     }
   }
 }

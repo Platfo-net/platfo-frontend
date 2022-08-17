@@ -21,13 +21,16 @@ const ContactForm: React.FC<ContactFormProps> = () => {
     console.log('Failed:', errorInfo);
   };
   return (
-    <form name="basic" className="flex flex-wrap items-center">
-      <div className="m-4">
+    <form
+      name="basic"
+      className="flex flex-col flex-wrap lg:flex-row items-center"
+    >
+      <div className="mx-4">
         <Input placeholder={t('fullname')} className="bg-white rounded-2xl" />
       </div>
 
       <div
-        className="m-4"
+        className="mx-4"
         name="phone-number"
         rules={[{ required: true, message: t('erorr-enter-phone-number') }]}
       >
@@ -37,7 +40,7 @@ const ContactForm: React.FC<ContactFormProps> = () => {
         />
       </div>
 
-      <div className="mx-4">
+      <div className="m-4">
         <button className="primary px-6 py-3" htmlType="submit">
           {t('submit')}
         </button>

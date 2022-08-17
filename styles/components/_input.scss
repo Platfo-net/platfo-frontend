@@ -1,4 +1,4 @@
-@import "../utils/variables";
+@import '../utils/variables';
 
 .input-box {
   label {
@@ -8,10 +8,11 @@
   }
   input {
     background: transparent;
-    border-radius: $border-radius !important;
+    border-radius: $border-radius-sm !important;
     color: $dark-text;
     border: $border;
-    padding: 16px;
+    padding: 0 16px;
+    height: $element-height;
     &.number {
       direction: ltr;
     }

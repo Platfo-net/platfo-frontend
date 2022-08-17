@@ -24,7 +24,7 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({
         {meta && <meta name={meta.name} content={meta.content} />}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="landingdiv">
+      <div className="landing-layout">
         <LandingHeader />
         {children}
         <div id="about-us">

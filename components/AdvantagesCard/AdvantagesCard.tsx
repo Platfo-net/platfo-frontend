@@ -8,13 +8,13 @@ type AdvantagesCardProps = {
 
 const AdvantagesCard: React.FC<AdvantagesCardProps> = ({ data }) => {
   return (
-    <div className="advantagesCard  p-8">
-      <div className="icon mb-16">{data.icon}</div>
+    <div className="advantagesCard p-8">
+      <div className="icon mb-12">{data.icon}</div>
       <div>
-        <p className="dark">{data.title} </p>
+        <p className="title">{data.title} </p>
       </div>
       <div>
-        <p className="light">{data.description} </p>
+        <p className="description">{data.description} </p>
       </div>
     </div>
   );

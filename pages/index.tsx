@@ -17,6 +17,7 @@ import WalletIcon from '../assets/svg/wallet.svg';
 import TimeIcon from '../assets/svg/time.svg';
 import SatisfyIcon from '../assets/svg/satisfy.svg';
 import CostIcon from '../assets/svg/cost.svg';
+import Image from 'next/image';
 
 const cards = [
   {
@@ -93,22 +94,34 @@ const Home: NextPage = () => {
 
   return (
     <LandingLayout>
-      <div className="landing-layout p-24">
-        <div id="intro" className="gradient-card mb-5 p-16 ">
-          <p className="dark">{getContent('landing-main-title')}</p>
-          <p className="light">{getContent('landing-slogan')} </p>
-          <p className="light d-block">{getContent('landing-description')} </p>
-          <button className="primary mt-5 px-6 py-3">{t('online-demo')}</button>
-          {/* <div className="iphone">
-            <Image src={IphoneImg} alt="" />
-          </div> */}
-        </div>
-        <div id="-cards" className="sections mt-8 ">
+      <div className="p-24">
+        <div id="intro" className="gradient-card flex justify-center mb-5">
           <div>
-            <p className="dark">{getContent('landing-section-2-title')}</p>
+            <p className="main-title rtl:text-right ltl:text-left">
+              {getContent('landing-main-title')}
+            </p>
+            <p className="slogan">{getContent('landing-slogan')} </p>
+            <p className="d-block description">
+              {getContent('landing-description')}
+            </p>
+            <button className="primary mt-5 px-6 py-3">
+              {t('online-demo')}
+            </button>
+          </div>
+          <div className="iphone relative">
+            <Image className="absolute " src={IphoneImg} alt="" />
+          </div>
+        </div>
+
+        <div
+          id="cards"
+          className="flex flex-col items-center after:sections mt-8"
+        >
+          <div>
+            <p className="title">{getContent('landing-section-2-title')}</p>
           </div>
           <div>
-            <div className="my-5 flex justify-center space-x-10">
+            <div className="my-5 flex space-x-10">
               {cards.map((item) => (
                 <div key={item.title}>
                   <AdvantagesCard data={item} />
@@ -116,20 +129,22 @@ const Home: NextPage = () => {
               ))}
             </div>
           </div>
+
           <div
             id="support"
-            className="blue-gradient-card flex justify-between mt-12"
+            className="blue-gradient-card flex flex-col flex-wrap lg:flex-nowrap xl:flex-row justify-center items-center mt-12 max-w-screen-2xl"
           >
-            <div className="flex-wrap">
-              <p className="dark">{getContent('landing-help-title')}</p>
-              <p className="light d-block">
+            <div className="w-full xl:w-3/5 flex flex-wrap justify-center xl:justify-start">
+              <p className="title">{getContent('landing-help-title')}</p>
+              <p className="description d-block w-2/3">
                 {getContent('landing-help-description')}{' '}
               </p>
             </div>
-            <div className="flex flex-wrap">
+            <div>
               <ContactForm />
             </div>
           </div>
+
           <div
             id="pricing"
             className="sections selection:mt-12 flex justify-center items-center my-12"
