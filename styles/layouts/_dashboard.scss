@@ -171,4 +171,16 @@
     z-index: 60;
     padding: 16px 32px;
   }
+
+  &.chatbot {
+    .inlineMenu {
+      .inline-menu-items {
+        &.active {
+          span {
+            border-bottom: 4px solid $chatbot;
+          }
+        }
+      }
+    }
+  }
 }

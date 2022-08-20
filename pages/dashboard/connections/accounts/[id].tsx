@@ -29,6 +29,7 @@ const AccountDetailsPage: NextPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [triggerOptions, setTriggerOptions] = useState([]);
   const [chatflowOptions, setChatflowOptions] = useState([]);
+  const [record, setRecord] = useState(null);
   const submitRef = useRef();
 
   const updateConnectionMenu = [
@@ -86,7 +87,13 @@ const AccountDetailsPage: NextPage = () => {
       setConections(response.data);
     } catch (e) {}
   };
-  const modalHandler = () => setOpenModal(!openModal);
+  const modalHandler = () => {
+    setOpenModal(!openModal);
+    if (openModal) {
+      setRecord(null);
+    }
+  };
+  const modalHandlerDetails = () => setOpenModalDetails(!openModalDetails);
 
   const onSubmit = () => {
     submitRef.current.click();
@@ -97,10 +104,15 @@ const AccountDetailsPage: NextPage = () => {
     getData();
   };
 
-  const onDisconnect = async () => {
+  const onEdit = (item) => {
+    setRecord(item);
+    modalHandler();
+  };
+
+  const onDisconnect = async (item) => {
     try {
-      await ConnectionService.deleteConnection(id);
-      router.push("/dashboard/connections/accounts");
+      await ConnectionService.deleteConnection(item.id);
+      getData();
       // Todo: notification
     } catch (e) {}
   };
@@ -119,12 +131,12 @@ const AccountDetailsPage: NextPage = () => {
               </div>
             </div>
             <div className="basis-1/2 flex">
-              <button
+              {/*TODO <button
                 className="primary my-auto rtl:mr-auto"
                 onClick={onDisconnect}
               >
                 {t("disconnect")}
-              </button>
+              </button> */}
             </div>
           </div>
         )}
@@ -142,11 +154,15 @@ const AccountDetailsPage: NextPage = () => {
             return (
               <div className="basis-1/6" key={item.id}>
                 <SocialBox
+                  removeable={true}
                   data={item}
                   imageUrlKey="profile_image_url"
-                  titleKey="username"
-                  buttonText={t("details")}
-                  onClick={() => {}}
+                  titleKey="name"
+                  descriptionKey="description"
+                  buttonText={t("edit")}
+                  onClick={onEdit}
+                  iconKey={item.application_name}
+                  onClickRemove={onDisconnect}
                 />
               </div>
             );
@@ -156,7 +172,7 @@ const AccountDetailsPage: NextPage = () => {
       <Modal
         open={openModal}
         onCancel={modalHandler}
-        title={t("add-new-connection")}
+        title={record ? t("edit-connection") : t("add-new-connection")}
         size="lg"
         onSubmit={onSubmit}
       >
@@ -166,6 +182,8 @@ const AccountDetailsPage: NextPage = () => {
           submitRef={submitRef}
           account_id={id}
           onSuccess={onSuccess}
+          record={record}
+          status={openModal}
         />
       </Modal>
     </DashboardLayout>

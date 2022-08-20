@@ -63,8 +63,8 @@ const AccountsPage: NextPage = () => {
 
   const onDisconnect = async (item) => {
     try {
-      await ConnectionService.deleteConnection(item.id);
-      router.push("/dashboard/connections/accounts");
+      // await ConnectionService.deleteConnection(item.id);
+      // router.push("/dashboard/connections/accounts");
       // Todo: notification
     } catch (e) {}
   };

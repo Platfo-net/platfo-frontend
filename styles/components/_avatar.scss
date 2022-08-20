@@ -26,5 +26,16 @@
         height: 100%;
       }
     }
+
+    &.BOT_BUILDER {
+      background-color: $chatbot;
+      svg {
+        position: relative;
+        top: 25%;
+        fill: #fff;
+        width: 50%;
+        height: 50%;
+      }
+    }
   }
 }

@@ -6,7 +6,7 @@ export const initialState = {
   accountList: [],
 };
 
-export type AuthState = {
+export type ConnectionState = {
   connections: {
     accountList: any;
   };
