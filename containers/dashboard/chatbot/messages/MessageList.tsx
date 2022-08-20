@@ -57,7 +57,8 @@ const MessageList: React.FC<MessageListProps> = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <h3 className="mx-2 mt-0">{t("accounts")}</h3>
+      {accountList.length > 0 && <h3 className="mx-2 mt-0">{t("accounts")}</h3>}
+
       <div className="w-full flex flex-wrap">
         {accountList.map((item) => {
           return (
