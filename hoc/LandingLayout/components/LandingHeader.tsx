@@ -24,7 +24,7 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
   };
 
   return (
-    <div className="w-full flex justify-between py-1 px-2">
+    <div className="w-full flex justify-between items-center py-1 px-2">
       <div className="--logo px-4">
         <Link href="/">
           <a href="replace" className="flex justify-center items-center">

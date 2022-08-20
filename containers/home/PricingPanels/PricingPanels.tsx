@@ -51,7 +51,7 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
   return (
     <>
       {plans.map((item) => (
-        <div key={item.type}>
+        <div key={item.type} className="basis-1/3">
           <PriceBox data={item} onSubmit={onSubmit} />
         </div>
       ))}

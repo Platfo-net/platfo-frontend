@@ -94,10 +94,10 @@ const Home: NextPage = () => {
 
   return (
     <LandingLayout>
-      <div className="p-24">
-        <div id="intro" className="gradient-card flex justify-center mb-5">
+      <div className="p-4 sm:p-8 md:p-12 lg:p-24">
+        <div id="intro" className="gradient-card flex justify-center">
           <div>
-            <p className="main-title rtl:text-right ltl:text-left">
+            <p className="main-title text-4xl rtl:text-right ltl:text-left">
               {getContent('landing-main-title')}
             </p>
             <p className="slogan">{getContent('landing-slogan')} </p>
@@ -108,22 +108,22 @@ const Home: NextPage = () => {
               {t('online-demo')}
             </button>
           </div>
-          <div className="iphone relative">
+          <div className="iphone relative md:w-full lg:w-1/2 xl:-top-36">
             <Image className="absolute " src={IphoneImg} alt="" />
           </div>
         </div>
 
         <div
           id="cards"
-          className="flex flex-col items-center after:sections mt-8"
+          className="flex flex-col items-center justify-center after:sections mt-8"
         >
-          <div>
+          <div className="w-full flex justify-start">
             <p className="title">{getContent('landing-section-2-title')}</p>
           </div>
           <div>
-            <div className="my-5 flex space-x-10">
+            <div className="my-5 flex flex-col sm:flex-row justify-center flex-wrap">
               {cards.map((item) => (
-                <div key={item.title}>
+                <div key={item.title} className="md:basis-2/4 lg:basis-1/4">
                   <AdvantagesCard data={item} />
                 </div>
               ))}
@@ -147,7 +147,7 @@ const Home: NextPage = () => {
 
           <div
             id="pricing"
-            className="sections selection:mt-12 flex justify-center items-center my-12"
+            className="sections flex flex-wrap justify-center items-center my-12"
           >
             <PricingPanels />
           </div>

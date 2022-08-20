@@ -23,7 +23,7 @@ const ContactForm: React.FC<ContactFormProps> = () => {
   return (
     <form
       name="basic"
-      className="flex flex-col flex-wrap lg:flex-row items-center"
+      className="flex flex-col flex-wrap md:flex-row items-center"
     >
       <div className="mx-4">
         <Input placeholder={t('fullname')} className="bg-white rounded-2xl" />
