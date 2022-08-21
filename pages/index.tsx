@@ -23,41 +23,32 @@ const cards = [
   {
     icon: <TimeIcon />,
     title: '24/7 response',
-    description:
-      'By building a chatbot with the help of Batinow and connecting it to your social network account, you can intelligently send messages to your customers and contacts and stay in touch with them around the clock.',
+    description: 'cards-description-1',
   },
   {
     icon: <CostIcon />,
     title: 'sales increase',
-    description:
-      'With the help of Batinow, you can automatically send messages to people who follow a number for the first time and introduce your products or services to them exclusively',
+    description: 'cards-description-2',
   },
   {
     icon: <WalletIcon />,
     title: 'Saving money and time',
-    description:
-      "With the help of chatbot, many of the messages and questions that your contacts have are answered, and you don't need to spend the whole day answering direct messages.",
+    description: 'cards-description-3',
   },
 
   {
     icon: <SatisfyIcon />,
     title: 'Satisfying customers',
-    description:
-      'Batino helps you respond to the requests of your contacts as quickly as possible. In fact, this will make your customers wait less and solve their problems quickly, and this will increase the satisfaction of your customers.',
+    description: 'cards-description-4',
   },
 ];
 
 const Home: NextPage = () => {
-  const getContent = (key: string) => {
-    let list: { [k: string]: string } = landingContents;
-    let text = list[key];
-    return text;
-  };
+  let { t } = useTranslation('common');
+
   const { isLoggedIn } = useSelector((state: AuthState) => ({
     isLoggedIn: state.auth.isLoggedIn,
   }));
-
-  let { t } = useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch();
   const { locale } = router;
@@ -95,20 +86,18 @@ const Home: NextPage = () => {
   return (
     <LandingLayout>
       <div className="p-4 sm:p-8 md:p-12 lg:p-24 flex flex-col items-center">
-        <div id="intro" className="gradient-card flex justify-center">
+        <div id="intro" className="gradient-card flex flex-col sm:flex-row ">
           <div>
             <p className="main-title text-4xl rtl:text-right ltl:text-left">
-              {getContent('landing-main-title')}
+              {t('landing-main-title')}
             </p>
-            <p className="slogan">{getContent('landing-slogan')} </p>
-            <p className="d-block description">
-              {getContent('landing-description')}
-            </p>
+            <p className="slogan">{t('landing-slogan')} </p>
+            <p className="d-block description">{t('landing-description')}</p>
             <button className="primary mt-5 px-6 py-3">
               {t('online-demo')}
             </button>
           </div>
-          <div className="iphone hidden sm:block relative md:w-full lg:w-1/2 xl:-top-36">
+          <div className="iphone relative w-2/3 md:w-full lg:w-1/2 xl:-top-36 mr-auto">
             <Image className="absolute " src={IphoneImg} alt="" />
           </div>
         </div>
@@ -118,8 +107,9 @@ const Home: NextPage = () => {
           className="flex flex-col items-center justify-center after:sections mt-8"
         >
           <div className="w-full flex justify-start">
-            <p className="title">{getContent('landing-section-2-title')}</p>
+            <p className="title">{t('landing-section-2-title')}</p>
           </div>
+
           <div>
             <div className="my-5 flex flex-col space-y-6 md:space-y-0 sm:flex-row justify-center flex-wrap">
               {cards.map((item) => (
@@ -134,9 +124,9 @@ const Home: NextPage = () => {
             className="blue-gradient-card flex flex-col flex-wrap lg:flex-nowrap xl:flex-row justify-center items-center mt-12 max-w-screen-2xl"
           >
             <div className="w-full xl:w-3/5 flex flex-wrap justify-center xl:justify-start">
-              <p className="title">{getContent('landing-help-title')}</p>
+              <p className="title">{t('landing-help-title')}</p>
               <p className="description d-block w-2/3">
-                {getContent('landing-help-description')}{' '}
+                {t('landing-help-description')}{' '}
               </p>
             </div>
             <div>

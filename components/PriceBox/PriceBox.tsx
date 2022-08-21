@@ -32,7 +32,7 @@ const PriceBox: React.FC<PriceBoxProps> = ({ data, onSubmit }) => {
         </div>
       ) : (
         <div className="price mt-4 my-5 font-extrabold">
-          <p> Coming Soon</p>
+          <p> {t('coming-soon')}</p>
         </div>
       )}
       <div>

@@ -1,20 +1,22 @@
 import PriceBox from 'components/PriceBox/PriceBox';
+import useTranslation from 'next-translate/useTranslation';
 import { iteratorSymbol } from 'immer/dist/internal';
 import { Fragment } from 'react';
 
 type PricingPanelsProps = {};
 
 const PricingPanels: React.FC<PricingPanelsProps> = () => {
+  let { t } = useTranslation('common');
   const plans = [
     {
       price: 100000,
       items: [
-        'Access to the design environment',
-        'Unlimited number of chat flows',
-        'Possibility to add an Instagram page',
-        'Number of users maximum one person',
-        'Access to the messaging tool',
-        'Accessing the menu builder',
+        t('Access to the design environment'),
+        t('Unlimited number of chat flows'),
+        t('Possibility to add an Instagram page'),
+        t('Number of users maximum one person'),
+        t('Access to the messaging tool'),
+        t('Accessing the menu builder'),
       ],
       type: 'bronze',
       status: 'active',
@@ -22,12 +24,12 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
     {
       price: 100000,
       items: [
-        'Access to the design environment',
-        'Unlimited number of chat flows',
-        'Possibility to add an Instagram page',
-        'Number of users maximum one person',
-        'Access to the messaging tool',
-        'Accessing the menu builder',
+        t('Access to the design environment'),
+        t('Unlimited number of chat flows'),
+        t('Possibility to add an Instagram page'),
+        t('Number of users maximum one person'),
+        t('Access to the messaging tool'),
+        t('Accessing the menu builder'),
       ],
       type: 'gold',
       status: 'disabled',
@@ -35,12 +37,12 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
     {
       price: 100000,
       items: [
-        'Access to the design environment',
-        'Unlimited number of chat flows',
-        'Possibility to add an Instagram page',
-        'Number of users maximum one person',
-        'Access to the messaging tool',
-        'Accessing the menu builder',
+        t('Access to the design environment'),
+        t('Unlimited number of chat flows'),
+        t('Possibility to add an Instagram page'),
+        t('Number of users maximum one person'),
+        t('Access to the messaging tool'),
+        t('Accessing the menu builder'),
       ],
       type: 'silver',
       status: 'disabled',
