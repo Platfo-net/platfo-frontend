@@ -24,8 +24,8 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
   };
 
   return (
-    <div className="w-full flex justify-between items-center py-1 px-2">
-      <div className="--logo px-4">
+    <div id='header' className="w-full flex flex-col sm:flex-row justify-between items-center py-1 px-2">
+      <div className="logo px-4">
         <Link href="/">
           <a href="replace" className="flex justify-center items-center">
             <Logo className="w-12 px-1 mx-1" />
@@ -35,14 +35,14 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
         </Link>
       </div>
 
-      <div className="--menu flex flex-wrap justify-center items-center">
+      <div className="menu flex flex-wrap justify-center items-center">
         {landingMenu.map((item: any) => (
           <Link href={item.path} key={item.path}>
             <a className="mx-4">{t(item.title)}</a>
           </Link>
         ))}
       </div>
-      <div className="--auth px-4 flex justify-center items-center ">
+      <div className="auth px-4 flex justify-center items-center my-4 sm:m-0">
         {isLoggedIn ? (
           <button className="primary my-auto mx-4" onClick={gotoDashboard}>
             <span className="relative ">{`Your Panel`}</span>

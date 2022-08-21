@@ -7,9 +7,26 @@
   // height: $landing-header-height;
   font-size: $font-size-md;
   font-family: $font-family;
+  #header {
+    .logo {
+      a {
+        p {
+          color: $light-text;
+        }
+      }
+    }
+    .menu {
+      a {
+        color: $light-text;
+      }
+    }
+    .auth {
+      button {
+        font-size: $font-size-xsm;
+      }
+    }
+  }
   #intro {
-    // max-width: 80vh;
-    // max-height: 640px;
     .main-title {
       color: $dark-text;
       font-weight: bold;
@@ -23,13 +40,8 @@
       font-size: $font-size-xsm;
     }
     .iphone {
-      // width: 36vh !important;
-      // height: 50vh;
-      // top: -140px;
     }
     .iphone img {
-      // width: 100%;
-      // height: 100%;
       display: inline-block;
       overflow: hidden;
     }

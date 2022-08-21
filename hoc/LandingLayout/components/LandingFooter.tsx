@@ -22,14 +22,14 @@ const LandingFooter: React.FC<LandingFooterProps> = () => {
     address: '60 Bloor W, Toronto, Ontario, Canada',
   };
   return (
-    <div className="flex mx-8">
-      <div className="w-1/2 p-5">
+    <div className="w-full h-full flex flex-col md:flex-row mx-8">
+      <div className="w-full md:w-1/2 p-5">
         <p className="dark">{about.title}</p>
         <p className="light">{about.p1}</p>
         <p className="light">{about.p2}</p>
         <p className="light">{about.p3}</p>
       </div>
-      <div className="w-1/2 p-5 mapBox flex flex-col items-center justify-center">
+      <div className="mapBox md:w-1/2 md:p-5 flex flex-col items-center justify-center">
         <p className="light"> {about.address}</p>
         <MapWithNoSSR />
       </div>

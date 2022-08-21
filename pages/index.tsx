@@ -94,7 +94,7 @@ const Home: NextPage = () => {
 
   return (
     <LandingLayout>
-      <div className="p-4 sm:p-8 md:p-12 lg:p-24">
+      <div className="p-4 sm:p-8 md:p-12 lg:p-24 flex flex-col items-center">
         <div id="intro" className="gradient-card flex justify-center">
           <div>
             <p className="main-title text-4xl rtl:text-right ltl:text-left">
@@ -108,7 +108,7 @@ const Home: NextPage = () => {
               {t('online-demo')}
             </button>
           </div>
-          <div className="iphone relative md:w-full lg:w-1/2 xl:-top-36">
+          <div className="iphone hidden sm:block relative md:w-full lg:w-1/2 xl:-top-36">
             <Image className="absolute " src={IphoneImg} alt="" />
           </div>
         </div>
@@ -121,7 +121,7 @@ const Home: NextPage = () => {
             <p className="title">{getContent('landing-section-2-title')}</p>
           </div>
           <div>
-            <div className="my-5 flex flex-col sm:flex-row justify-center flex-wrap">
+            <div className="my-5 flex flex-col space-y-6 md:space-y-0 sm:flex-row justify-center flex-wrap">
               {cards.map((item) => (
                 <div key={item.title} className="md:basis-2/4 lg:basis-1/4">
                   <AdvantagesCard data={item} />
@@ -129,7 +129,6 @@ const Home: NextPage = () => {
               ))}
             </div>
           </div>
-
           <div
             id="support"
             className="blue-gradient-card flex flex-col flex-wrap lg:flex-nowrap xl:flex-row justify-center items-center mt-12 max-w-screen-2xl"
@@ -144,7 +143,6 @@ const Home: NextPage = () => {
               <ContactForm />
             </div>
           </div>
-
           <div
             id="pricing"
             className="sections flex flex-wrap justify-center items-center my-12"

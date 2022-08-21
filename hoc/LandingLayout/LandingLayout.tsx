@@ -18,13 +18,13 @@ const LandingLayout: React.FC<LandingLayoutProps> = ({
   title,
 }) => {
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <Head>
         <title>{title}</title>
         {meta && <meta name={meta.name} content={meta.content} />}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="landing-layout flex flex-col w-screen h-full ">
+      <div className="landing-layout w-screen h-full  flex flex-col items-center justify-center max-w-screen-2xl">
         <LandingHeader />
         {children}
         <div id="about-us">
