@@ -1,3 +1,4 @@
+import ListItem from 'components/ListItem/ListItem';
 import useTranslation from 'next-translate/useTranslation';
 
 type PriceBoxProps = {
@@ -19,16 +20,12 @@ const PriceBox: React.FC<PriceBoxProps> = ({ data, onSubmit }) => {
         <p>{t(data.type)}</p>
       </div>
       {data.items.map((item) => {
-        return (
-          <div key={item}>
-            <p>{item}</p>
-          </div>
-        );
+        return <ListItem item={item} />;
       })}
       {data.status !== 'disabled' ? (
         <div className="price my-4 font-extrabold">
           <p> {data.price.toLocaleString()} T</p>
-          <p className="light sm d-block"> {t('monthly')} </p>
+          <p> {t('monthly')} </p>
         </div>
       ) : (
         <div className="price mt-4 my-5 font-extrabold">

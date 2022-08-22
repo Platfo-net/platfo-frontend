@@ -12,7 +12,7 @@ const landingMenu = [
     path: '#pricing',
   },
   {
-    title: 'terms of Service',
+    title: 'terms-of-service',
     path: '/landing/toc',
   },
 ];

@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { AuthState } from '../stores/reducers/authReducer';
@@ -11,48 +10,45 @@ import LandingLayout from 'hoc/LandingLayout/LandingLayout';
 import AdvantagesCard from 'components/AdvantagesCard/AdvantagesCard';
 import ContactForm from 'containers/home/ContactForm/ContactForm';
 import PricingPanels from 'containers/home/PricingPanels/PricingPanels';
-import landingContents from 'assets/contents/landingContents.json';
 import IphoneImg from '../assets/img/iphone.png';
 import WalletIcon from '../assets/svg/wallet.svg';
 import TimeIcon from '../assets/svg/time.svg';
 import SatisfyIcon from '../assets/svg/satisfy.svg';
 import CostIcon from '../assets/svg/cost.svg';
+
 import Image from 'next/image';
 
 const cards = [
   {
     icon: <TimeIcon />,
-    title: '24/7 response',
-    description: 'cards-description-1',
+    title: 'response-24-7',
+    description: 'landing-cards-description-1',
   },
   {
     icon: <CostIcon />,
-    title: 'sales increase',
-    description: 'cards-description-2',
+    title: 'sales-increase',
+    description: 'landing-cards-description-2',
   },
   {
     icon: <WalletIcon />,
-    title: 'Saving money and time',
-    description: 'cards-description-3',
+    title: 'saving-money-and-time',
+    description: 'landing-cards-description-3',
   },
 
   {
     icon: <SatisfyIcon />,
-    title: 'Satisfying customers',
-    description: 'cards-description-4',
+    title: 'satisfying-customers',
+    description: 'landing-cards-description-4',
   },
 ];
 
 const Home: NextPage = () => {
-  let { t } = useTranslation('common');
-
   const { isLoggedIn } = useSelector((state: AuthState) => ({
     isLoggedIn: state.auth.isLoggedIn,
   }));
   const router = useRouter();
   const dispatch = useDispatch();
   const { locale } = router;
-
   const changeLocale = useCallback(
     (newLocale) => {
       if (newLocale === 'fa-IR') {
@@ -65,6 +61,8 @@ const Home: NextPage = () => {
     [router]
   );
 
+  let { t } = useTranslation('common');
+
   const onClick = async () => {
     console.log(isLoggedIn);
 
@@ -75,8 +73,6 @@ const Home: NextPage = () => {
           password: 'gdgdggdg',
         };
         await dispatch(loggedIn(data));
-
-        // router.push("/dashboard");
       } catch (e) {}
     } else {
       dispatch(loggedOut());
@@ -85,20 +81,24 @@ const Home: NextPage = () => {
 
   return (
     <LandingLayout>
-      <div className="p-4 sm:p-8 md:p-12 lg:p-24 flex flex-col items-center">
-        <div id="intro" className="gradient-card flex flex-col sm:flex-row ">
-          <div>
+      <div className="landing-body my-16 flex flex-col items-center">
+        <div id="intro" className="gradient-card flex flex-col sm:flex-row">
+          <div className="basis-1/2">
             <p className="main-title text-4xl rtl:text-right ltl:text-left">
-              {t('landing-main-title')}
+              {t('landing-intro-main-title')}
             </p>
-            <p className="slogan">{t('landing-slogan')} </p>
-            <p className="d-block description">{t('landing-description')}</p>
+            <p className="sub-title">{t('landing-intro-sub-title')}</p>
+            <p className="description">{t('landing-intro-description')}</p>
             <button className="primary mt-5 px-6 py-3">
               {t('online-demo')}
             </button>
           </div>
-          <div className="iphone relative w-2/3 md:w-full lg:w-1/2 xl:-top-36 mr-auto">
-            <Image className="absolute " src={IphoneImg} alt="" />
+          <div className="intro-imgrelative xl:-top-36">
+            <Image
+              className="absolute  max-w-52 max-h-52"
+              src={IphoneImg}
+              alt=""
+            />
           </div>
         </div>
 
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
           className="flex flex-col items-center justify-center after:sections mt-8"
         >
           <div className="w-full flex justify-start">
-            <p className="title">{t('landing-section-2-title')}</p>
+            <p className="title">{t('landing-cards-section-2-title')}</p>
           </div>
 
           <div>
@@ -121,21 +121,19 @@ const Home: NextPage = () => {
           </div>
           <div
             id="support"
-            className="blue-gradient-card flex flex-col flex-wrap lg:flex-nowrap xl:flex-row justify-center items-center mt-12 max-w-screen-2xl"
+            className="blue-gradient-card flex flex-wrap items-center mt-12"
           >
-            <div className="w-full xl:w-3/5 flex flex-wrap justify-center xl:justify-start">
-              <p className="title">{t('landing-help-title')}</p>
-              <p className="description d-block w-2/3">
-                {t('landing-help-description')}{' '}
-              </p>
+            <div className="sm:basis-6/12">
+              <p className="title">{t('landing-support-title')}</p>
+              <p className="description">{t('landing-support-description')} </p>
             </div>
-            <div>
+            <div className="sm:basis-6/12">
               <ContactForm />
             </div>
           </div>
           <div
             id="pricing"
-            className="sections flex flex-wrap justify-center items-center my-12"
+            className="w-full flex flex-wrap justify-evenly my-12"
           >
             <PricingPanels />
           </div>

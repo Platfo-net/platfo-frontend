@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import landingMenu from 'assets/contents/landingMenu';
 import Logo from '../../../assets/svg/botinow-logo.svg';
-import { tokenObj } from 'helpers/token';
 import useTranslation from 'next-translate/useTranslation';
 
 const LandingHeader: React.FC<LandingHeaderProps> = () => {
@@ -24,7 +23,10 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
   };
 
   return (
-    <div id='header' className="w-full flex flex-col sm:flex-row justify-between items-center py-1 px-2">
+    <div
+      id="header"
+      className="w-full flex flex-col sm:flex-row justify-between items-center py-1 px-2"
+    >
       <div className="logo px-4">
         <Link href="/">
           <a href="replace" className="flex justify-center items-center">
@@ -52,11 +54,7 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
             <button className="py-3 px-6" onClick={onLogin}>
               {t('login')}
             </button>
-            <button
-              type="button"
-              className="primary py-3 px-6"
-              onClick={onRegister}
-            >
+            <button className="primary py-3 px-6" onClick={onRegister}>
               {t('register')}
             </button>
           </>

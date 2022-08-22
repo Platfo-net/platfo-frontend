@@ -4,9 +4,11 @@
 .landing-layout {
   background: $landing-header-background;
   color: $on-landing-header-background;
-  // height: $landing-header-height;
   font-size: $font-size-md;
-  font-family: $font-family;
+  * {
+    font-family: $font-family;
+  }
+
   #header {
     .logo {
       a {
@@ -20,18 +22,16 @@
         color: $light-text;
       }
     }
-    .auth {
-      button {
-        font-size: $font-size-xsm;
-      }
-    }
   }
   #intro {
+    height: 50vh;
+    max-width: 90%;
+
     .main-title {
       color: $dark-text;
       font-weight: bold;
     }
-    .slogan {
+    .sub-title {
       font-size: $font-size-lg;
       color: $light-text;
       font-weight: bold;
@@ -39,11 +39,11 @@
     .description {
       font-size: $font-size-xsm;
     }
-    .iphone {
-    }
-    .iphone img {
-      display: inline-block;
-      overflow: hidden;
+    .intro-img {
+      img {
+        display: inline-block;
+        overflow: hidden;
+      }
     }
   }
   #cards {
@@ -72,6 +72,12 @@
 
     .description {
       font-size: $font-size-xsm;
+    }
+  }
+
+  #footer {
+    .title {
+      color: $primary;
     }
   }
 }

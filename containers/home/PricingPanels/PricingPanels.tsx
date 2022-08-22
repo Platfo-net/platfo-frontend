@@ -1,7 +1,5 @@
 import PriceBox from 'components/PriceBox/PriceBox';
 import useTranslation from 'next-translate/useTranslation';
-import { iteratorSymbol } from 'immer/dist/internal';
-import { Fragment } from 'react';
 
 type PricingPanelsProps = {};
 
@@ -11,12 +9,12 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
     {
       price: 100000,
       items: [
-        t('Access to the design environment'),
-        t('Unlimited number of chat flows'),
-        t('Possibility to add an Instagram page'),
-        t('Number of users maximum one person'),
-        t('Access to the messaging tool'),
-        t('Accessing the menu builder'),
+        t('access-to-the-design-environment'),
+        t('unlimited-number-of-chat-flows'),
+        t('possibility-to-add-an-Instagram-page'),
+        t('number-of-users-maximum-one-person'),
+        t('access-to-the-messaging-tool'),
+        t('accessing-the-menu-builder'),
       ],
       type: 'bronze',
       status: 'active',
@@ -24,12 +22,12 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
     {
       price: 100000,
       items: [
-        t('Access to the design environment'),
-        t('Unlimited number of chat flows'),
-        t('Possibility to add an Instagram page'),
-        t('Number of users maximum one person'),
-        t('Access to the messaging tool'),
-        t('Accessing the menu builder'),
+        t('access-to-the-design-environment'),
+        t('unlimited-number-of-chat-flows'),
+        t('possibility-to-add-an-Instagram-page'),
+        t('number-of-users-maximum-one-person'),
+        t('access-to-the-messaging-tool'),
+        t('accessing-the-menu-builder'),
       ],
       type: 'gold',
       status: 'disabled',
@@ -37,12 +35,12 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
     {
       price: 100000,
       items: [
-        t('Access to the design environment'),
-        t('Unlimited number of chat flows'),
-        t('Possibility to add an Instagram page'),
-        t('Number of users maximum one person'),
-        t('Access to the messaging tool'),
-        t('Accessing the menu builder'),
+        t('access-to-the-design-environment'),
+        t('unlimited-number-of-chat-flows'),
+        t('possibility-to-add-an-Instagram-page'),
+        t('number-of-users-maximum-one-person'),
+        t('access-to-the-messaging-tool'),
+        t('accessing-the-menu-builder'),
       ],
       type: 'silver',
       status: 'disabled',
@@ -53,7 +51,7 @@ const PricingPanels: React.FC<PricingPanelsProps> = () => {
   return (
     <>
       {plans.map((item) => (
-        <div key={item.type} className="sm:basis-1/2 lg:basis-1/3">
+        <div key={item.type} className="sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
           <PriceBox data={item} onSubmit={onSubmit} />
         </div>
       ))}
