@@ -4,17 +4,22 @@ import DashboardSideDrawer from "./components/DashboardSideDrawer/DashboardSideD
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { tokenObj } from "helpers/token";
-import { useSelector } from "react-redux";
-import { AuthState } from "stores/reducers/authReducer";
+import { useAppSelector } from "hooks/reduxHooks";
 
 interface Props {
   children: ReactNode;
   title?: string;
   subTitle?: string;
+  className?: string;
 }
 
-const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
-  const { language } = useSelector((state: AuthState) => ({
+const DashboardLayout: NextPage<Props> = ({
+  title,
+  subTitle,
+  children,
+  className,
+}) => {
+  const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
   const [mobileNavsidebar, setMobileNavsidebar] = useState(false);
@@ -41,7 +46,9 @@ const DashboardLayout: NextPage<Props> = ({ title, subTitle, children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="dashboard-layout flex min-h-screen relative">
+      <div
+        className={`dashboard-layout ${className} flex min-h-screen relative`}
+      >
         <DashboardSideDrawer mobileNavsidebar={mobileNavsidebar} />
         <div className="flex flex-col w-full bg-white">{children}</div>
       </div>

@@ -1,77 +1,225 @@
 import Input from "components/Input/Input";
+import SelectBox from "components/SelectBox/SelectBox";
+import { useSetState } from "hooks/useSetState";
 import useTranslation from "next-translate/useTranslation";
+import { useEffect, useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import ConnectionService from "services/endpoints/ConnectionService";
+import PlusIcon from "../../../assets/svg/icons/plus.svg";
+import CrossIcon from "../../../assets/svg/icons/cross.svg";
 
 type AddNewConnectionProps = {};
+type FormData = {
+  name: "string";
+  description: "string";
+  application_name: "string";
+  account_id: "string";
+  connection_chatflows: [
+    {
+      chatflow_id: "string";
+      trigger_id: "string";
+    }
+  ];
+};
 
-const AddNewConnectionForm: React.FC<AddNewConnectionProps> = () => {
+const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
+  triggerOptions,
+  chatflowOptions,
+  submitRef,
+  account_id,
+  record,
+  status,
+  onSuccess,
+}) => {
+  const { register, handleSubmit, control, reset } = useForm<FormData>();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "connection_chatflows",
+  });
   let { t } = useTranslation("common");
+  const [controls, setControls] = useSetState({
+    trigger_id: {
+      options: [],
+      value: "",
+    },
+    chatflow_id: {
+      options: [],
+      value: "",
+    },
+  });
+
+  const onSubmit = async (values) => {
+    try {
+      const data = {
+        ...values,
+        account_id,
+        application_name: "BOT_BUILDER",
+      };
+      if (!record) {
+        await ConnectionService.postCreateConnection(data);
+        onSuccess();
+      } else {
+        await ConnectionService.putUpdateConnection(data, record.id);
+        onSuccess();
+      }
+    } catch (e) {}
+  };
+
+  const onClear = () => {
+    reset({
+      name: "",
+      description: "",
+      connection_chatflows: [],
+    });
+    setControls({ trigger_id: { options: [], value: "" } });
+    setControls({ chatflow_id: { options: [], value: "" } });
+  };
+
+  const onAddToList = () => {
+    const isDuplicate = fields.findIndex(
+      (item) =>
+        item.trigger_id + item.chatflow_id ===
+        controls.trigger_id.value + controls.chatflow_id.value
+    );
+    console.log(controls.chatflow_id.value);
+    if (
+      controls.trigger_id.value !== "undefined" &&
+      controls.trigger_id.value !== "" &&
+      controls.chatflow_id.value !== "undefined" &&
+      controls.chatflow_id.value !== "" &&
+      isDuplicate === -1
+    ) {
+      append({
+        trigger_id: controls.trigger_id.value,
+        chatflow_id: controls.chatflow_id.value,
+      });
+    }
+  };
+
+  const onChangeSelect = (e) => {
+    setControls({ [e.target.id]: { value: e.target.value } });
+  };
+
+  useEffect(() => {
+    setControls({ chatflow_id: { options: chatflowOptions } });
+  }, [chatflowOptions]);
+
+  useEffect(() => {
+    if (!status) {
+      onClear();
+    }
+  }, [status]);
+
+  useEffect(() => {
+    // console.log(record);
+    (async () => {
+      if (record) {
+        try {
+          const response = await ConnectionService.getConnectionDetails(
+            record.id
+          );
+          const data = response.data;
+          const connection_chatflows = response.data.connection_chatflows.map(
+            (item) => ({
+              chatflow_id: item.chatflow_id,
+              trigger_id: item.trigger_id,
+            })
+          );
+          reset({
+            name: data.name,
+            description: data.description,
+            connection_chatflows: connection_chatflows,
+          });
+        } catch (e) {}
+      }
+    })();
+  }, [record]);
+
+  useEffect(() => {
+    setControls({ trigger_id: { options: triggerOptions } });
+  }, [triggerOptions]);
+
   return (
-    <div>
-      <form className="w-full max-w-lg">
-        <div className="flex flex-wrap -mx-3 mb-3">
-          <Input label={t("connection-name")} id="connection-name" />
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <Input label={t("details")} id="details" />
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-state"
-            >
-              {t("connection-type")}
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
+    <form
+      className="w-full  flex flex-wrap my-3"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="basis-1/2 sm:w-full px-2">
+        <Input label={t("connection-name")} {...register("name")} />
+      </div>
+      <div className="w-full  px-2">
+        <Input label={t("details")} {...register("description")} />
+      </div>
+      <div className="basis-5/12 sm:w-full  px-2">
+        <SelectBox
+          options={controls.trigger_id.options}
+          label={t("trigger")}
+          onChange={onChangeSelect}
+          id="trigger_id"
+        />
+      </div>
+      <div className="basis-5/12 sm:w-full  px-2">
+        <SelectBox
+          options={controls.chatflow_id.options}
+          label={t("chatflows")}
+          id="chatflow_id"
+          onChange={onChangeSelect}
+        />
+      </div>
+      <div className="basis-2/12 sm:w-full  px-2 flex">
+        <button
+          type="button"
+          onClick={onAddToList}
+          className="secondary icon-only mt-auto mr-auto"
+        >
+          <PlusIcon />
+        </button>
+      </div>
+      {fields.map((item, index) => {
+        return (
+          <div className="border-box flex flex-wrap w-full mt-5" key={item.id}>
+            <div className="basis-5/12 sm:w-full  px-3 rtl:text-right flex">
+              <span className="my-auto">
+                {
+                  controls.trigger_id.options.find(
+                    (x) => x.id === item.trigger_id
+                  )?.persian_name
+                }
+              </span>
+              <input
+                className="hidden"
+                {...register(`connection_chatflows.${index}.trigger_id`)}
+                disabled
+              />
+            </div>
+            <div className="basis-5/12 sm:w-full  px-3 rtl:text-right flex">
+              <span className="my-auto">
+                {
+                  controls.chatflow_id.options.find(
+                    (x) => x.id === item.chatflow_id
+                  )?.name
+                }
+              </span>
+              <input
+                className="hidden"
+                {...register(`connection_chatflows.${index}.chatflow_id`)}
+                disabled
+              />
+            </div>
+            <div className="basis-2/12 sm:w-full  px-2 flex">
+              <button
+                type="button"
+                onClick={() => remove(index)}
+                className=" px-4 mt-auto mr-auto icon-only"
               >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
+                <CrossIcon />
+              </button>
             </div>
           </div>
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
-              for="grid-state"
-            >
-              {t("connection-to-accoutnt")}
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+        );
+      })}
+      <button ref={submitRef} type="submit" style={{ display: "none" }} />
+    </form>
   );
 };
 

@@ -1,20 +1,23 @@
-import { NextPage, NextPageContext } from "next";
+import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
-import Connectionbar from "containers/dashboard/connections/Connectionbar";
 import useTranslation from "next-translate/useTranslation";
-import { AxiosResponse } from "axios";
-import $axios from "services/axios.config";
 import SocialBox from "components/SocialBox/SocialBox";
 import { useEffect } from "react";
 import InstagramService from "services/endpoints/InstagramService";
 import TopMenu from "components/TopMenu/TopMenu";
 import ConnectionMenu from "assets/contents/connectionMenu";
+import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
+import { getAccounts } from "stores/actions";
+import ConnectionService from "services/endpoints/ConnectionService";
 
 const AccountsPage: NextPage = () => {
+  const { accountList } = useAppSelector((state) => ({
+    accountList: state.connections.accountList,
+  }));
+  const dispatch = useAppDispatch();
   const { t } = useTranslation("common");
   const router = useRouter();
-  const { locale } = router;
 
   const onClickAddAccount = () => {
     try {
@@ -28,6 +31,7 @@ const AccountsPage: NextPage = () => {
               facebook_user_token: response.authResponse.accessToken,
             };
             await InstagramService.postConnectInstagram(data);
+            await dispatch(getAccounts());
             FB.api("/me", function (response) {
               console.log("Good to see you, " + response.name + ".");
             });
@@ -45,31 +49,51 @@ const AccountsPage: NextPage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res: AxiosResponse = await $axios.get(
-          `user-services/api/v1/account`
-        );
+        await dispatch(getAccounts());
       } catch (e) {}
     })();
   }, []);
+
+  const onClickConnect = (item) => {
+    router.push(
+      "/dashboard/connections/accounts/[id]",
+      `/dashboard/connections/accounts/${item.id}`
+    );
+  };
+
+  const onDisconnect = async (item) => {
+    try {
+      // await ConnectionService.deleteConnection(item.id);
+      // router.push("/dashboard/connections/accounts");
+      // Todo: notification
+    } catch (e) {}
+  };
 
   return (
     <DashboardLayout>
       <TopMenu items={ConnectionMenu} />
       <div className="content basis-full ">
-        {/* <h3 className="mb-5 mx-5">{t("accounts")}</h3> */}
         <div className="flex flex-wrap">
-          <SocialBox empty onClick={onClickAddAccount} />
-          {/*  {accountResponse && (
-            <div className="basis-1/6">
+          <SocialBox
+            empty
+            onClick={onClickAddAccount}
+            title={t("add-new-account")}
+          />
+          {accountList?.map((item) => {
+            return (
+              <div className="basis-1/6" key={item.id}>
                 <SocialBox
-            id="instagram"
-            icon={<AiFillInstagram />}
-            title={t("connect-to-instagram")}
-            buttonText={t("connect")}
-            onClick={onClickSocialBox}
-          /> 
-            </div>
-          )} */}
+                  removeable={false}
+                  data={item}
+                  imageUrlKey="profile_image_url"
+                  titleKey="username"
+                  buttonText={t("details")}
+                  onClick={onClickConnect}
+                  onClickRemove={onDisconnect}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </DashboardLayout>

@@ -52,7 +52,9 @@ $axios.interceptors.response.use(
     }
 
     if (RES403) {
-      //TODO : notification
+      tokenObj.removeToken();
+      localStorage.clear();
+      location.replace("/auth/login");
     }
 
     if (RES409) {

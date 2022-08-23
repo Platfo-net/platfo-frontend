@@ -6,19 +6,36 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  border: 2px solid $gray !important;
+  padding: 6px;
 
-  &.active {
-    &.chatbot {
-      border: 2px solid $chatbot !important;
+  &.image {
+    border: 1px solid $gray !important;
+    &.active {
+      &.chatbot {
+        border: 2px solid $chatbot !important;
+      }
     }
   }
-  svg {
-    color: #fff;
-    font-size: 2rem;
-    margin: auto;
-  }
-  &.instagram {
-    background-color: #d22f71;
+
+  &.icon {
+    &.instagram {
+      background-color: #d22f71;
+      svg {
+        fill: #fff;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &.BOT_BUILDER {
+      background-color: $chatbot;
+      svg {
+        position: relative;
+        top: 25%;
+        fill: #fff;
+        width: 50%;
+        height: 50%;
+      }
+    }
   }
 }

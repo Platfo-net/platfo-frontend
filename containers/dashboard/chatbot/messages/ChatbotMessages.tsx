@@ -6,14 +6,14 @@ type ChatbotMessagesProps = {};
 
 const ChatbotMessages: React.FC<ChatbotMessagesProps> = () => {
   return (
-    <div className="flex flex-nowrap h-full">
-      <div className="basis-1/4 m-4 overflow-y-auto">
+    <div className="flex flex-nowrap message-container">
+      <div className="basis-1/4 mx-2 ">
         <UsersList />
       </div>
-      <div className="basis-1/2 m-4 overflow-y-auto">
+      <div className="basis-1/2 mx-2 ">
         <MessageList />
       </div>
-      <div className="basis-1/4 m-4 overflow-y-auto">
+      <div className="basis-1/4 mx-2 ">
         <UserInfo />
       </div>
     </div>

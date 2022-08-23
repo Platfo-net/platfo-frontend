@@ -2,7 +2,8 @@
   background: #fff;
   border-radius: $border-radius;
   padding: 8px;
-
+  height: auto;
+  display: flex !important;
   .avatar-container {
     margin: 0 16px;
     width: 70px;
@@ -17,6 +18,10 @@
   &:hover,
   &.active {
     background: $chatbot;
+    img {
+      box-shadow: inset 3px 3px 10px 0 #000000;
+      border-radius: 999px;
+    }
     .subtitle {
       color: $dark-text;
     }

@@ -9,7 +9,7 @@ const MessagesPage: NextPage = () => {
   const { t } = useTranslation("common");
 
   return (
-    <DashboardLayout>
+    <DashboardLayout className="chatbot">
       <TopMenu items={ChatbotMenu} />
       <div className="content basis-full chatbot-messages">
         <ChatbotMessages />

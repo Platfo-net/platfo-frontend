@@ -1,10 +1,18 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 
 import { authReducer } from "./reducers/authReducer";
+import { chatflowReducer } from "./reducers/chatflowReducer";
+import { connectionsReducer } from "./reducers/connectionsReducer";
+import { messageReducer } from "./reducers/messageReducer";
 
 export function makeStore() {
   return configureStore({
-    reducer: { auth: authReducer },
+    reducer: {
+      chatflow: chatflowReducer,
+      auth: authReducer,
+      connections: connectionsReducer,
+      message: messageReducer,
+    },
   });
 }
 

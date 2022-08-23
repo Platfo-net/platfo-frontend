@@ -3,15 +3,16 @@
   color: $primary;
   display: flex;
   height: fit-content;
+  width: auto;
   &.user {
     background: $chatbot;
-    border-radius: $border-radius $border-radius $border-radius 0;
+    border-radius: $border-radius $border-radius 0 $border-radius;
     justify-content: end;
   }
 
   &.bot {
     background: $secondary;
 
-    border-radius: $border-radius $border-radius 0 $border-radius;
+    border-radius: $border-radius $border-radius $border-radius 0;
   }
 }
