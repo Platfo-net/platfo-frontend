@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import ChatbotMenu from "assets/contents/chatbotMenu";
 import TopMenu from "components/TopMenu/TopMenu";
 import { useAppSelector } from "hooks/reduxHooks";
+import Link from "next/link";
 
 const ChatbotPage: NextPage = () => {
   const { language } = useAppSelector((state) => ({
@@ -12,10 +13,16 @@ const ChatbotPage: NextPage = () => {
   const router = useRouter();
   const { locale } = router;
 
+  const onClickFlow = () => {
+    router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
+  };
+
   return (
     <DashboardLayout className="chatbot">
       <TopMenu items={ChatbotMenu} />
-      <div className="content basis-full "></div>
+      <div className="content basis-full ">
+        <button onClick={onClickFlow}> f </button>
+      </div>
     </DashboardLayout>
   );
 };

@@ -21,7 +21,8 @@
     "react-redux": "^8.0.2",
     "reaflow": "^5.0.6",
     "sass": "^1.54.0",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/facebook-js-sdk": "^3.3.5",

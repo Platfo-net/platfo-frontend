@@ -28,5 +28,13 @@
       animation: dashdraw 0.5s linear infinite;
       stroke-width: 1;
     }
+
+    .node {
+      stroke: $primary;
+      fill: white;
+      stroke-width: 1;
+      rx: 16px;
+      ry: 16px;
+    }
   }
 }

@@ -1,6 +1,4 @@
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import {
   Canvas,
   CanvasRef,
@@ -10,22 +8,16 @@ import {
   NodeData,
   NodeProps,
 } from "reaflow";
-import { changeEdges } from "stores/actions";
-import actionTypes from "stores/actionTypes";
 import EdgeComponent from "./components/edges/EdgeComponent/EdgeComponent";
 import NodeComponent from "./components/nodes/NodeComponent/NodeComponent";
+import { createStartNodeData } from "./utils/nodes";
 
 type ChatFlowDesignProps = {};
 
 const ChatFlowDesign: React.FC<ChatFlowDesignProps> = () => {
-  /* const { nodes, edges, selections } = useAppSelector((state) => ({
-    nodes: state.chatflow.nodes,
-    edges: state.chatflow.edges,
-    selections: state.chatflow.selections,
-  })); */
-  const dispatch = useDispatch();
   const ref = useRef<CanvasRef | null>(null);
-  const [ed, setEd] = useState([]);
+  const [edgesData, setEdgesData] = useState<any[]>([]);
+  const [nodesData, setNodesData] = useState<any[]>([]);
   const nodes = [
     {
       id: "1",
@@ -37,21 +29,21 @@ const ChatFlowDesign: React.FC<ChatFlowDesignProps> = () => {
     },
   ];
   const onNodeLinkCheck = (event, from: NodeData, to: NodeData) => {
-    return !hasLink(ed, from, to);
+    return !hasLink(edgesData, from, to);
   };
 
   const onNodeLink = (event, from, to) => {
-    console.log("onnode");
+    console.log("edges");
     const id = `${from.id}-${to.id}`;
     const newEdges = [
-      ...ed,
+      ...edgesData,
       {
         id,
         from: from.id,
         to: to.id,
       },
     ];
-    setEd(newEdges);
+    setEdgesData(newEdges);
   };
 
   const Node = (nodeProps: NodeProps) => {
@@ -62,13 +54,19 @@ const ChatFlowDesign: React.FC<ChatFlowDesignProps> = () => {
     return <EdgeComponent {...edgeProps} />;
   };
 
-  const onLayoutChange = (layout) => {
-    console.log("layout", layout);
-    /*  dispatch({
-      type: actionTypes.CHANGE_LAYOUT,
-      layout: layout,
-    }); */
+  const onLayoutChange = (values) => {
+    console.log("onLayoutChange");
+    // TODO CHACK WHEN UPDATE
   };
+
+  useEffect(() => {
+    console.log(nodesData);
+    const startNode = nodesData?.find((node) => node?.data?.type === "start");
+    if (!startNode) {
+      const startData = createStartNodeData();
+      setNodesData([...nodesData, startData]);
+    }
+  }, [nodesData]);
 
   return (
     <div className="playground">
@@ -78,8 +76,8 @@ const ChatFlowDesign: React.FC<ChatFlowDesignProps> = () => {
         direction="LEFT"
         maxWidth={10000} // 10k should handle about 50 horizontal nodes
         maxHeight={2000}
-        nodes={nodes}
-        edges={ed}
+        nodes={nodesData}
+        edges={edgesData}
         // selections={selections}
         onNodeLinkCheck={onNodeLinkCheck}
         onNodeLink={onNodeLink}
