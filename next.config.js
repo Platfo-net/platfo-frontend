@@ -5,7 +5,7 @@ const path = require('path');
 const nextConfig = {
   ...nextTranslate(),
   images: {
-    domains: ['scontent-frx5-1.xx.fbcdn.net', 'scontent-frt3-1.xx.fbcdn.net', 'scontent-lhr8-1.xx.fbcdn.net', 'scontent-ams2-1.cdninstagram.com', 'en.wikipedia.org']
+    domains: ['scontent-frx5-1.xx.fbcdn.net','scontent-frt3-2.cdninstagram.com','scontent-frt3-1.cdninstagram.com', 'scontent-frt3-1.xx.fbcdn.net', 'scontent-lhr8-1.xx.fbcdn.net', 'scontent-ams2-1.cdninstagram.com', 'en.wikipedia.org']
   },
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL
