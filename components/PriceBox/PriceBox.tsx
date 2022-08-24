@@ -15,7 +15,7 @@ type PriceBoxProps = {
 const PriceBox: React.FC<PriceBoxProps> = ({ data, onSubmit }) => {
   const { t } = useTranslation('common');
   return (
-    <div className={`price-box ${data.status}`}>
+    <div className={`price-box ${data.status} flex flex-col`}>
       <div className={`type ${data.type} mb-5 font-extrabold`}>
         <p>{t(data.type)}</p>
       </div>
