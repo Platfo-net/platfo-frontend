@@ -24,7 +24,8 @@
     "reaflow": "^5.0.6",
     "react-leaflet": "^4.0.1",
     "sass": "^1.54.0",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/facebook-js-sdk": "^3.3.5",
@@ -32,6 +33,7 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "@types/react-redux": "^7.1.24",
+    "@types/uuid": "^8.3.4",
     "autoprefixer": "^10.4.7",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "eslint": "8.20.0",

@@ -38,20 +38,24 @@ const UsersList: React.FC<UsersListProps> = () => {
 
   return (
     <div className="flex flex-col user-list">
-      <Input placeholder={t("search")} />
-      <div className="items flex flex-col overflow-y-auto px-2">
-        {users.map((item) => {
-          return (
-            <HorizontalUserBox
-              key={item.id}
-              item={item}
-              onClick={onClick}
-              information={true}
-              className={selectedUser?.id === item.id ? "active" : ""}
-            />
-          );
-        })}
-      </div>
+      {users.length > 0 && (
+        <>
+          <Input placeholder={t("search")} />
+          <div className="items flex flex-col overflow-y-auto px-2">
+            {users.map((item) => {
+              return (
+                <HorizontalUserBox
+                  key={item.id}
+                  item={item}
+                  onClick={onClick}
+                  information={true}
+                  className={selectedUser?.id === item.id ? "active" : ""}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -22,7 +22,7 @@ class Node {
   getNextMove = (params, from_id) =>
     $axios.get(`chatflow-services/api/v1/node/${from_id}/next`, { params });
   getDataFacebook = (params, payload) =>
-    $axios.get(`chatflow-services/api/v1/node/get/${payload}`, { params });
+    $axios.get(`api/v1/node/get/${payload}`, { params });
 }
 
 const NodeService = new Node();
