@@ -14,7 +14,7 @@ const AdvantagesCard: React.FC<AdvantagesCardProps> = ({ data }) => {
       <div className="advantagesCard w-3/5 flex flex-col">
         <div className="icon mb-12">{data.icon}</div>
         <div>
-          <p className="title">{t(data.title)} </p>
+          <p className="title font-bold text-2xl">{t(data.title)} </p>
         </div>
         <div>
           <p className="description">{t(data.description)} </p>

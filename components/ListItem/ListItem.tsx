@@ -7,7 +7,7 @@ const ListItem: React.FC<ListItemProps> = ({ item }) => {
   return (
     <div key={item} className="price-list-item flex items-center">
       <CheckMark />
-      <p>{item}</p>
+      <p className="font-medium text-base">{item}</p>
     </div>
   );
 };

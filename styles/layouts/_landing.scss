@@ -26,21 +26,16 @@
   #intro {
     height: 50vh;
     max-width: 90%;
-
     .main-title {
       color: $dark-text;
-      font-weight: bold;
     }
     .sub-title {
-      font-size: $font-size-lg;
       color: $light-text;
-      font-weight: bold;
-    }
-    .description {
-      font-size: $font-size-xsm;
     }
     .intro-img {
       img {
+        max-width: 480px;
+        max-height: 720px;
         display: inline-block;
         overflow: hidden;
       }
@@ -48,15 +43,11 @@
   }
   #cards {
     .title {
-      font-size: $font-size-xlg;
       color: $dark-text;
-      font-weight: bold;
     }
     .advantagesCard {
       .title {
-        font-size: $font-size-md;
         color: $dark-text;
-        font-weight: bold;
       }
       .description {
         font-size: $font-size-xsm;
@@ -67,7 +58,6 @@
     .title {
       font-size: $font-size-xlg;
       color: $dark-text;
-      font-weight: bold;
     }
 
     .description {
@@ -76,8 +66,27 @@
   }
 
   #footer {
-    .title {
-      color: $primary;
+    .about-box {
+      .title {
+        color: $primary;
+      }
+    }
+    .map-box {
+      svg {
+        width: 18px;
+        fill: $light-text;
+      }
+      p {
+        color: $light-text;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .landing-layout {
+    #intro {
+      height: 80vh;
     }
   }
 }

@@ -82,23 +82,26 @@ const Home: NextPage = () => {
   return (
     <LandingLayout>
       <div className="landing-body my-16 flex flex-col items-center">
-        <div id="intro" className="gradient-card flex flex-col sm:flex-row">
+        <div
+          id="intro"
+          className="gradient-card flex flex-col-reverse sm:justify-between sm:flex-row"
+        >
           <div className="basis-1/2">
-            <p className="main-title text-4xl rtl:text-right ltl:text-left">
+            <p className="main-title text-2xl font-extrabold sm:text-4xl rtl:text-right ltl:text-left">
               {t('landing-intro-main-title')}
             </p>
-            <p className="sub-title">{t('landing-intro-sub-title')}</p>
-            <p className="description">{t('landing-intro-description')}</p>
+            <p className="sub-title font-bold sm:text-2xl">
+              {t('landing-intro-sub-title')}
+            </p>
+            <p className="description sm:text-md">
+              {t('landing-intro-description')}
+            </p>
             <button className="primary mt-5 px-6 py-3">
               {t('online-demo')}
             </button>
           </div>
-          <div className="intro-imgrelative xl:-top-36">
-            <Image
-              className="absolute  max-w-52 max-h-52"
-              src={IphoneImg}
-              alt=""
-            />
+          <div className="intro-img relative flex items-center lg:-top-4 xl:-top-12">
+            <Image className="absolute" src={IphoneImg} alt="" />
           </div>
         </div>
 
@@ -107,11 +110,13 @@ const Home: NextPage = () => {
           className="flex flex-col items-center justify-center after:sections mt-8"
         >
           <div className="w-full flex justify-start">
-            <p className="title">{t('landing-cards-section-2-title')}</p>
+            <p className="title font-extrabold text-2xl">
+              {t('landing-cards-section-2-title')}
+            </p>
           </div>
 
           <div>
-            <div className="my-5 flex flex-col space-y-6 md:space-y-0 sm:flex-row justify-center flex-wrap">
+            <div className="my-5 flex flex-col sm:flex-row sm:justify-center flex-wrap">
               {cards.map((item) => (
                 <div key={item.title} className="md:basis-2/4 lg:basis-1/4">
                   <AdvantagesCard data={item} />
@@ -124,7 +129,9 @@ const Home: NextPage = () => {
             className="blue-gradient-card flex flex-wrap items-center mt-12"
           >
             <div className="sm:basis-6/12">
-              <p className="title">{t('landing-support-title')}</p>
+              <p className="title font-extrabold">
+                {t('landing-support-title')}
+              </p>
               <p className="description">{t('landing-support-description')} </p>
             </div>
             <div className="sm:basis-6/12">

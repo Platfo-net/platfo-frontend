@@ -14,13 +14,13 @@ type LandingLayoutProps = {
 
 const LandingLayout: NextPage = ({ children, meta, title }) => {
   return (
-    <div className="w-full flex justify-center">
+    <div className="h-full flex justify-center">
       <Head>
         <title>{title}</title>
         {meta && <meta name={meta.name} content={meta.content} />}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="landing-layout w-11/12 h-full flex flex-col items-center">
+      <div className="h-full landing-layout w-11/12">
         <LandingHeader />
         {children}
         <LandingFooter />
