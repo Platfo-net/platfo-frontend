@@ -1,7 +1,7 @@
 import $axios from "../axios.config";
 
 class Accounts {
-  getAccounts = () => $axios.get(`user-services/api/v1/account`);
+  getAccounts = () => $axios.get(`api/v1/account/all`);
 }
 
 const AccountsService = new Accounts();
