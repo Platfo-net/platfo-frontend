@@ -12,6 +12,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "axios": "^0.27.2",
+    "leaflet": "^1.8.0",
+    "leaflet-defaulticon-compatibility": "^0.1.1",
     "next": "12.2.3",
     "next-translate": "^1.5.0",
     "ngrok": "^4.3.1",
@@ -20,6 +22,7 @@
     "react-hook-form": "^7.34.1",
     "react-redux": "^8.0.2",
     "reaflow": "^5.0.6",
+    "react-leaflet": "^4.0.1",
     "sass": "^1.54.0",
     "universal-cookie": "^4.0.4",
     "uuid": "^8.3.2"

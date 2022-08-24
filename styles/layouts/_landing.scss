@@ -1,74 +1,93 @@
 @import "../utils/variables";
 @import "../base/mixins";
 
-.landingLayout {
-    background: #fff;
-    [class~="ant-layout-header"] {
-        background: $landing-header-background;
-        color: $on-landing-header-background;
-        height: $landing-header-height;
-        font-size: $font-size-md;
-        @include breakpoint(mobileonly) {
-            padding: 0 8px;
-        }
-        [class~="ant-row"] {
-            height: 100%;
-            width: 100%;
-            .logo {
-                display: flex;
-                [class~="ant-typography"] {
-                    color: $on-landing-header-background;
-                }
-                a {
-                    height: $landing-header-height;
-                    display: flex;
-                    svg {
-                        padding: 12px 8px;
-                        width: 100%;
-                        height: 100%;
-                        fill: $primary;
-                        margin: auto;
-                    }
-                }
-            }
+.landing-layout {
+  background: $landing-header-background;
+  color: $on-landing-header-background;
+  font-size: $font-size-md;
+  * {
+    font-family: $font-family;
+  }
 
-            .auth {
-                display: flex;
-                justify-content: flex-end;
-            }
-
-            .menu {
-                a {
-                    color: $on-landing-header-background;
-                    &:hover {
-                        color: $primary
-                    }
-                }
-            }
+  #header {
+    .logo {
+      a {
+        p {
+          color: $light-text;
         }
-        
+      }
     }
-    [class~="ant-layout-content"] {
-        .main {
-            min-height: 100vh;
-            padding: 6rem 1rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
+    .menu {
+      a {
+        color: $light-text;
+      }
+    }
+  }
+  #intro {
+    height: 50vh;
+    max-width: 90%;
+    .main-title {
+      color: $dark-text;
+    }
+    .sub-title {
+      color: $light-text;
+    }
+    .intro-img {
+      img {
+        max-width: 480px;
+        max-height: 550px !important;
+        display: inline-block;
+        overflow: hidden;
+        top: 40px !important;
+      }
+    }
+  }
+  #cards {
+    .title {
+      color: $dark-text;
+    }
+    .advantagesCard {
+      .title {
+        color: $dark-text;
+      }
+      .description {
+        font-size: $font-size-xsm;
+      }
+    }
+  }
+  #support {
+    .title {
+      font-size: $font-size-xlg;
+      color: $dark-text;
     }
 
-    footer {
-        background: #fff; 
-
-        .mapBox {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .brands {
-            text-align: center;
-        }
+    .description {
+      font-size: $font-size-xsm;
     }
+  }
+
+  #footer {
+    .about-box {
+      .title {
+        color: $primary;
+      }
+    }
+    .map-box {
+      svg {
+        width: 18px;
+        fill: $light-text;
+      }
+      p {
+        color: $light-text;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .landing-layout {
+    #intro {
+      height: 80vh;
+    }
+  }
 }
