@@ -20,7 +20,7 @@ const PriceBox: React.FC<PriceBoxProps> = ({ data, onSubmit }) => {
         <p>{t(data.type)}</p>
       </div>
       {data.items.map((item) => {
-        return <ListItem item={item} />;
+        return <ListItem key={item} item={item} />;
       })}
       {data.status !== 'disabled' ? (
         <div className="price my-4 font-extrabold">
