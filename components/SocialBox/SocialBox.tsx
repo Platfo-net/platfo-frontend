@@ -2,6 +2,8 @@ import Avatar from "components/Avatar/Avatar";
 import useTranslation from "next-translate/useTranslation";
 import PlusIcon from "../../assets/svg/icons/plus.svg";
 import CrossIcon from "../../assets/svg/icons/cross.svg";
+import AlertModal from "../AlertModal/AlertModal";
+import {useState} from "react";
 
 type SocialBoxProps = {};
 
@@ -17,13 +19,19 @@ const SocialBox: React.FC<SocialBoxProps> = ({
   onClickRemove,
   descriptionKey,
   iconKey,
+  className,
+
 }) => {
-  let { t } = useTranslation("common");
+  const [openModal,  setOpenModal] = useState(false);
+  const {t} = useTranslation("common");
+   const handleAlertModal = () => setOpenModal(!openModal)
 
   return (
-    <div className="basis-1/6 m-4">
+    <div className={`basis - 1 / 6 m-4 `}>
       {!empty ? (
-        <div className="social-box flex-col justify-center text-center">
+        <div
+          className={`social-box flex-col justify-center text-center ${className}`}
+        >
           {!iconKey ? (
             <div className="avatar-container  justify-center flex p-1 ">
               {data[imageUrlKey] && <Avatar imageUrl={data[imageUrlKey]} />}
@@ -35,11 +43,15 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           )}
 
           {removeable && (
+              <>
             <div className="remove-btn">
-              <button className="icon-only" onClick={() => onClickRemove(data)}>
+              <button className="icon-only" onClick={() => setOpenModal(true)}>
                 <CrossIcon />
               </button>
+
             </div>
+                <AlertModal text={t("are-you-sure-to-delete")} onCancel={handleAlertModal} onOK={() => onClickRemove(data)} open={openModal}/>
+              </>
           )}
 
           {data.platform && (
@@ -51,16 +63,17 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           {descriptionKey && (
             <p className="subtitle"> {data[descriptionKey]} </p>
           )}
-          <button
-            className="secondary w-full mt-3"
-            onClick={() => onClick(data)}
+          {onClick && <button
+              className="secondary w-full mt-3"
+              onClick={() => onClick(data)}
           >
             {buttonText}
-          </button>
+          </button>}
+
         </div>
       ) : (
         <button
-          className="social-box empty flex-col justify-center text-center p-5"
+          className={`social-box empty flex-col justify-center text-center p-5 ${className}`}
           onClick={onClick}
         >
           <div className="content">
@@ -71,6 +84,8 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           </div>
         </button>
       )}
+
+
     </div>
   );
 };

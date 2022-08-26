@@ -6,5 +6,6 @@ export const getAccounts = () => async (dispatch) => {
   try {
     const response: AxiosResponse = await AccountsService.getAccounts();
     dispatch({ type: actionTypes.ACCOUNT_LIST, accountList: response.data });
+    return response.data
   } catch (e) {}
 };

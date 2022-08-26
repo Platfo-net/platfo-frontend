@@ -8,8 +8,8 @@ class Chatflow {
       params,
     });
 
-  getUserChatflows = (params, headers) =>
-    $axios.get(`api/v1/chatflow/all`, { params, headers });
+  getUserChatflows = (params) =>
+    $axios.get(`api/v1/chatflow/all`, { params });
 }
 
 const ChatflowService = new Chatflow();

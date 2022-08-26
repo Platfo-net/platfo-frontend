@@ -3,25 +3,73 @@ import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import { useRouter } from "next/router";
 import ChatbotMenu from "assets/contents/chatbotMenu";
 import TopMenu from "components/TopMenu/TopMenu";
-import { useAppSelector } from "hooks/reduxHooks";
-import Link from "next/link";
+import SocialBox from "../../../components/SocialBox/SocialBox";
+import { useEffect, useState } from "react";
+import chatflowService from "../../../services/endpoints/ChatflowService";
+import useTranslation from "next-translate/useTranslation";
+import {getFormattedDate, getFormattedTime} from "../../../helpers/dateAndTimeHelper";
 
 const ChatbotPage: NextPage = () => {
-  const { language } = useAppSelector((state) => ({
-    language: state.auth.language,
-  }));
+  const [chatflowList, setChatflowList] = useState([]);
+  const { t } = useTranslation("common");
+
   const router = useRouter();
-  const { locale } = router;
 
   const onClickFlow = () => {
     router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
   };
 
+  const onClickAddChatflow = () => {};
+  const onClickRemove = (value) => {
+    console.log(value)
+  };
+  const onClickChatflow = () => {};
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await chatflowService.getUserChatflows(null);
+        const newList = response.data.map((item) => ({
+          ...item,
+          date:
+              getFormattedTime(item.updated_at) +
+              " - " +
+              getFormattedDate(item.updated_at),
+        }));
+        setChatflowList(newList);
+      } catch (e) {}
+    })();
+  }, []);
+
   return (
     <DashboardLayout className="chatbot">
       <TopMenu items={ChatbotMenu} />
       <div className="content basis-full ">
-        <button onClick={onClickFlow}> f </button>
+        <div className="flex flex-wrap">
+          <SocialBox
+            className="chatbot"
+            empty
+            onClick={onClickAddChatflow}
+            title={t("add-new-chatflow")}
+          />
+          {chatflowList?.map((item) => {
+            return (
+              <div className="basis-1/6" key={item.id}>
+                <SocialBox
+                  className="chatbot"
+                  removeable={true}
+                  data={item}
+                  iconKey={"BOT_BUILDER"}
+                  titleKey="name"
+                  descriptionKey="date"
+                  buttonText={t("details")}
+                  onClick={onClickChatflow}
+                  onClickRemove={onClickRemove}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </DashboardLayout>
   );

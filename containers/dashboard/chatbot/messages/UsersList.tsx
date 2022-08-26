@@ -1,12 +1,8 @@
 import HorizontalUserBox from "components/HorizontalUserBox/HorizontalUserBox";
-import Input from "components/Input/Input";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import useTranslation from "next-translate/useTranslation";
 import { useEffect, useState } from "react";
 import ContactsService from "services/endpoints/ContactsService";
-import MessagesService from "services/endpoints/MessagesService";
 import { selectUser } from "stores/actions";
-import Img from "../../../../assets/img/p.png";
 type UsersListProps = {};
 
 const UsersList: React.FC<UsersListProps> = () => {
@@ -15,7 +11,6 @@ const UsersList: React.FC<UsersListProps> = () => {
     selectedUser: state.message.selectedUser,
   }));
   const [users, setUsers] = useState([]);
-  let { t } = useTranslation("common");
   const dispatch = useAppDispatch();
 
   const onClick = async (item) => {
@@ -30,6 +25,9 @@ const UsersList: React.FC<UsersListProps> = () => {
             null,
             selectedAccount.page_id
           );
+          if (response.data.length > 0) {
+            dispatch(selectUser(response.data[0]));
+          }
           setUsers(response.data);
         } catch (e) {}
       }
@@ -37,11 +35,10 @@ const UsersList: React.FC<UsersListProps> = () => {
   }, [selectedAccount]);
 
   return (
-    <div className="flex flex-col user-list">
+    <>
       {users.length > 0 && (
-        <>
-          <Input placeholder={t("search")} />
-          <div className="items flex flex-col overflow-y-auto px-2">
+        <div className="flex flex-col card user-list overflow-y-auto mt-4">
+          <div className="items flex flex-col ">
             {users.map((item) => {
               return (
                 <HorizontalUserBox
@@ -54,9 +51,9 @@ const UsersList: React.FC<UsersListProps> = () => {
               );
             })}
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

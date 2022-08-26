@@ -1,18 +1,26 @@
-.message-box {
-  padding: 16px;
-  color: $primary;
-  display: flex;
-  height: fit-content;
-  width: auto;
-  &.user {
-    background: $chatbot;
-    border-radius: $border-radius $border-radius 0 $border-radius;
-    justify-content: end;
+@import "../utils/variables";
+
+.message-container {
+  .message-box {
+    padding: 16px;
+    color: $primary;
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    &.user {
+      background: $chatbot;
+      border-radius: $border-radius $border-radius  $border-radius 0;
+    }
+
+    &.bot {
+      background: $secondary;
+      border-radius: $border-radius $border-radius 0 $border-radius ;
+    }
+
+
   }
-
-  &.bot {
-    background: $secondary;
-
-    border-radius: $border-radius $border-radius $border-radius 0;
+  .message-date {
+    font-size: $font-size-sm;
+    color: $gray
   }
 }
