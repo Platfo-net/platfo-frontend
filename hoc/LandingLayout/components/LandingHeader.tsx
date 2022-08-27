@@ -5,6 +5,8 @@ import landingMenu from 'assets/contents/landingMenu';
 import Logo from '../../../assets/svg/botinow-logo.svg';
 import useTranslation from 'next-translate/useTranslation';
 
+type LandingHeaderProps = {};
+
 const LandingHeader: React.FC<LandingHeaderProps> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
@@ -31,8 +33,7 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
         <Link href="/">
           <a href="replace" className="flex justify-center items-center">
             <Logo className="w-12 px-1 mx-1" />
-            <p className="font-bold text-2xl">Now</p>
-            <p className="text-2xl">boti</p>
+            <p className="font-extrabold text-xl pt-2">Botinow</p>
           </a>
         </Link>
       </div>
