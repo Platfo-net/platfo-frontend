@@ -125,7 +125,7 @@ const AccountDetailsPage: NextPage = () => {
           <div className="flex flex-wrap mb-5">
             <div className="basis-1/2 ">
               {/* <h3 className="mb-5 mx-5">{t("account-info")}</h3> */}
-              <div className="flex mx-4 my-auto">
+              <div className="flex mx-4 my-auto w-52" >
                 <Avatar imageUrl={accountInfo.profile_image_url} />
                 <b className="my-auto mx-5">{accountInfo.username}</b>
               </div>

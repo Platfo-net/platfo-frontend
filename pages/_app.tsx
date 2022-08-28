@@ -6,6 +6,7 @@ import store from "../stores/store";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Script from "next/script";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -29,6 +30,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Provider store={store}>
+      <Head>
+        <meta
+          name="facebook-domain-verification"
+          content="7a2nqcelnwc5f7l2j8fpcldnbzoaja"
+        />
+      </Head>
       <Component {...pageProps} />
       <Script
         async

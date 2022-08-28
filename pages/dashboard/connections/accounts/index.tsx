@@ -9,7 +9,6 @@ import TopMenu from "components/TopMenu/TopMenu";
 import ConnectionMenu from "assets/contents/connectionMenu";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { getAccounts } from "stores/actions";
-import ConnectionService from "services/endpoints/ConnectionService";
 
 const AccountsPage: NextPage = () => {
   const { accountList } = useAppSelector((state) => ({
@@ -61,11 +60,9 @@ const AccountsPage: NextPage = () => {
     );
   };
 
-  const onDisconnect = async (item) => {
+  const onDisconnect = async () => {
     try {
-      // await ConnectionService.deleteConnection(item.id);
-      // router.push("/dashboard/connections/accounts");
-      // Todo: notification
+      await InstagramService.deleteFacebookDisconnectPage();
     } catch (e) {}
   };
 
@@ -83,7 +80,7 @@ const AccountsPage: NextPage = () => {
             return (
               <div className="basis-1/6" key={item.id}>
                 <SocialBox
-                  removeable={false}
+                  removeable={true}
                   data={item}
                   imageUrlKey="profile_image_url"
                   titleKey="username"

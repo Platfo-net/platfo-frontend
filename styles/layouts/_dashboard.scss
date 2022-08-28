@@ -3,6 +3,7 @@
 .dashboard-layout {
   background: $dashboard-background;
   overflow: hidden;
+  height: 100vh;
   .side-drawer {
     background: $dashboard-sider-background;
     .menuItem {

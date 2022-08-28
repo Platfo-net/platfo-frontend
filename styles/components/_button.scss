@@ -39,9 +39,20 @@ button {
     color: $on-primary;
   }
 
+  &.chatbot {
+    background-color: $chatbot;
+    color: $primary;
+  }
+
   &.icon-only {
     width: $element-height;
     padding-left: 0.8rem;
     padding-right: 0.8rem;
+    &.sm {
+      width: 25px;
+      height: 25px;
+      padding-left: 0.3rem;
+      padding-right: 0.3rem;
+    }
   }
 }

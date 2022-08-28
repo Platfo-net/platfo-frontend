@@ -1,6 +1,6 @@
 import { Action } from "@reduxjs/toolkit";
 import { actionTypes } from "../actionTypes";
-import { updateObject } from "./updateObject";
+import { updateObject } from "../../helpers/updateObject";
 
 export const initialState = {
   accountList: [],

@@ -1,36 +1,20 @@
-import Avatar from "components/Avatar/Avatar";
 import MessageBox from "components/MessageBox/MessageBox";
-import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
-import useTranslation from "next-translate/useTranslation";
+import {  useAppSelector } from "hooks/reduxHooks";
 import { useEffect, useState } from "react";
 import MessagesService from "services/endpoints/MessagesService";
-import { getAccounts, selectAccount } from "stores/actions";
+
 
 type MessageListProps = {};
 
 const MessageList: React.FC<MessageListProps> = () => {
-  const { accountList, selectedAccount, selectedUser } = useAppSelector(
+  const { selectedAccount, selectedUser } = useAppSelector(
     (state) => ({
-      accountList: state.connections.accountList,
       selectedAccount: state.message.selectedAccount,
       selectedUser: state.message.selectedUser,
     })
   );
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation("common");
   const [messages, setMessages] = useState([]);
 
-  const onSelectAccount = (item) => {
-    dispatch(selectAccount(item));
-  };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        await dispatch(getAccounts());
-      } catch (e) {}
-    })();
-  }, []);
 
   useEffect(() => {
     (async () => {
@@ -55,33 +39,20 @@ const MessageList: React.FC<MessageListProps> = () => {
     })();
   }, [selectedUser]);
 
+  useEffect(() => {
+    if(messages.length > 0) {
+      let objDiv = document.getElementById("message-list");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+  }, [messages]);
+
+
   return (
-    <div className="flex flex-col h-full">
-      <h3 className="mx-2 mt-0">{t("accounts")}</h3>
-      <div className="w-full flex flex-wrap">
-        {accountList.map((item) => {
-          return (
-            <div className="account-list px-2 " key={item.id}>
-              <button
-                className="p-0 h-auto"
-                onClick={() => onSelectAccount(item)}
-              >
-                <Avatar
-                  imageUrl={item.profile_image_url}
-                  className={`${
-                    item.id === selectedAccount?.id
-                      ? "active chatbot"
-                      : "opacity-60"
-                  }`}
-                />
-              </button>
-            </div>
-          );
-        })}
-      </div>
+    <div className="message-container flex flex-col h-full">
       {messages.length > 0 && (
-        <div className="w-full flex flex-col card h-full mt-2 overflow-y-auto">
-          {messages?.map((item) => {
+        <div id="message-list" className="w-full flex flex-col card h-full  overflow-y-auto">
+          {messages.reverse()?.map((item) => {
             return (
               <MessageBox
                 key={item.id}
@@ -89,7 +60,7 @@ const MessageList: React.FC<MessageListProps> = () => {
                   selectedUser.user_page_id === item.from_page_id
                     ? "bot"
                     : "user"
-                }  w-1/2`}
+                }`}
                 data={item}
               />
             );

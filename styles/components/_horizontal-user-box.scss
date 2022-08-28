@@ -4,6 +4,7 @@
   padding: 8px;
   height: auto;
   display: flex !important;
+  justify-content: end;
   .avatar-container {
     margin: 0 16px;
     width: 70px;
@@ -17,9 +18,10 @@
 
   &:hover,
   &.active {
+    cursor: default;
     background: $chatbot;
     img {
-      box-shadow: inset 3px 3px 10px 0 #000000;
+      box-shadow: inset 3px 3px 10px 0 #0f040400;
       border-radius: 999px;
     }
     .subtitle {

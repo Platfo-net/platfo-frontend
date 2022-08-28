@@ -29,7 +29,7 @@ const DashboardLayout: NextPage<Props> = ({
   const checkLogin = () => {
     const token = tokenObj.getAccessToken();
     if (!token) {
-      router.push("/auth/login");
+      // router.push("/auth/login");
     }
   };
 

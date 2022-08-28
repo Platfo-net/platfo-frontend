@@ -1,16 +1,13 @@
 import $axios from "../axios.config";
 
 class Chatflow {
-  postCreateChatflow = (data) =>
-    $axios.post(`chatflow-services/api/v1/chatflow`, data);
+  postCreateChatflow = (data) => $axios.post(`api/v1/chatflow`, data);
 
-  deleteChatflow = (params, Chatflow_id) =>
-    $axios.delete(`chatflow-services/api/v1/chatflow/${Chatflow_id}`, {
-      params,
-    });
+  deleteChatflow = ( Chatflow_id) =>
+    $axios.delete(`api/v1/chatflow/${Chatflow_id}`);
 
-  getUserChatflows = (params, headers) =>
-    $axios.get(`chatflow-services/api/v1/chatflow/all`, { params, headers });
+  getUserChatflows = (params) =>
+    $axios.get(`api/v1/chatflow/all`, { params });
 }
 
 const ChatflowService = new Chatflow();
