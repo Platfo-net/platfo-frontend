@@ -2,12 +2,15 @@
 
 .price-list-item {
   padding: 0 12px;
+  margin: 12px 0;
   p {
     color: $light-text;
+    margin: 0;
   }
   svg {
+    height: 12px;
     width: 12px;
-    margin: 0 4px;
+    margin: 6px 6px 0 6px;
     fill: $light-text;
   }
 }

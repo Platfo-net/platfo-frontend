@@ -84,7 +84,7 @@ const Home: NextPage = () => {
       <div className="landing-body my-16 flex flex-col items-center">
         <div
           id="intro"
-          className="gradient-card flex flex-col-reverse sm:justify-between sm:flex-row"
+          className="gradient-card flex flex-col sm:justify-between sm:flex-row mt-12"
         >
           <div className="basis-1/2">
             <p className="main-title text-2xl font-extrabold sm:text-4xl rtl:text-right ltl:text-left">
@@ -93,24 +93,24 @@ const Home: NextPage = () => {
             <p className="sub-title font-bold sm:text-2xl">
               {t('landing-intro-sub-title')}
             </p>
-            <p className="description sm:text-md">
+            <p className="description text-lg">
               {t('landing-intro-description')}
             </p>
             <button className="primary mt-5 px-6 py-3">
               {t('online-demo')}
             </button>
           </div>
-          <div className="intro-img relative flex items-center lg:-top-4 xl:-top-12">
+          <div className="intro-img relative flex items-center mt-8 md:mt-0 lg:-top-4 xl:-top-12">
             <Image className="absolute" src={IphoneImg} alt="" />
           </div>
         </div>
 
         <div
           id="cards"
-          className="flex flex-col items-center justify-center after:sections mt-8"
+          className="flex flex-col items-center justify-center mt-8"
         >
-          <div className="w-full flex justify-start">
-            <p className="title font-extrabold text-2xl">
+          <div className="title w-full flex justify-start">
+            <p className="font-extrabold text-2xl">
               {t('landing-cards-section-2-title')}
             </p>
           </div>
@@ -129,10 +129,12 @@ const Home: NextPage = () => {
             className="blue-gradient-card flex flex-wrap items-center mt-12"
           >
             <div className="sm:basis-6/12">
-              <p className="title font-extrabold">
+              <p className="title font-extrabold text-2xl">
                 {t('landing-support-title')}
               </p>
-              <p className="description">{t('landing-support-description')} </p>
+              <p className="description text-base">
+                {t('landing-support-description')}{' '}
+              </p>
             </div>
             <div className="sm:basis-6/12">
               <ContactForm />

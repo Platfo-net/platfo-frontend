@@ -12,12 +12,14 @@ const AdvantagesCard: React.FC<AdvantagesCardProps> = ({ data }) => {
   return (
     <div className="flex justify-center">
       <div className="advantagesCard w-3/5 flex flex-col">
-        <div className="icon mb-12">{data.icon}</div>
+        <div className="icon">{data.icon}</div>
         <div>
           <p className="title font-bold text-2xl">{t(data.title)} </p>
         </div>
         <div>
-          <p className="description">{t(data.description)} </p>
+          <p className="description md:text-base md:leading-8">
+            {t(data.description)}{' '}
+          </p>
         </div>
       </div>
     </div>

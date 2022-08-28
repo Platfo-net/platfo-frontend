@@ -38,7 +38,7 @@ const ContactForm: React.FC<ContactFormProps> = () => {
       </div>
 
       <div className="md:basis-5/12 2xl:basis-4/12 items-center mx-2">
-        <button className="primary px-8 py-2" htmlType="submit">
+        <button className="primary px-8 py-2" htmltype="submit">
           {t('submit')}
         </button>
       </div>

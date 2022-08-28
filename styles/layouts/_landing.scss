@@ -1,5 +1,5 @@
-@import "../utils/variables";
-@import "../base/mixins";
+@import '../utils/variables';
+@import '../base/mixins';
 
 .landing-layout {
   background: $landing-header-background;
@@ -22,6 +22,9 @@
         color: $light-text;
       }
     }
+    svg {
+      fill: $dark-text;
+    }
   }
   #intro {
     height: 50vh;
@@ -35,34 +38,28 @@
     .intro-img {
       img {
         max-width: 480px;
-        max-height: 550px !important;
+        max-height: 60vh;
         display: inline-block;
         overflow: hidden;
-        top: 40px !important;
       }
     }
   }
   #cards {
     .title {
-      color: $dark-text;
+      max-width: 90%;
+      p {
+        color: $dark-text;
+      }
     }
     .advantagesCard {
       .title {
         color: $dark-text;
       }
-      .description {
-        font-size: $font-size-xsm;
-      }
     }
   }
   #support {
     .title {
-      font-size: $font-size-xlg;
       color: $dark-text;
-    }
-
-    .description {
-      font-size: $font-size-xsm;
     }
   }
 
@@ -72,14 +69,28 @@
         color: $primary;
       }
     }
-    .map-box {
-      svg {
-        width: 18px;
-        fill: $light-text;
-      }
+    .business-info {
       p {
         color: $light-text;
       }
+      svg {
+        height: 20px;
+        width: 18px;
+        fill: $light-text;
+      }
+      .location-info {
+        svg {
+          width: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .landing-layout {
+    #intro {
+      height: 60vh;
     }
   }
 }
