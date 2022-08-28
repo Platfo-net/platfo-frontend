@@ -65,7 +65,7 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           )}
 
           {data.platform && (
-            <div className="platform-container ">
+            <div className="platform-container ltr:left-8">
               <Avatar iconKey={data.platform} />{" "}
             </div>
           )}

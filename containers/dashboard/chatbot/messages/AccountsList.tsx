@@ -22,7 +22,7 @@ const AccountsList: React.FC<AccountsListProps> = () => {
             <div className="w-full flex flex-wrap">
                 {accountList.map((item) => {
                     return (
-                        <div className="account-list px-2 " key={item.id}>
+                        <div className="account-list px-2 w-16 h-16" key={item.id}>
                             <button
                                 className="p-0 h-auto"
                                 onClick={() => onSelectAccount(item)}

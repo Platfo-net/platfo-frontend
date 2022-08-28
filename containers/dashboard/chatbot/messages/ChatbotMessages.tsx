@@ -9,7 +9,7 @@ const ChatbotMessages: React.FC<ChatbotMessagesProps> = () => {
   return (
     <div className="max-w-6xl m-auto">
         <AccountsList />
-      <div className="flex flex-nowrap message-container">
+      <div className="flex flex-nowrap message-container ltr:flex-row-reverse">
         <div className="basis-3/4 mx-2 ">
           <MessageList />
         </div>

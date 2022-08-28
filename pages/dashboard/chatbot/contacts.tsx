@@ -80,7 +80,7 @@ const ContactsPage: NextPage = () => {
               return (
                 <div className="account-list px-2 " key={item.id}>
                   <button
-                    className="p-0 h-auto w-32"
+                    className="p-0 h-auto w-32 h-32"
                     onClick={() => onSelectAccount(item)}
                   >
                     <Avatar

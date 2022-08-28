@@ -123,12 +123,12 @@ const AccountDetailsPage: NextPage = () => {
       <div className="content basis-full ">
         {accountInfo && (
           <div className="flex flex-wrap mb-5">
-            <div className="basis-1/2 ">
+            <div className="basis-1/2 flex">
               {/* <h3 className="mb-5 mx-5">{t("account-info")}</h3> */}
-              <div className="flex mx-4 my-auto w-52" >
+              <div className="flex mx-4 my-auto w-32 h-32" >
                 <Avatar imageUrl={accountInfo.profile_image_url} />
-                <b className="my-auto mx-5">{accountInfo.username}</b>
               </div>
+              <h2 className="my-auto mx-5">{accountInfo.username}</h2>
             </div>
             <div className="basis-1/2 flex">
               {/*TODO <button
