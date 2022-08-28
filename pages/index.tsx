@@ -82,12 +82,12 @@ const Home: NextPage = () => {
   return (
     <LandingLayout>
       <div className="landing-body my-16 flex flex-col items-center">
-        <div
+      <div
           id="intro"
-          className="gradient-card flex flex-col sm:justify-between sm:flex-row mt-12"
+          className="gradient-card flex flex-col sm:justify-between rtl:flex-row ltr:flex-row-reverse sm:flex-row mt-12"
         >
           <div className="basis-1/2">
-            <p className="main-title text-2xl font-extrabold sm:text-4xl rtl:text-right ltl:text-left">
+            <p className="main-title text-2xl font-extrabold sm:text-4xl rtl:text-right ltr:text-left">
               {t('landing-intro-main-title')}
             </p>
             <p className="sub-title font-bold sm:text-2xl">
