@@ -1,25 +1,89 @@
-import { useAppDispatch } from "hooks/reduxHooks";
-import { ReactNode, useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import { Node, NodeChildProps, NodeData, Port } from "reaflow";
 import StartNode from "./components/StartNode";
 import TextNode from "./components/TextNode";
-import CrossIcon from "../../../../../../../assets/svg/icons/cross.svg";
+import DeleteIcon from "../../../../../../../assets/svg/icons/trash.svg";
+import EditIcon from "../../../../../../../assets/svg/icons/pencil.svg";
 import MenuNode from "./components/MenuNode";
+import { useChatflow, useDispatchChatflow } from "../../store/chatflow-context";
+import chatflowTypes from "../../store/chatflowTypes";
+import { translateXYToCanvasPosition } from "../../utils/nodes";
 
 const NodeComponent: React.FC = (props) => {
-  const {
-    properties,
-    onClickPort,
-    onNodeRemove,
-    onEditTextNodeData,
-    onEditMenuNodeData,
-  } = props;
+  const chatflowCtx = useChatflow();
+  const { nodes, edges } = chatflowCtx;
+  const dispatch = useDispatchChatflow();
+
+  const { properties } = props;
+
+  const [showActions, setShowActions] = useState(false);
 
   const onClick = (
     event: React.MouseEvent<SVGGElement, MouseEvent>,
     node: NodeData
   ) => {
     console.log("Selecting Node", event, node);
+  };
+
+  const onEnter = (
+    event: React.MouseEvent<SVGGElement, MouseEvent>,
+    node: NodeData
+  ) => {
+    console.log("onEnter Node", event, node);
+    // setShowActions(true);
+  };
+  const onLeave = (
+    event: React.MouseEvent<SVGGElement, MouseEvent>,
+    node: NodeData
+  ) => {
+    console.log("onLeave Node", event, node);
+    // setShowActions(false);
+  };
+  const onMouseOver = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
+    console.log("onMouseOver Node",);
+    setShowActions(true);
+  };
+
+  const onMouseOut = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
+    console.log("onMouseLeave Node",);
+    setShowActions(false);
+  };
+
+  const onNodeRemove = (nodeData) => {
+    const updateNodes = nodes.filter((item) => item.id !== nodeData.id);
+    dispatch({
+      type: chatflowTypes.CHANGE_NODE,
+      payload: updateNodes,
+    });
+
+    const updateEdges = edges.filter((item) => item.to !== nodeData.id);
+    dispatch({
+      type: chatflowTypes.CHANGE_EDGE,
+      payload: updateEdges,
+    });
+  };
+
+  const onClickPort = (event, portData, nodeData) => {
+    const [x, y] = translateXYToCanvasPosition(event?.clientX, event.clientY, {
+      top: 60,
+      left: 15,
+    });
+    dispatch({
+      type: chatflowTypes.SHOW_POPUP_MENU,
+      payload: true,
+    });
+    dispatch({
+      type: chatflowTypes.POPUP_POSITION,
+      payload: [x, y],
+    });
+    dispatch({
+      type: chatflowTypes.SELECTED_PORT,
+      payload: portData,
+    });
+    dispatch({
+      type: chatflowTypes.SELECTED_NODE,
+      payload: nodeData,
+    });
   };
 
   useEffect(() => {}, [properties]);
@@ -29,14 +93,11 @@ const NodeComponent: React.FC = (props) => {
       <Node
         className="node"
         onClick={onClick}
+        onEnter={onEnter}
+        onLeave={onLeave}
         port={
           <Port
             onClick={(e, portData) => onClickPort(e, portData, properties)}
-            style={{
-              fill: "#303030",
-              stroke: "white",
-              // transform: "translateX(-7.5px) translateY(7.5px) scale(1)",
-            }}
             rx={10}
             ry={10}
           />
@@ -48,20 +109,26 @@ const NodeComponent: React.FC = (props) => {
           return (
             <foreignObject
               id={`node-foreignObject-${properties.id}`}
-              className={`${properties?.data?.type}-node-container node-container`}
+              className={`${properties?.data?.type}-node-container node-container overflow-visible`}
               width={width}
               height={height}
+              onMouseEnter={onMouseOver}
+              onMouseLeave={onMouseOut}
             >
               <div className={`${properties?.data.type}-node`}>
-                <div className={"node-actions-container"}>
-                  {properties?.hasDeleteAction && (
-                    <button
-                      className={"icon-only sm m-1"}
-                      onClick={() => onNodeRemove(properties)}
-                    >
-                      <CrossIcon />
-                    </button>
-                  )}
+                <div className={`node-actions-container ${showActions ? " " : "hidden"}`}>
+                  <div className="flex mx-2">
+                    {properties?.hasDeleteAction && (
+                      <button onClick={() => onNodeRemove(properties)}>
+                        <DeleteIcon />
+                      </button>
+                    )}
+                    {properties?.hasEditAction && (
+                      <button onClick={() => onNodeRemove(properties)}>
+                        <EditIcon />
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div
@@ -71,16 +138,10 @@ const NodeComponent: React.FC = (props) => {
                     <StartNode {...nodeProps} />
                   )}
                   {properties?.data?.type === "text" && (
-                    <TextNode
-                      {...nodeProps}
-                      onEditTextNodeData={onEditTextNodeData}
-                    />
+                    <TextNode {...nodeProps} />
                   )}
                   {properties?.data?.type === "menu" && (
-                    <MenuNode
-                      {...nodeProps}
-                      onEditMenuNodeData={onEditMenuNodeData}
-                    />
+                    <MenuNode {...nodeProps} />
                   )}
                 </div>
               </div>

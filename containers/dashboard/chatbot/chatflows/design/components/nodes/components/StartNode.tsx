@@ -1,4 +1,4 @@
-import StartIcon from "../../../../../../../../assets/svg/icons/play.svg"
+import StartIcon from "../../../../../../../../assets/svg/icons/play.svg";
 
 type StartNodeProps = {
   [x: string]: any;

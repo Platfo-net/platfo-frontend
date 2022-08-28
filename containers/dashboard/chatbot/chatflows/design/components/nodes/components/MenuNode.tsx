@@ -4,14 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import PlusIcon from "../../../../../../../../assets/svg/icons/plus.svg";
 import CrossIcon from "../../../../../../../../assets/svg/icons/cross.svg";
 import { v4 as uuidv4 } from "uuid";
+import {useChatflow, useDispatchChatflow} from "../../../store/chatflow-context";
+import chatflowTypes from "../../../store/chatflowTypes";
 
 type MenuNodeProps = {
   [x: string]: any;
 };
 
 const MenuNode: React.FC<MenuNodeProps> = (props) => {
+  const chatflowCtx = useChatflow();
+  const {nodes} = chatflowCtx;
+  const dispatch = useDispatchChatflow()
+
   const { t } = useTranslation("common");
-  const { node, onEditMenuNodeData } = props;
+  const { node } = props;
   const [question, setQuestion] = useState(node.data.question);
   const [data, setData] = useState(null);
   const [choices, setChoices] = useState(node.data.choices);
@@ -66,6 +72,26 @@ const MenuNode: React.FC<MenuNodeProps> = (props) => {
     };
     setData(data);
   }, [question, choices]);
+
+  const onEditMenuNodeData = (value, height, nodeData) => {
+    const updateNodes = nodes.map((item) => {
+      if (item.id === nodeData.id) {
+        return {
+          ...item,
+          height,
+          data: value,
+        };
+      } else {
+        return {
+          ...item,
+        };
+      }
+    });
+    dispatch({
+      type: chatflowTypes.CHANGE_NODE,
+      payload: updateNodes
+    })
+  };
 
   return (
     <div className="flex flex-col">

@@ -9,18 +9,40 @@
     width: fit-content;
     &.user {
       background: $chatbot;
-      border-radius: $border-radius $border-radius  $border-radius 0;
+      border-radius: $border-radius $border-radius $border-radius 0;
     }
-
     &.bot {
       background: $secondary;
       border-radius: $border-radius $border-radius 0 $border-radius ;
     }
-
-
   }
   .message-date {
     font-size: $font-size-sm;
     color: $gray
+  }
+
+  .widget-menu {
+    .message-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title {
+      border-bottom: $border-primary;
+      margin-bottom: 4px;
+      padding-bottom: 5px;
+      text-align: center;
+      font-weight: 500;
+
+    }
+
+    .choices {
+      button {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        height: auto;
+        font-weight: 300;
+      }
+    }
   }
 }

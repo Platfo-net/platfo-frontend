@@ -46,7 +46,7 @@ const UsersList: React.FC<UsersListProps> = () => {
                   item={item}
                   onClick={onClick}
                   information={true}
-                  className={selectedUser?.id === item.id ? "active" : ""}
+                  active={selectedUser?.id === item.id}
                 />
               );
             })}

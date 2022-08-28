@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 import chatflowService from "../../../services/endpoints/ChatflowService";
 import useTranslation from "next-translate/useTranslation";
 import {getFormattedDate, getFormattedTime} from "../../../helpers/dateAndTimeHelper";
+import ChatflowService from "../../../services/endpoints/ChatflowService";
 
 const ChatbotPage: NextPage = () => {
   const [chatflowList, setChatflowList] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
   const { t } = useTranslation("common");
 
   const router = useRouter();
@@ -20,24 +22,34 @@ const ChatbotPage: NextPage = () => {
   };
 
   const onClickAddChatflow = () => {};
-  const onClickRemove = (value) => {
-    console.log(value)
+  const onClickRemove = async (value) => {
+    try{
+       await ChatflowService.deleteChatflow(value.id);
+      await getChatFlowList()
+    }catch (e) {
+
+    }
+
   };
   const onClickChatflow = () => {};
 
+
+  const getChatFlowList = async  () => {
+    try {
+      const response = await chatflowService.getUserChatflows(null);
+      const newList = response.data.map((item) => ({
+        ...item,
+        date:
+            getFormattedTime(item.updated_at) +
+            " - " +
+            getFormattedDate(item.updated_at),
+      }));
+      setChatflowList(newList);
+    } catch (e) {}
+  }
   useEffect(() => {
     (async () => {
-      try {
-        const response = await chatflowService.getUserChatflows(null);
-        const newList = response.data.map((item) => ({
-          ...item,
-          date:
-              getFormattedTime(item.updated_at) +
-              " - " +
-              getFormattedDate(item.updated_at),
-        }));
-        setChatflowList(newList);
-      } catch (e) {}
+      await getChatFlowList()
     })();
   }, []);
 

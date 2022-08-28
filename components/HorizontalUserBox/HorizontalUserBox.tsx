@@ -6,11 +6,21 @@ const HorizontalUserBox: React.FC<HorizontalUserBoxProps> = ({
   className,
   onClick,
   item,
+    active
 }) => {
+
+  const onButtonClick = (item) => {
+    if (active) {
+      return () => {};
+    }
+
+    return onClick(item);
+  };
+
   return (
     <button
-      className={`${className} horizontal-user-box flex flex-row my-2`}
-      onClick={() => onClick(item)}
+      className={`${className} ${active ? "active" : ""}  horizontal-user-box flex flex-row my-2`}
+      onClick={() => onButtonClick(item)}
     >
       <div className="flex flex-col text-left">
         <p className="title m-auto">{item.information?.username} </p>

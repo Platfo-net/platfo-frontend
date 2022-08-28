@@ -12,9 +12,10 @@ export const createStartNodeData = () => {
     ports: [
       {
         id: uuidv4(),
-        width: 15,
-        height: 15,
+        width: 20,
+        height: 20,
         side: "WEST",
+        className: "active-port"
       },
     ],
   };
@@ -26,8 +27,8 @@ export const createDefaultMenuNodeData = () => {
   const node = {
     id: uuidv4(),
     text: " ",
-    width: 250,
-    height: 190,
+    width: 90,
+    height: 90,
     data: {
       type: "menu",
       question: "",
@@ -36,15 +37,17 @@ export const createDefaultMenuNodeData = () => {
     ports: [
       {
         id: uuidv4(),
-        width: 15,
-        height: 15,
+        width: 10,
+        height: 10,
         side: "EAST",
+        disabled: true
       },
       {
         id: uuidv4(),
-        width: 15,
-        height: 15,
+        width: 20,
+        height: 20,
         side: "WEST",
+        className: "active-port"
       },
     ],
     hasDeleteAction: true,
@@ -57,7 +60,7 @@ export const createDefaultTextNodeData = () => {
   const node = {
     id: uuidv4(),
     text: " ",
-    width: 250,
+    width: 90,
     height: 90,
     data: {
       type: "text",
@@ -66,18 +69,21 @@ export const createDefaultTextNodeData = () => {
     ports: [
       {
         id: uuidv4(),
-        width: 15,
-        height: 15,
+        width: 10,
+        height: 10,
         side: "EAST",
+        disabled: true
       },
       {
         id: uuidv4(),
-        width: 15,
-        height: 15,
+        width: 20,
+        height: 20,
         side: "WEST",
+        className: "active-port"
       },
     ],
     hasDeleteAction: true,
+    hasEditAction: true,
   };
 
   return node;

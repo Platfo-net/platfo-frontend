@@ -14,7 +14,7 @@ const Avatar: React.FC<AvatarProps> = ({ imageUrl, iconKey, className }) => {
   return (
     <>
       {imageUrl && (
-        <Image
+        <img
           className={`avatar image inline-block rounded-full ring-2 ring-white w-full h-full ${className}`}
           src={imageUrl}
           alt=""

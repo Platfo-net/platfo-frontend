@@ -43,15 +43,25 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           )}
 
           {removeable && (
-              <>
-            <div className="remove-btn">
-              <button className="icon-only" onClick={() => setOpenModal(true)}>
-                <CrossIcon />
-              </button>
-
-            </div>
-                <AlertModal text={t("are-you-sure-to-delete")} onCancel={handleAlertModal} onOK={() => onClickRemove(data)} open={openModal}/>
-              </>
+            <>
+              <div className="remove-btn">
+                <button
+                  className="icon-only"
+                  onClick={() => setOpenModal(true)}
+                >
+                  <CrossIcon />
+                </button>
+              </div>
+              <AlertModal
+                text={t("are-you-sure-to-delete")}
+                onCancel={handleAlertModal}
+                onOK={async () => {
+                  await onClickRemove(data);
+                  handleAlertModal();
+                }}
+                open={openModal}
+              />
+            </>
           )}
 
           {data.platform && (
@@ -63,13 +73,14 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           {descriptionKey && (
             <p className="subtitle"> {data[descriptionKey]} </p>
           )}
-          {onClick && <button
+          {onClick && (
+            <button
               className="secondary w-full mt-3"
               onClick={() => onClick(data)}
-          >
-            {buttonText}
-          </button>}
-
+            >
+              {buttonText}
+            </button>
+          )}
         </div>
       ) : (
         <button
@@ -84,8 +95,6 @@ const SocialBox: React.FC<SocialBoxProps> = ({
           </div>
         </button>
       )}
-
-
     </div>
   );
 };
