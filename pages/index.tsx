@@ -84,8 +84,8 @@ const Home: NextPage = () => {
       <div className="landing-body my-16 flex flex-col items-center">
       <div
           id="intro"
-          className="gradient-card flex flex-col sm:justify-between rtl:flex-row ltr:flex-row-reverse sm:flex-row mt-12"
-        >
+          className="gradient-card flex flex-col sm:justify-between sm:flex-row mt-12 "
+        style={{direction : "rtl"}}>
           <div className="basis-1/2">
             <p className="main-title text-2xl font-extrabold sm:text-4xl rtl:text-right ltr:text-left">
               {t('landing-intro-main-title')}
