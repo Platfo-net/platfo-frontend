@@ -95,7 +95,7 @@ const MenuNode: React.FC<MenuNodeProps> = (props) => {
 
   return (
     <div className="flex flex-col">
-      <Input label={t("question")} onChange={onChange}></Input>
+     {/* <Input label={t("question")} onChange={onChange}></Input>
       <div className="flex justify-between">
         <button
           className="chatbot icon-only mt-auto mb-3 "
@@ -126,7 +126,7 @@ const MenuNode: React.FC<MenuNodeProps> = (props) => {
             ></Input>
           </div>
         );
-      })}
+      })}*/}
     </div>
   );
 };

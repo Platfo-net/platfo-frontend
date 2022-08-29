@@ -21,7 +21,9 @@ const ChatbotPage: NextPage = () => {
     router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
   };
 
-  const onClickAddChatflow = () => {};
+  const onClickAddChatflow = () => {
+    router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
+  };
   const onClickRemove = async (value) => {
     try{
        await ChatflowService.deleteChatflow(value.id);

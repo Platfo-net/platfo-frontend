@@ -112,11 +112,11 @@ const NodeComponent: React.FC = (props) => {
               className={`${properties?.data?.type}-node-container node-container overflow-visible`}
               width={width}
               height={height}
-              onMouseEnter={onMouseOver}
-              onMouseLeave={onMouseOut}
+              // onMouseEnter={onMouseOver}
+              // onMouseLeave={onMouseOut}
             >
               <div className={`${properties?.data.type}-node`}>
-                <div className={`node-actions-container ${showActions ? " " : "hidden"}`}>
+                <div className={`node-actions-container `}>
                   <div className="flex mx-2">
                     {properties?.hasDeleteAction && (
                       <button onClick={() => onNodeRemove(properties)}>
@@ -124,7 +124,7 @@ const NodeComponent: React.FC = (props) => {
                       </button>
                     )}
                     {properties?.hasEditAction && (
-                      <button onClick={() => onNodeRemove(properties)}>
+                      <button >
                         <EditIcon />
                       </button>
                     )}
