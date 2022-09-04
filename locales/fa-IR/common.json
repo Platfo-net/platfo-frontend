@@ -26,9 +26,15 @@
   "login": "ورود",
   "email": "ایمیل",
   "password": "پسورد",
+  "benefits":"ویژگی‌ها",
+  "services":"خدمات",
+  "master":"Master",
+  "live":"Live",
+  "post-man":"Postman",
   "about-us": "درباره‌ی ما",
   "contact-us": "ارتباط با ما",
   "pricing": "تعرفه",
+  "botinowlogy":"باتینو شناسی",
   "terms-of-service": "شرایط استفاده",
   "online-demo": "پیش‌نمایش آنلاین",
   "erorr-enter-fullname": "خطا‍! نام و نام خانوداگی خود را وارد کنید.",
@@ -46,7 +52,6 @@
   "accessing-the-menu-builder": "دسترسی به سازنده منو",
   "landing-intro-brands-title": "برندهایی که به ما اعتماد کرده اند.",
   "landing-intro-main-title": "نرم افزار چت هوشمند Botinow",
-  "landing-intro-sub-title": "راحت و حرفه ای شروع کنید",
   "landing-intro-description": "یک پلتفرم همه کاره برای ساخت و اجرای چت ربات های مکالمه بدون کدنویسی.",
   "landing-cards-section-2-title": "چرا باید از Botinow استفاده کنیم؟",
   "landing-support-title": "چگونه Botinow به کسب و کار شما کمک می کند",
@@ -60,5 +65,7 @@
   "landing-footer-address": "Num23-a503 boursaeed st- al naboodah real Estate–Dubai-UAE -ZIP/postal code: 88583",
   "landing-name-of-business": "E H B ELECTRONICS TRADING L.L.C",
   "landing-business-phone": "971-52-9109003",
-  "landing-business-mail": "Information@botinow.com"
+  "landing-business-mail": "Information@botinow.com",
+  "get-started":"شروع کنید"
 }
+ 

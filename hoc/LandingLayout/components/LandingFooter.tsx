@@ -15,7 +15,7 @@ const LandingFooter: React.FC<LandingFooterProps> = () => {
   });
 
   return (
-    <div id="footer" className="w-full flex flex-col md:flex-row">
+    <div id="footer" className="w-full flex flex-col md:flex-row p-4">
       <div className="about-box w-full md:w-1/2 p-5">
         <p className="title font-extrabold text-2xl">
           {t('landing-footer-title')}

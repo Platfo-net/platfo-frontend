@@ -37,6 +37,11 @@ button {
   &.primary {
     background-color: $primary;
     color: $on-primary;
+    &.out-line{
+      background-color: transparent;
+      color: $dark-text;
+      border: $border;
+    }
   }
 
   &.chatbot {
