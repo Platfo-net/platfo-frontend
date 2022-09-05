@@ -1,7 +1,6 @@
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import "../styles/index.scss";
-
 import store from "../stores/store";
 import { useRouter } from "next/router";
 import { useEffect } from "react";

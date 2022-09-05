@@ -134,7 +134,7 @@ const Home: NextPage = () => {
         <div id='customers' className='flex flex-col items-center w-full h-max 4 mt-16'>
           <div className='customers-content'>
             {Customers.map((item) => (
-              <div key={item.key} id={item.id}><a href={item.link}>{item.logo}</a></div>
+              <div key={item.title} id={item.id}><a href={item.link}>{item.logo}</a></div>
             ))}          
           </div>
         </div>

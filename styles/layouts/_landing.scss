@@ -5,7 +5,6 @@
   background: $landing-header-background;
   color: $on-landing-header-background;
   font-size: $font-size-md;
-
   * {
     font-family: $font-family;
   }
@@ -16,17 +15,8 @@
     position: fixed;
     z-index: 1;
 
-    .logo {
-      a {
-        svg {
-          fill: $primary;
-        }
-      }
-    }
-
     .hamberger-menu-btn {
       display: none !important;
-
       svg {
         height: auto;
         width: 24px;
@@ -36,7 +26,7 @@
     .drpdwn-menu {
       position: relative;
       display: inline-block;
-
+      
       .drpbtn {
         color: $light-text;
       }
@@ -325,7 +315,7 @@
             color: $on-primary;
           }
 
-          button {
+          button:not(.secondary) {
             font-size: $font-size-xlg;
             color: $on-primary;
           }

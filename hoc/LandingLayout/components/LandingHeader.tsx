@@ -45,13 +45,13 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
   return (
     <div
       id="header"
-      className="w-full flex items-center py-4 px-2 md:py-4 md:px-10"
+      className="w-full flex items-center py-4 px-2 md:px-10"
     >
       <div className="logo px-4">
         <Link href="/">
           <a href="replace" className="flex">
             {/* TODO: change it with updated one */}
-            <Logo className="w-12 px-1 mx-1 -mt-1" />
+            <Logo className="w-12 md:w-16 px-1 mx-1 -mt-1" />
           </a>
         </Link>
       </div>
@@ -64,7 +64,8 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
         </button>
       </div>
       <div className='menu w-full flex justify-center items-center'>
-        <div className="menu-content w-full xl:w-10/12 2xl:11/12 flex flex-col space-y-4 xl:space-y-0 xl:flex-row items-center">
+        <div className="menu-content w-full flex items-center flex-col-reverse xl:flex-row">
+          <div className='w-full flex items-center flex-col space-y-4 xl:space-y-0 xl:flex-row'>
           {landingMenu.map((item: any) => (
             item.children !== undefined ?
               <div className={`drpdwn-menu ${item.class}`}>
@@ -72,7 +73,7 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
                 <div className='drpdwn-content'>
                   {item.children.map((child: any) => (
                     <Link href={child.path} key={child.title}>
-                      <a className="px-4 py-1 my-2">{t(child.title)}</a>
+                      <a className="px-4 py-1">{t(child.title)}</a>
                     </Link>))
                   }
                 </div>
@@ -82,19 +83,20 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
                 <a className="mx-4">{t(item.title)}</a>
               </Link>
           ))}
-        </div>
-        <div className="auth flex justify-center my-4 px-4">
+          </div>
+          <div className='w-40 flex justify-center my-4'>
           {isLoggedIn ? (
-            <button className="primary my-auto mx-4 px-8 py-3" onClick={gotoDashboard}>
+            <button className="primary text-center align-middle" onClick={gotoDashboard}>
               <span className="relative ">{`Your Panel`}</span>
             </button>
           ) : (
             <>
-              <button className="secondary px-8 py-3" onClick={onRegister}>
+              <button className="secondary text-center align-middle" onClick={onRegister}>
                 {t('get-started')}
               </button>
             </>
           )}
+          </div>
         </div>
       </div>
 
