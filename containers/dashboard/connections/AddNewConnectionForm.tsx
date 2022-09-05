@@ -2,7 +2,7 @@ import Input from "components/Input/Input";
 import SelectBox from "components/SelectBox/SelectBox";
 import { useSetState } from "hooks/useSetState";
 import useTranslation from "next-translate/useTranslation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import ConnectionService from "services/endpoints/ConnectionService";
 import PlusIcon from "../../../assets/svg/icons/plus.svg";
@@ -81,7 +81,6 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
         item.trigger_id + item.chatflow_id ===
         controls.trigger_id.value + controls.chatflow_id.value
     );
-    console.log(controls.chatflow_id.value);
     if (
       controls.trigger_id.value !== "undefined" &&
       controls.trigger_id.value !== "" &&

@@ -7,6 +7,16 @@
 }
 .chatflow-design {
   padding: 0 9px !important;
+  &.content {
+    border-radius: 0 26px 26px 0;
+    background: $dashboard-background;
+    height: 100%;
+    position: relative;
+    top: -12px;
+    left: 3px;
+    z-index: 60;
+    padding: 16px 32px;
+  }
   .playground {
     direction: ltr !important;
     position: absolute;
@@ -18,10 +28,10 @@
     height: 100%;
     //background-color: transparent;
     background-size: 50px 50px;
-    background: #fafafa;
+    //background: #fafafa;
     /*background-image: linear-gradient(90deg, #eaeaea 1px, transparent 0),
       linear-gradient(180deg, #eaeaea 1px, transparent 0);*/
-    background-position: right -109px bottom -39px;
+    //background-position: right -109px bottom -39px;
     transform: scale(1);
     z-index: -10000;
 
@@ -86,21 +96,34 @@
 
     .menu-node-container {
       .menu-node {
+        padding: 20px 0;
         .menu-content-container {
           padding: 4px 12px;
+          .icon {
+            display: flex;
+            height: 50px;
+            svg {
+              margin: auto;
+              width: 30px;
+              height: 30px;
+
+              fill: $chatbot;
+            }
+          }
         }
       }
     }
 
     .node-actions-container {
       position: absolute;
-      top: -35px;
+      top: -13px;
+      left: 3px;
 
       button {
         background: #fff;
-        border: $border-primary;
+        border: 2px solid $primary;
         border-radius: 50%;
-        padding: 7px;
+        padding: 5px;
         width: 30px;
         height: 30px;
         margin: 0 2px;
@@ -111,12 +134,16 @@
         }
 
         &:hover {
-          border: 1px solid $chatbot;
+          //border: 2px solid $chatbot;
+          background: $chatbot;
           svg {
-
           }
         }
       }
+    }
+
+    .node-label {
+      transform: translateY(31px);
     }
   }
 

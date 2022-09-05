@@ -93,7 +93,6 @@ const AccountDetailsPage: NextPage = () => {
       setRecord(null);
     }
   };
-  const modalHandlerDetails = () => setOpenModalDetails(!openModalDetails);
 
   const onSubmit = () => {
     submitRef.current.click();

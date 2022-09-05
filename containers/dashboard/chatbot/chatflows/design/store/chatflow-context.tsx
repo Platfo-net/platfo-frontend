@@ -1,7 +1,6 @@
 import { useReducer, useContext, createContext } from 'react'
 import {updateObject} from "../../../../../../helpers/updateObject";
-import POPUP_POSITION, {chatflowTypes} from "./chatflowTypes";
-import SELECTED_PORT from "./chatflowTypes";
+import  {chatflowTypes} from "./chatflowTypes";
 
 const CounterStateContext = createContext()
 const CounterDispatchContext = createContext()
@@ -26,6 +25,10 @@ const reducer = (state, action) => {
             return updateObject(state, {
                 showPopupMenu: action.payload,
             })
+        case chatflowTypes.SHOW_DRAWER:
+            return updateObject(state, {
+                showDrawer: action.payload,
+            })
         case chatflowTypes.SELECTED_PORT:
             return updateObject(state, {
                 selectedPort: action.payload,
@@ -34,14 +37,21 @@ const reducer = (state, action) => {
             return updateObject(state, {
                 selectedNode: action.payload,
             })
+        case chatflowTypes.DRAWER_DATA:
+            return updateObject(state, {
+                drawerData: action.payload,
+            })
+        case chatflowTypes.CHATFLOW_INFO:
+            return updateObject(state, {
+                chatflowInfo: action.payload,
+            })
         default:
             throw new Error(`Unknown action: ${action.type}`)
     }
 }
 
-
-
 export const ChatFlowProvider = ({ children }) => {
+
     const [state, dispatch] = useReducer(reducer, {
         nodes: [],
         edges: [],
@@ -49,6 +59,9 @@ export const ChatFlowProvider = ({ children }) => {
         popupPosition: [0, 0],
         selectedNode: null,
         selectedPort: null,
+        showDrawer: false,
+        drawerData: null,
+        chatflowInfo: null
     })
     return (
         <CounterDispatchContext.Provider value={dispatch}>

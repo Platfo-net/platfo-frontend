@@ -4,26 +4,22 @@ import { useRouter } from "next/router";
 import ChatbotMenu from "assets/contents/chatbotMenu";
 import TopMenu from "components/TopMenu/TopMenu";
 import SocialBox from "../../../components/SocialBox/SocialBox";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import chatflowService from "../../../services/endpoints/ChatflowService";
 import useTranslation from "next-translate/useTranslation";
 import {getFormattedDate, getFormattedTime} from "../../../helpers/dateAndTimeHelper";
 import ChatflowService from "../../../services/endpoints/ChatflowService";
+import Modal from "../../../components/Modal/Modal";
+import AddNewChatflowForm from "../../../containers/dashboard/chatbot/AddNewChatflowForm";
 
 const ChatbotPage: NextPage = () => {
   const [chatflowList, setChatflowList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const { t } = useTranslation("common");
+  const submitRef = useRef();
 
   const router = useRouter();
 
-  const onClickFlow = () => {
-    router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
-  };
-
-  const onClickAddChatflow = () => {
-    router.push("/dashboard/chatbot/[id]", "/dashboard/chatbot/1");
-  };
   const onClickRemove = async (value) => {
     try{
        await ChatflowService.deleteChatflow(value.id);
@@ -33,8 +29,10 @@ const ChatbotPage: NextPage = () => {
     }
 
   };
-  const onClickChatflow = () => {};
-
+  const onClickChatflow = (chatflowData) => {
+    console.log(chatflowData)
+    router.push("/dashboard/chatbot/[id]", `/dashboard/chatbot/${chatflowData.id}`);
+  };
 
   const getChatFlowList = async  () => {
     try {
@@ -49,11 +47,25 @@ const ChatbotPage: NextPage = () => {
       setChatflowList(newList);
     } catch (e) {}
   }
+
   useEffect(() => {
     (async () => {
       await getChatFlowList()
     })();
   }, []);
+
+  const modalHandler = () => {
+    setOpenModal(!openModal);
+  };
+
+  const onSubmit = () => {
+    submitRef.current.click();
+  };
+
+  const onSuccess = (chatflowId) => {
+    router.push("/dashboard/chatbot/[id]", `/dashboard/chatbot/${chatflowId}`);
+    modalHandler()
+  }
 
   return (
     <DashboardLayout className="chatbot">
@@ -63,7 +75,7 @@ const ChatbotPage: NextPage = () => {
           <SocialBox
             className="chatbot"
             empty
-            onClick={onClickAddChatflow}
+            onClick={modalHandler}
             title={t("add-new-chatflow")}
           />
           {chatflowList?.map((item) => {
@@ -85,6 +97,19 @@ const ChatbotPage: NextPage = () => {
           })}
         </div>
       </div>
+      <Modal
+          open={openModal}
+          onCancel={modalHandler}
+          title={ t("add-new-chatflow")}
+          size="md"
+          onSubmit={onSubmit}
+      >
+        <AddNewChatflowForm
+            submitRef={submitRef}
+            onSuccess={onSuccess}
+            status={openModal}
+        />
+      </Modal>
     </DashboardLayout>
   );
 };

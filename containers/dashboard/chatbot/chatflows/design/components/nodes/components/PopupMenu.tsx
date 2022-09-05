@@ -9,7 +9,7 @@ type PopupMenuProps = {
   [x: string]: any;
 };
 
-const PopupMenu: React.FC<PopupMenuProps> = (props) => {
+const PopupMenu: React.FC<PopupMenuProps> = () => {
   const chatflowCtx = useChatflow();
   const {nodes,edges,selectedNode, selectedPort,  showPopupMenu, popupPosition} = chatflowCtx;
   const dispatch = useDispatchChatflow()
@@ -24,7 +24,12 @@ const PopupMenu: React.FC<PopupMenuProps> = (props) => {
   }, [popupPosition]);
   
   const onClickAddTextBlock = async () => {
-    const textData = await createDefaultTextNodeData();
+    dispatch({
+      type: chatflowTypes.SHOW_POPUP_MENU,
+      payload: false
+    })
+    const numberOfTextNode = nodes.filter(node => node.data.type === "text").length + 1
+    const textData = await createDefaultTextNodeData(numberOfTextNode);
      dispatch({
        type: chatflowTypes.CHANGE_NODE,
       payload: [ ...nodes, textData]
@@ -54,7 +59,9 @@ const PopupMenu: React.FC<PopupMenuProps> = (props) => {
       type: chatflowTypes.SHOW_POPUP_MENU,
       payload: false
     })
-    const textData = await createDefaultMenuNodeData();
+
+    const numberOfMenuNode = nodes.filter(node => node.data.type === "menu").length + 1
+    const textData = await createDefaultMenuNodeData(numberOfMenuNode);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,
       payload: [...nodes, textData]
@@ -77,6 +84,8 @@ const PopupMenu: React.FC<PopupMenuProps> = (props) => {
       payload: newEdges
     })
   };
+
+
   return (
     <div
       id="picker-menu"

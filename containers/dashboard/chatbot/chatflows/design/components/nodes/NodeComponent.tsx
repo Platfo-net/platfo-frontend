@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import { Node, NodeChildProps, NodeData, Port } from "reaflow";
+import {useEffect} from "react";
+import {Label, Node, NodeChildProps, NodeData, Port} from "reaflow";
 import StartNode from "./components/StartNode";
 import TextNode from "./components/TextNode";
 import DeleteIcon from "../../../../../../../assets/svg/icons/trash.svg";
@@ -16,37 +16,11 @@ const NodeComponent: React.FC = (props) => {
 
   const { properties } = props;
 
-  const [showActions, setShowActions] = useState(false);
-
   const onClick = (
     event: React.MouseEvent<SVGGElement, MouseEvent>,
     node: NodeData
   ) => {
     console.log("Selecting Node", event, node);
-  };
-
-  const onEnter = (
-    event: React.MouseEvent<SVGGElement, MouseEvent>,
-    node: NodeData
-  ) => {
-    console.log("onEnter Node", event, node);
-    // setShowActions(true);
-  };
-  const onLeave = (
-    event: React.MouseEvent<SVGGElement, MouseEvent>,
-    node: NodeData
-  ) => {
-    console.log("onLeave Node", event, node);
-    // setShowActions(false);
-  };
-  const onMouseOver = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
-    console.log("onMouseOver Node",);
-    setShowActions(true);
-  };
-
-  const onMouseOut = (event: React.MouseEvent<SVGGElement, MouseEvent>) => {
-    console.log("onMouseLeave Node",);
-    setShowActions(false);
   };
 
   const onNodeRemove = (nodeData) => {
@@ -64,10 +38,9 @@ const NodeComponent: React.FC = (props) => {
   };
 
   const onClickPort = (event, portData, nodeData) => {
-    const [x, y] = translateXYToCanvasPosition(event?.clientX, event.clientY, {
-      top: 60,
-      left: 15,
-    });
+    console.log(portData)
+
+    const [x, y] = translateXYToCanvasPosition(event?.clientX, event.clientY);
     dispatch({
       type: chatflowTypes.SHOW_POPUP_MENU,
       payload: true,
@@ -86,15 +59,31 @@ const NodeComponent: React.FC = (props) => {
     });
   };
 
+  const onEditNode = (nodeData) => {
+    dispatch({
+      type: chatflowTypes.SHOW_DRAWER,
+      payload: true
+    })
+
+    dispatch({
+      type: chatflowTypes.DRAWER_DATA,
+      payload: nodeData
+    })
+  }
+
+
+
   useEffect(() => {}, [properties]);
+  useEffect(() => {
+    // console.log(edges)
+    // do not let double edges
+  }, [edges]);
 
   return (
     <>
       <Node
         className="node"
         onClick={onClick}
-        onEnter={onEnter}
-        onLeave={onLeave}
         port={
           <Port
             onClick={(e, portData) => onClickPort(e, portData, properties)}
@@ -102,7 +91,9 @@ const NodeComponent: React.FC = (props) => {
             ry={10}
           />
         }
+        label={<Label className="node-label"/>}
         {...props}
+
       >
         {(nodeProps: NodeChildProps) => {
           const { width, height } = nodeProps;
@@ -112,8 +103,6 @@ const NodeComponent: React.FC = (props) => {
               className={`${properties?.data?.type}-node-container node-container overflow-visible`}
               width={width}
               height={height}
-              // onMouseEnter={onMouseOver}
-              // onMouseLeave={onMouseOut}
             >
               <div className={`${properties?.data.type}-node`}>
                 <div className={`node-actions-container `}>
@@ -124,13 +113,12 @@ const NodeComponent: React.FC = (props) => {
                       </button>
                     )}
                     {properties?.hasEditAction && (
-                      <button >
+                      <button onClick={() => onEditNode(properties)}>
                         <EditIcon />
                       </button>
                     )}
                   </div>
                 </div>
-
                 <div
                   className={`node-content-container ${properties?.data?.type}-content-container`}
                 >
@@ -149,6 +137,8 @@ const NodeComponent: React.FC = (props) => {
           );
         }}
       </Node>
+
+
     </>
   );
 };

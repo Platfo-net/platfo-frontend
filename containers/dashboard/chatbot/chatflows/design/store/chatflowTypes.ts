@@ -5,5 +5,8 @@ export const chatflowTypes = {
     POPUP_POSITION: "POPUP_POSITION",
     SELECTED_NODE: "SELECTED_NODE",
     SELECTED_PORT: "SELECTED_PORT",
+    SHOW_DRAWER: "SHOW_DRAWER",
+    DRAWER_DATA: "DRAWER_DATA",
+    CHATFLOW_INFO: "CHATFLOW_INFO",
 };
 export { chatflowTypes as default };

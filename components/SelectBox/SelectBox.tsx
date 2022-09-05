@@ -20,9 +20,6 @@ const SelectBox: React.FC<SelectBoxProps> = forwardRef<HTMLButtonElement>(
   ) => {
     let { t } = useTranslation("common");
 
-    const onChange = (e) => {
-      console.log(e);
-    };
     return (
       <div className={`select-box w-full  ${className}`}>
         <label className="block  tracking-wide text-xs rtl:text-right ltr:text-left ">
@@ -35,6 +32,7 @@ const SelectBox: React.FC<SelectBoxProps> = forwardRef<HTMLButtonElement>(
             className="block appearance-none w-full"
             id={id}
             {...rest}
+
           >
             <option value={"undefined"}>{t("select-something")}</option>
             {options.map((item) => {

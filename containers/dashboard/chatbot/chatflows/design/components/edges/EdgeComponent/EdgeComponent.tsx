@@ -9,6 +9,8 @@ const EdgeComponent: React.FC<EdgeProps> = (props) => {
     console.log("Selecting edge", event, edge);
   };
 
+
+
   return <Edge className="edge" onClick={onClick} {...props} />;
 };
 
