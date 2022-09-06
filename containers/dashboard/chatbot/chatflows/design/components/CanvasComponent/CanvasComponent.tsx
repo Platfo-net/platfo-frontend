@@ -81,23 +81,26 @@ const CanvasComponent: React.FC<ChatFlowDesignProps> = () => {
     };
 
     const onClickSave = async () => {
+try {
+    const newEdges = convertEdgestoApiData(edges)
+    const newNodes = convertNodesToApiData(nodes)
+    const data = {
+        name: chatflowInfo.name,
+        chatflow_id: chatflowInfo.chatflow_id,
+        nodes: newNodes,
+        edges: newEdges
+    }
+    console.log(data)
+    //todo set from chatflow info
+    const response = await ChatflowUIService.postChatflowData(router.query.id, data);
+    router.push("/dashboard/chatbot");
+} catch (e) {
 
-            const newEdges = convertEdgestoApiData(edges)
-            const newNodes = convertNodesToApiData(nodes)
-            const data = {
-                name: chatflowInfo.name,
-                chatflow_id: chatflowInfo.chatflow_id,
-                nodes: newNodes,
-                edges: newEdges
-            }
-            console.log(data)
-            //todo set from chatflow info
-            const response = ChatflowUIService.postChatflowData(router.query.id, data);
+}
 
     }
 
     useEffect(() => {
-         console.log("nodes", nodes)
         const startNode = nodes?.find((node) => node?.data?.type === "start");
          if (!startNode) {
             const startData = createStartNodeData();
@@ -114,31 +117,33 @@ const CanvasComponent: React.FC<ChatFlowDesignProps> = () => {
 
     useEffect(() => {
         (async () => {
-
-                if(router.query.id) {
-                    const response = await ChatflowUIService.getChatflowData(router.query.id, null);
-                    console.log(response.data)
-                    const convertedNodes = await convertApiDataToNodes(response.data)
-                    const chatflowData = {
-                        name : response.data.name,
-                        chatflow_id: response.data.chatflow_id
+                try {
+                    if (router.query.id) {
+                        const response = await ChatflowUIService.getChatflowData(router.query.id, null);
+                        console.log(response.data)
+                        const convertedNodes = await convertApiDataToNodes(response.data)
+                        const chatflowData = {
+                            name: response.data.name,
+                            chatflow_id: response.data.chatflow_id
+                        }
+                        dispatch({
+                            type: chatflowTypes.CHATFLOW_INFO,
+                            payload: chatflowData,
+                        });
+                        dispatch({
+                            type: chatflowTypes.CHANGE_NODE,
+                            payload: convertedNodes,
+                        });
+                        const newEdges = await convertApiDataToEdges(response.data);
+                        dispatch({
+                            type: chatflowTypes.CHANGE_EDGE,
+                            payload: newEdges
+                        })
                     }
-                    dispatch({
-                        type: chatflowTypes.CHATFLOW_INFO,
-                        payload: chatflowData,
-                    });
-                    dispatch({
-                        type: chatflowTypes.CHANGE_NODE,
-                        payload: convertedNodes,
-                    });
-                    const newEdges = await convertApiDataToEdges(response.data);
-                    dispatch({
-                        type: chatflowTypes.CHANGE_EDGE,
-                        payload: newEdges
-                    })
-                }
+                }  catch (e) {}
 
-        })()
+            }
+        )()
     }, [])
 
     return (
