@@ -24,6 +24,7 @@ const NodeComponent: React.FC = (props) => {
   };
 
   const onNodeRemove = (nodeData) => {
+    //TODO remove all edges and red the unconnected nodes
     const updateNodes = nodes.filter((item) => item.id !== nodeData.id);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,
@@ -38,8 +39,6 @@ const NodeComponent: React.FC = (props) => {
   };
 
   const onClickPort = (event, portData, nodeData) => {
-    console.log(portData)
-
     const [x, y] = translateXYToCanvasPosition(event?.clientX, event.clientY);
     dispatch({
       type: chatflowTypes.SHOW_POPUP_MENU,

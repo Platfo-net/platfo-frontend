@@ -5,6 +5,7 @@ import useTranslation from "next-translate/useTranslation";
 import QuickReplyDrawerItem from "./QuickReplyDrawerItem";
 import {getEdgesOfWidgets} from "../../../utils/edges";
 import {useEffect, useState} from "react";
+import {updateNodeData, updatePorts} from "../../../utils/nodes";
 
 function TextDrawerItems({ nodeData }) {
     const chatflowCtx = useChatflow();
@@ -38,24 +39,15 @@ function TextDrawerItems({ nodeData }) {
     };
 
     const onEditMenuNodeData = async (value, nodeData) => {
-        const updateNodes = nodes.map((item) => {
-            if (item.id === nodeData.id) {
-                return {
-                    ...item,
-                    data: value,
-                };
-            } else {
-                return {
-                    ...item,
-                };
-            }
-        });
+        const updateNodes = await updateNodeData(value, nodeData, nodes);
+        const updateNodesPorts = await updatePorts(updateNodes);
+
         dispatch({
             type: chatflowTypes.CHANGE_NODE,
-            payload: updateNodes,
+            payload: updateNodesPorts,
         });
 
-        const newEdges = await getEdgesOfWidgets(nodeData, updateNodes, edges)
+        const newEdges = await getEdgesOfWidgets(nodeData, updateNodesPorts, edges)
         dispatch({
             type: chatflowTypes.CHANGE_EDGE,
             payload: newEdges

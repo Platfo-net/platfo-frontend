@@ -1,5 +1,64 @@
 import { v4 as uuidv4 } from "uuid";
 
+export const updatePorts = (nodes) => {
+  const updateNodes = nodes.map(item => {
+    let updatePorts = [...item.ports];
+    if(item.data.choices && item.data.choices.length > 0) {
+      const newPort = item.data.choices.map(choice => {
+        return {
+          id: choice.value,
+          width: 1,
+          height: 1,
+          side: "NORTH",
+          disabled: true,
+          className: "hidden-port",
+          hidden: true,
+        }
+      })
+      updatePorts= updatePorts.concat(newPort);
+    }
+    if(item.data.quickReplies && item.data.quickReplies.length > 0) {
+      const newPort = item.data.quickReplies.map(quickReply => {
+        return {
+          id: quickReply.value,
+          width: 1,
+          height: 1,
+          side: "NORTH",
+          className: "hidden-port",
+          disabled: true,
+          hidden: true,
+        }
+      })
+      updatePorts = updatePorts.concat(newPort);
+    }
+
+    return {
+      ...item,
+      ports: updatePorts
+    }
+  })
+
+  return updateNodes
+
+}
+
+export const updateNodeData = (value, nodeData, nodes ) => {
+
+  const updateNodes = nodes.map((item) => {
+    if (item.id === nodeData.id) {
+      return {
+        ...item,
+        data: value,
+      };
+    } else {
+      return {
+        ...item,
+      };
+    }
+  });
+  return updateNodes
+}
+
 export const createStartNodeData = () => {
   const node = {
     id: uuidv4(),
@@ -105,8 +164,6 @@ export const translateXYToCanvasPosition = (
 ): [x: number, y: number] => {
   return [window.innerWidth - x - 60 , y - 35];
 };
-
-
 
 
 export const convertApiDataToNodes = (data) => {

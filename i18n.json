@@ -1,6 +1,6 @@
 {
   "locales": ["en", "fa-IR"],
-  "defaultLocale": "en",
+  "defaultLocale": "fa-IR",
   "localeDetection": false,
   "pages": {
     "*": ["common"],

@@ -180,8 +180,12 @@
 
 .active-port {
   fill: $chatbot !important;
-
+  //transform: translateX(-10px) translateY(35px) scale(1) !important;
 }
+.hidden-port {
+  //transform: translateX(-10px) translateY(35px) scale(1) !important;
+}
+
 
 .disable-port {
   fill: $chatbot !important;
