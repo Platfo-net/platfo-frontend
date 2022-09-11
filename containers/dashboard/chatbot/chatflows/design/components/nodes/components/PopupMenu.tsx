@@ -9,7 +9,6 @@ import {
   createDefaultTextNodeData,
 } from "../../../utils/nodes";
 import chatflowTypes from "../../../store/chatflowTypes";
-import { v4 as uuidv4 } from "uuid";
 import { createEdge } from "../../../utils/edges";
 
 type PopupMenuProps = {
@@ -47,7 +46,7 @@ const PopupMenu: React.FC<PopupMenuProps> = () => {
       payload: false,
     });
     const numberOfTextNode =
-      nodes.filter((node) => node.data.type === "text").length + 1;
+      nodes.filter((node) => node.data.type === "TEXT").length + 1;
     const textData = await createDefaultTextNodeData(numberOfTextNode);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,
@@ -72,7 +71,7 @@ const PopupMenu: React.FC<PopupMenuProps> = () => {
     });
 
     const numberOfMenuNode =
-      nodes.filter((node) => node.data.type === "menu").length + 1;
+      nodes.filter((node) => node.data.type === "MENU").length + 1;
     const textData = await createDefaultMenuNodeData(numberOfMenuNode);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,

@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Label, Node, NodeChildProps, NodeData, Port} from "reaflow";
 import StartNode from "./components/StartNode";
 import TextNode from "./components/TextNode";
@@ -7,12 +7,14 @@ import EditIcon from "../../../../../../../assets/svg/icons/pencil.svg";
 import MenuNode from "./components/MenuNode";
 import { useChatflow, useDispatchChatflow } from "../../store/chatflow-context";
 import chatflowTypes from "../../store/chatflowTypes";
-import { translateXYToCanvasPosition } from "../../utils/nodes";
+import {checkNodeStatus, checkPortStatus, translateXYToCanvasPosition, updatePortStatus} from "../../utils/nodes";
 
 const NodeComponent: React.FC = (props) => {
   const chatflowCtx = useChatflow();
   const { nodes, edges } = chatflowCtx;
   const dispatch = useDispatchChatflow();
+  const [nodeStatus, setNodeStatus] = useState("NORMAL");
+  const [westPortStatus, setWestPortStatus] = useState("NORMAL");
 
   const { properties } = props;
 
@@ -24,14 +26,14 @@ const NodeComponent: React.FC = (props) => {
   };
 
   const onNodeRemove = (nodeData) => {
-    //TODO remove all edges and red the unconnected nodes
     const updateNodes = nodes.filter((item) => item.id !== nodeData.id);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,
       payload: updateNodes,
     });
 
-    const updateEdges = edges.filter((item) => item.to !== nodeData.id);
+    let updateEdges = edges.filter((item) => item.to !== nodeData.id);
+     updateEdges = updateEdges.filter((item) => item.from !== nodeData.id);
     dispatch({
       type: chatflowTypes.CHANGE_EDGE,
       payload: updateEdges,
@@ -69,19 +71,32 @@ const NodeComponent: React.FC = (props) => {
       payload: nodeData
     })
   }
-
-
-
-  useEffect(() => {}, [properties]);
+  
   useEffect(() => {
-    // console.log(edges)
-    // do not let double edges
-  }, [edges]);
+    if(properties.data.type !== "START" ) {
+      const status = checkNodeStatus(properties, edges);
+      setNodeStatus(status)
+    }
+    if(properties.data.type !== "MENU" ) {
+      const portStatus = checkPortStatus(properties, edges);
+      setWestPortStatus(portStatus)
+    }
+  }, [properties]);
+
+  useEffect(() => {
+    console.log('westPortStatus')
+    console.log(westPortStatus)
+    const updateNodes = updatePortStatus(nodes, properties, westPortStatus);
+    dispatch({
+      type: chatflowTypes.CHANGE_NODE,
+      payload: updateNodes,
+    });
+  }, [westPortStatus]);
 
   return (
     <>
       <Node
-        className="node"
+        className={`node ${nodeStatus === "ERROR" ? "node-error" : ""}`}
         onClick={onClick}
         port={
           <Port
@@ -90,9 +105,8 @@ const NodeComponent: React.FC = (props) => {
             ry={10}
           />
         }
-        label={<Label className="node-label"/>}
+        label={<Label className="node-label" />}
         {...props}
-
       >
         {(nodeProps: NodeChildProps) => {
           const { width, height } = nodeProps;
@@ -121,13 +135,13 @@ const NodeComponent: React.FC = (props) => {
                 <div
                   className={`node-content-container ${properties?.data?.type}-content-container`}
                 >
-                  {properties?.data?.type === "start" && (
+                  {properties?.data?.type === "START" && (
                     <StartNode {...nodeProps} />
                   )}
-                  {properties?.data?.type === "text" && (
+                  {properties?.data?.type === "TEXT" && (
                     <TextNode {...nodeProps} />
                   )}
-                  {properties?.data?.type === "menu" && (
+                  {properties?.data?.type === "MENU" && (
                     <MenuNode {...nodeProps} />
                   )}
                 </div>
@@ -136,8 +150,6 @@ const NodeComponent: React.FC = (props) => {
           );
         }}
       </Node>
-
-
     </>
   );
 };

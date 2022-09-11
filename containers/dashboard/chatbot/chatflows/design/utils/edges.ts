@@ -14,6 +14,21 @@ export const createEdge = (fromNode, toNode) => {
   };
 };
 
+export const createNewEdge =  (fromNode, toNode) => {
+  const id = uuidv4();
+  const toPort =  toNode.ports.find((item) => item.side === "EAST");
+  const fromPort =  fromNode.ports.find((item) => item.side === "WEST");
+  return {
+    id,
+    from: fromNode.id,
+    to: toNode.id,
+    fromPort: fromPort.id,
+    toPort: toPort.id,
+    fromWidget: fromNode.id,
+    text:" "
+  };
+};
+
 export const convertApiDataToEdges = (data) => {
   const newEdges = data.edges.map((edge) => {
     return {
@@ -56,7 +71,7 @@ export const getEdgesOfWidgets = async (nodeData, nodes, edges) => {
         const toPort = await targetNode.ports.find(
           (item) => item.side === "EAST"
         );
-        const fromPort = await nodeData.ports.find((item) => item.side === "WEST" && item.className === "active-port");
+        const fromPort = await nodeData.ports.find((item) => item.side === "WEST" );
         const edgeLabel = currentNode.data.quickReplies[x].label
          const fromWidget = currentNode.data.quickReplies[x].value;
 
@@ -89,7 +104,7 @@ export const getEdgesOfWidgets = async (nodeData, nodes, edges) => {
         const toPort = await targetNode.ports.find(
           (item) => item.side === "EAST"
         );
-        const fromPort = await nodeData.ports.find((item) => item.side === "WEST" && item.className === "active-port");
+        const fromPort = await nodeData.ports.find((item) => item.side === "WEST");
         const edgeLabel = currentNode.data.choices[x].label
         const fromWidget = currentNode.data.choices[x].value;
 

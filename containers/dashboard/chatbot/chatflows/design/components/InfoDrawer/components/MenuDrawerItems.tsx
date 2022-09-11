@@ -11,8 +11,8 @@ import CrossIcon from "../../../../../../../../assets/svg/icons/cross.svg";
 import chatflowTypes from "../../../store/chatflowTypes";
 import SelectBox from "../../../../../../../../components/SelectBox/SelectBox";
 import QuickReplyDrawerItem from "./QuickReplyDrawerItem";
-import {getEdgesOfWidgets} from "../../../utils/edges";
-import {updateNodeData, updatePorts} from "../../../utils/nodes";
+import { getEdgesOfWidgets } from "../../../utils/edges";
+import { updateNodeData, updatePorts } from "../../../utils/nodes";
 
 function MenuDrawerItems({ nodeData }) {
   const chatflowCtx = useChatflow();
@@ -42,7 +42,7 @@ function MenuDrawerItems({ nodeData }) {
       if (item.value === data.value) {
         return {
           ...item,
-          [key]: key === "label" ? value : {type: "GOTO", data: value},
+          [key]: key === "label" ? value : { type: "GOTO", data: value },
         };
       } else {
         return {
@@ -69,7 +69,8 @@ function MenuDrawerItems({ nodeData }) {
         action: { type: "GOTO", data: target.value },
       },
       ...choices,
-    ]
+    ];
+    // @ts-ignore
     setChoices(newChoices);
   };
 
@@ -82,11 +83,11 @@ function MenuDrawerItems({ nodeData }) {
       payload: updateNodesPorts,
     });
 
-    const newEdges = await getEdgesOfWidgets(nodeData, updateNodesPorts, edges)
-      dispatch({
-          type: chatflowTypes.CHANGE_EDGE,
-          payload: newEdges
-      });
+    const newEdges = await getEdgesOfWidgets(nodeData, updateNodesPorts, edges);
+    dispatch({
+      type: chatflowTypes.CHANGE_EDGE,
+      payload: newEdges,
+    });
   };
 
   useEffect(() => {
@@ -96,86 +97,91 @@ function MenuDrawerItems({ nodeData }) {
   }, [data]);
 
   useEffect(() => {
-      const data = {
-        ...nodeData.data,
-        question,
-        choices,
-        quickReplies
-      }
-      setData(data);
+    const data = {
+      ...nodeData.data,
+      question,
+      choices,
+      quickReplies,
+    };
+    setData(data);
   }, [question, choices, quickReplies]);
 
   useEffect(() => {
-   if(nodeData) {
-     setQuestion(nodeData.data.question);
-     setChoices(nodeData.data.choices);
-   }
+    if (nodeData) {
+      setQuestion(nodeData.data.question);
+      setChoices(nodeData.data.choices);
+    }
   }, [nodeData]);
 
   useEffect(() => {
-    if(nodes.length > 0) {
-      setTarget( { options: nodes, value: "" })
+    const selectableNodes = nodes.filter(
+      (node) => node.data.type !== "START" && node.id !== nodeData.id
+    );
+    if (selectableNodes.length > 0) {
+      setTarget({ options: selectableNodes, value: "" });
     }
   }, [nodes.length]);
 
   return (
-    <div className="flex flex-col ml-auto p-8 w-11/12">
+    <div className="flex flex-col rtl:ml-auto  ltr:mr-auto p-8 w-11/12">
       <Input
         label={t("question")}
         onChange={onChange}
-        value={nodes.find((item) => item.id === nodeData.id).data.question}
+        value={nodes?.find((item) => item.id === nodeData.id)?.data.question}
       />
       <div className="flex justify-between">
-          <SelectBox
-              options={target.options}
-              label={t("goto")}
-              onChange={onChangeSelect}
-              labelKey="text"
-          />
         <Input
           ref={choiceRef}
           label={t("text")}
-          className="rtl:pl-2 ltr:pr-2 mx-2"
+          className="rtl:pl-2 ltr:pr-2 "
+        />
+        <SelectBox
+          options={target.options}
+          label={t("goto")}
+          onChange={onChangeSelect}
+          labelKey="text"
+          className="mx-2"
         />
 
-          <button
-              className="chatbot icon-only mt-auto mb-3  md"
-              onClick={onAddChoice}
-          >
-              <PlusIcon />
-          </button>
+        <button
+          className="chatbot icon-only mt-auto mb-3  md"
+          onClick={onAddChoice}
+        >
+          <PlusIcon />
+        </button>
       </div>
-      {nodes
-        .find((item) => item.id === nodeData.id)
-        .data.choices.map((item) => {
+      {nodes?.find((item) => item.id === nodeData.id)?.data.choices.map((item) => {
           return (
             <div key={item.value} className="flex justify-between">
-                <SelectBox
-                    options={target.options}
-                    label={t("goto")}
-                    onChange={(e) => onEditChoices(e.target.value, item, "action")}
-                    value={item.action.data}
-                    labelKey="text"
-                />
               <Input
-                label={t("text")}
-                onChange={(e) => onEditChoices(e.target.value, item, "label")}
-                value={item.label}
-                className="rtl:pl-2 ltr:pr-2 mx-2"
+                  label={t("text")}
+                  onChange={(e) => onEditChoices(e.target.value, item, "label")}
+                  value={item.label}
+                  className="rtl:pl-2 ltr:pr-2 "
               />
+              <SelectBox
+                options={target.options}
+                label={t("goto")}
+                onChange={(e) => onEditChoices(e.target.value, item, "action")}
+                value={item.action.data}
+                labelKey="text"
+                className="mx-2"
 
-                <button
-                    className="danger icon-only mt-auto mb-3 md"
-                    onClick={() => onRemove(item)}
-                >
-                    <CrossIcon />
-                </button>
+              />
+              <button
+                className="danger icon-only mt-auto mb-3 md"
+                onClick={() => onRemove(item)}
+              >
+                <CrossIcon />
+              </button>
             </div>
           );
         })}
 
-      <QuickReplyDrawerItem nodeData={nodeData} onEditQuickReply={setQuickReplies}/>
-
+      <QuickReplyDrawerItem
+        nodeData={nodeData}
+        onEditQuickReply={setQuickReplies}
+      />
     </div>
   );
 }

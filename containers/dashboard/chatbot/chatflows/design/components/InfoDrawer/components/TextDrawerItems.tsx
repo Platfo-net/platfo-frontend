@@ -69,8 +69,8 @@ function TextDrawerItems({ nodeData }) {
     }, [quickReplies]);
 
 
-  return <div className="ml-auto p-8 w-11/12">
-      <Input label={t("text")} onChange={onChange} value={nodes.find(item => item.id === nodeData.id).data.value}/>
+  return <div className="ltr:mr-auto rtl:ml-auto p-8 w-11/12">
+      <Input label={t("text")} onChange={onChange} value={nodes?.find(item => item.id === nodeData.id)?.data?.value}/>
       <QuickReplyDrawerItem nodeData={nodeData} onEditQuickReply={setQuickReplies}/>
   </div>;
 }

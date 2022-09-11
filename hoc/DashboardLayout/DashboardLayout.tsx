@@ -22,7 +22,6 @@ const DashboardLayout: NextPage<Props> = ({
   const { language } = useAppSelector((state) => ({
     language: state.auth.language,
   }));
-  const [mobileNavsidebar, setMobileNavsidebar] = useState(false);
 
   const router = useRouter();
 
@@ -49,7 +48,7 @@ const DashboardLayout: NextPage<Props> = ({
       <div
         className={`dashboard-layout ${className} flex min-h-screen relative`}
       >
-        <DashboardSideDrawer mobileNavsidebar={mobileNavsidebar} />
+        <DashboardSideDrawer  />
         <div className="flex flex-col w-full bg-white">{children}</div>
       </div>
     </Fragment>

@@ -53,12 +53,15 @@
       stroke-width: 2;
       rx: 16px;
       ry: 16px;
+      &.node-error {
+        stroke: $danger
+      }
     }
 
-    .start-node-container {
-      .start-node {
+    .START-node-container {
+      .START-node {
         padding: 20px 0;
-        .start-content-container {
+        .START-content-container {
           .icon {
             display: flex;
             height: 50px;
@@ -74,10 +77,10 @@
       }
     }
 
-    .text-node-container {
-      .text-node {
+    .TEXT-node-container {
+      .TEXT-node {
         padding: 20px 0;
-        .text-content-container {
+        .TEXT-content-container {
           padding: 4px 12px;
           .icon {
             display: flex;
@@ -94,10 +97,10 @@
       }
     }
 
-    .menu-node-container {
-      .menu-node {
+    .MENU-node-container {
+      .MENU-node {
         padding: 20px 0;
-        .menu-content-container {
+        .MENU-content-container {
           padding: 4px 12px;
           .icon {
             display: flex;

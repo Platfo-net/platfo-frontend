@@ -1,5 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
 
+export const updatePortStatus = (nodes, nodeData, status) => {
+  const updateNodes = [...nodes];
+  if(nodeData.data.type !== "MENU") {
+    const nodeIndex = nodes.findIndex(node => node.id === nodeData.id);
+    const portIndex = updateNodes[nodeIndex].ports.findIndex(port => port.side === "WEST");
+    updateNodes[nodeIndex].ports[portIndex].disabled =  status === "DISABLE" ? true : false;
+    updateNodes[nodeIndex].ports[portIndex].className =  status === "DISABLE" ? "" : "active-port";
+    updateNodes[nodeIndex].ports[portIndex].width =  status === "DISABLE" ? 8 : 20;
+    updateNodes[nodeIndex].ports[portIndex].height =  status === "DISABLE" ? 8 : 20;
+  }
+  return updateNodes
+}
 export const updatePorts = (nodes) => {
   const updateNodes = nodes.map(item => {
     let updatePorts = [...item.ports];
@@ -66,16 +78,9 @@ export const createStartNodeData = () => {
     width: 90,
     height: 90,
     data: {
-      type: "start",
+      type: "START",
     },
     ports: [
-      {
-        id: uuidv4(),
-        width: 8,
-        height: 8,
-        side: "EAST",
-        disabled: true
-      },
       {
         id: uuidv4(),
         width: 20,
@@ -96,7 +101,7 @@ export const createDefaultMenuNodeData = (numberOfMenuNode) => {
     width: 90,
     height: 90,
     data: {
-      type: "menu",
+      type: "MENU",
       question: "",
       choices: [],
       quickReplies: [],
@@ -111,10 +116,10 @@ export const createDefaultMenuNodeData = (numberOfMenuNode) => {
       },
       {
         id: uuidv4(),
-        width: 20,
-        height: 20,
+        width: 8,
+        height: 8,
         side: "WEST",
-        className: "active-port"
+        disabled: true
       },
     ],
     hasDeleteAction: true,
@@ -131,7 +136,7 @@ export const createDefaultTextNodeData = (numberOfTextNode) => {
     width: 90,
     height: 90,
     data: {
-      type: "text",
+      type: "TEXT",
       value: "",
       quickReplies: [],
     },
@@ -199,6 +204,30 @@ export const convertNodesToApiData = (nodes) => {
     }
   });
   return newNodes
+}
+
+export const checkNodeStatus = (nodeData, edges) => {
+  const eastPort = nodeData.ports.find(port => port.side === "EAST");
+  const findEastEdgeStatus = edges.findIndex(edge => edge.toPort === eastPort?.id );
+  return findEastEdgeStatus === -1 ? "ERROR" : "NORMAL";
+}
+
+export const checkPortStatus = (nodeData, edges) => {
+  if(nodeData.data.type !== "MENU") {
+    const westPort = nodeData.ports.find(port => port.side === "WEST");
+    const WestPortEdges = edges.filter(edge => edge.fromPort === westPort?.id );
+    if(WestPortEdges.length === 0) {
+      return "NORMAL" ;
+    } else  {
+      const existEdge = WestPortEdges.filter(edge => edge.fromWidget === edge.from);
+      if(existEdge.length > 0) {
+        return "DISABLE"
+      }
+
+    }
+  }
+  return "NORMAL"
+
 }
 
 /*export const convertApiDataToNodes = (data) => {

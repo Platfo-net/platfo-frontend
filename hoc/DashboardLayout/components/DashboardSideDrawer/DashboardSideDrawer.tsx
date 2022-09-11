@@ -1,88 +1,19 @@
-import React, { Fragment, useRef, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import {FC} from "react";
 import Nav from "./components/Nav";
 import Tools from "./components/Tools";
 import Logo from "./components/Logo";
 
-interface Props {
-  mobileNavsidebar: boolean;
-}
-
-const DashboardSideDrawer: React.FC<Props> = ({ mobileNavsidebar }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const router = useRouter();
-  const sidebarRef = useRef(null);
-  //   const sidebarOutsideClick = OutsideClick(sidebarRef);
-  const selectedKeys: string = router.pathname;
-  const openKeys: string = router.pathname.split("/")[3];
-
-  const onSelect = ({ key }) => {
-    router.push(`${key}`);
-  };
-
-  const onFinish = (values) => {
-    router.push(
-      "/dashboard/chatflows/[id]",
-      `/dashboard/chatflows/${values.name}`
-    );
-  };
-
-  const handleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
-
-  const logout = () => {
-    router.push("/");
-  };
+const DashboardSideDrawer: FC = () => {
 
   return (
     <>
-      <aside
-        className={`${
-          mobileNavsidebar ? "block" : "hidden"
-        } side-drawer  sm:flex sm:flex-col z-50`}
-        ref={sidebarRef}
-      >
+      <aside className={` side-drawer  sm:flex sm:flex-col z-50`}>
         <div className="flex-grow flex flex-col justify-between ">
-          <Logo />
+          <Logo href=""/>
           <Nav />
           <Tools />
         </div>
       </aside>
-      {/* <Modal
-        title="New Chat Flow"
-        visible={isModalVisible}
-        footer={false}
-        onCancel={handleModal}
-      >
-        <Form
-          form={form}
-          layout="vertical"
-          name="newChatFlowForm"
-          size="large"
-          onFinish={onFinish}
-        >
-          <Form.Item
-            name="name"
-            label="Name"
-            rules={[
-              {
-                required: true,
-                message: "Please input Name!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item className=" mt-32">
-            <Button type="primary" htmlType="submit" block>
-              GO!
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal> */}
     </>
   );
 };

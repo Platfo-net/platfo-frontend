@@ -9,6 +9,7 @@ import UserService from "services/endpoints/UserService";
 export const loggedOut = () => (dispatch) => {
   tokenObj.removeToken();
   localStorage.clear();
+  location.reload();
   dispatch({
     type: actionTypes.LOGGED_OUT,
   });

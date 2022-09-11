@@ -26,8 +26,8 @@ const PopupMenu: React.FC<PopupMenuProps> = () => {
 
     return (
         <Drawer isOpen={showDrawer} setIsOpen={drawerHandler} title={t(`edit-${drawerData?.data.type}`)}>
-            {drawerData?.data?.type === "text" && <TextDrawerItems nodeData={drawerData}/>}
-            {drawerData?.data?.type === "menu" && <MenuDrawerItems nodeData={drawerData}/>}
+            {drawerData?.data?.type === "TEXT" && <TextDrawerItems nodeData={drawerData}/>}
+            {drawerData?.data?.type === "MENU" && <MenuDrawerItems nodeData={drawerData}/>}
         </Drawer>
     );
 };

@@ -14,12 +14,12 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
         }`}
       >
         <div className={`${className} message-box ${
-            className.includes("user") ? "mr-auto": ""
+            className.includes("user") ? "mr-auto": "ml-auto"
         }`}>
           {data.content.message}
         </div>
         <div className={` message-date ${
-            className.includes("user") ? "mr-auto": ""
+            className.includes("user") ? "mr-auto": "ml-auto"
         }`}>
           {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
         </div>
@@ -35,7 +35,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
             }`}
         >
           <div className={`${className} message-box ${
-              className.includes("user") ? "mr-auto": ""
+              className.includes("user") ? "mr-auto": "ml-auto"
           }`}>
             <div className="title">
               {data.content.title}
@@ -47,7 +47,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
             </div>
           </div>
           <div className={` message-date ${
-              className.includes("user") ? "mr-auto": ""
+              className.includes("user") ? "mr-auto": "ml-auto"
           }`}>
             {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
           </div>
