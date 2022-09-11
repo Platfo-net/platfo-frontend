@@ -22,7 +22,7 @@ const NodeComponent: React.FC = (props) => {
     event: React.MouseEvent<SVGGElement, MouseEvent>,
     node: NodeData
   ) => {
-    console.log("Selecting Node", event, node);
+    // console.log("Selecting Node", event, node);
   };
 
   const onNodeRemove = (nodeData) => {
@@ -84,8 +84,6 @@ const NodeComponent: React.FC = (props) => {
   }, [properties]);
 
   useEffect(() => {
-    console.log('westPortStatus')
-    console.log(westPortStatus)
     const updateNodes = updatePortStatus(nodes, properties, westPortStatus);
     dispatch({
       type: chatflowTypes.CHANGE_NODE,

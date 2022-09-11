@@ -101,7 +101,7 @@ const CanvasComponent: React.FC<ChatFlowDesignProps> = () => {
         nodes: newNodes,
         edges: newEdges,
       };
-      console.log(data);
+      // console.log(data);
       //todo set from chatflow info
       const response = await ChatflowUIService.postChatflowData(
         router.query.id,
@@ -141,8 +141,8 @@ const CanvasComponent: React.FC<ChatFlowDesignProps> = () => {
   };
 
   useEffect(() => {
-    console.log("nodes" )
-    console.log(nodes )
+    // console.log("nodes" )
+    // console.log(nodes )
     const startNode = nodes?.find((node) => node?.data?.type === "START");
     if (!startNode) {
       const startData = createStartNodeData();
@@ -163,8 +163,8 @@ const CanvasComponent: React.FC<ChatFlowDesignProps> = () => {
   }, [nodes]);
 
   useEffect(() => {
-    console.log("edges" )
-    console.log(edges )
+    // console.log("edges" )
+    // console.log(edges )
 
   }, [edges]);
 

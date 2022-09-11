@@ -23,8 +23,8 @@ const AccountsPage: NextPage = () => {
       window.FB.login(
         async (response) => {
           if (response.authResponse) {
-            console.log("Welcome!  Fetching your information.... ");
-            console.log(response.authResponse);
+            // console.log("Welcome!  Fetching your information.... ");
+            // console.log(response.authResponse);
             const data = {
               facebook_user_id: response.authResponse.userID,
               facebook_user_token: response.authResponse.accessToken,

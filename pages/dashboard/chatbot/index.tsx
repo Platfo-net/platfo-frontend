@@ -30,7 +30,6 @@ const ChatbotPage: NextPage = () => {
 
   };
   const onClickChatflow = (chatflowData) => {
-    console.log(chatflowData)
     router.push("/dashboard/chatbot/[id]", `/dashboard/chatbot/${chatflowData.id}`);
   };
 

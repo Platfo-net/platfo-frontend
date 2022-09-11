@@ -6,7 +6,7 @@ const EdgeComponent: React.FC<EdgeProps> = (props) => {
     event: React.MouseEvent<SVGGElement, MouseEvent>,
     edge: EdgeData
   ) => {
-    console.log("Selecting edge", event, edge);
+    // console.log("Selecting edge", event, edge);
   };
 
 

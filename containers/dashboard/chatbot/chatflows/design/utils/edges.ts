@@ -156,18 +156,15 @@ export const updateEdgesData = async (currentEdges , newEdge) => {
   const indexDuplicateWithNodesLink = allEdges.findIndex(
       (edge) => edge.fromPort === newEdge.fromPort && edge.to === newEdge.to
   );
-  console.log(!duplicateEdges && indexDuplicateWithNodesLink === -1)
   if(!duplicateEdges && indexDuplicateWithNodesLink === -1) {
     allEdges.push(newEdge);
-    console.log("allEdges")
-    console.log(allEdges)
+
   }
 
   if(indexDuplicateWithNodesLink !== -1) {
     allEdges[indexDuplicateWithNodesLink].fromWidget = newEdge.fromWidget;
     allEdges[indexDuplicateWithNodesLink].text = newEdge.text;
   }
-  console.log("findIndexDuplicateWithNodesLink" , indexDuplicateWithNodesLink)
-  console.log("findDuplicateEdges" , duplicateEdges)
+
   return allEdges
 }
