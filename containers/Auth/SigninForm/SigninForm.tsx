@@ -20,7 +20,6 @@ const SigninForm: React.FC<Props> = () => {
   const { t } = useTranslation("common");
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     try {
       setLoading(true);
 

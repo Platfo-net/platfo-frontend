@@ -18,17 +18,17 @@ const AccountsList: React.FC<AccountsListProps> = () => {
     };
 
     return (
-        <div className="flex flex-nowrap">
+        <div className="flex flex-nowrap card mb-4">
             <div className="w-full flex flex-wrap">
                 {accountList.map((item) => {
                     return (
-                        <div className="account-list px-2 w-16 h-16" key={item.id}>
+                        <div className="flex account-list px-2 " key={item.id}>
                             <button
-                                className="p-0 h-auto"
+                                className="p-0 h-auto h-14 w-14 my-auto"
                                 onClick={() => onSelectAccount(item)}
                             >
                                 <Avatar
-                                    imageUrl={item.profile_image_url}
+                                    imageUrl={item.profile_image}
                                     className={`${
                                         item.id === selectedAccount?.id
                                             ? "active chatbot"

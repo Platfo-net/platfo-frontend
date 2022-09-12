@@ -37,7 +37,7 @@ const UsersList: React.FC<UsersListProps> = () => {
   return (
     <>
       {users.length > 0 && (
-        <div className="flex flex-col card user-list overflow-y-auto mt-4">
+        <div className="flex flex-col card user-list overflow-y-auto ">
           <div className="items flex flex-col ">
             {users.map((item) => {
               return (

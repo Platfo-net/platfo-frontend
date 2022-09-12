@@ -7,14 +7,16 @@ type ChatbotMessagesProps = {};
 
 const ChatbotMessages: React.FC<ChatbotMessagesProps> = () => {
   return (
-    <div className="max-w-6xl m-auto">
-        <AccountsList />
+    <div className="w-full m-auto">
       <div className="flex flex-nowrap message-container ltr:flex-row-reverse">
-        <div className="basis-3/4 mx-2 ">
+          <div className="w-3/12 mx-2 ">
+              <UserInfo />
+          </div>
+        <div className="w-6/12 mx-2 ">
+            <AccountsList />
           <MessageList />
         </div>
-        <div className="basis-1/4 mx-2 ">
-          <UserInfo />
+        <div className="w-3/12 mx-2 ">
           <UsersList />
         </div>
       </div>

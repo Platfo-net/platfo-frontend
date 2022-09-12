@@ -1,8 +1,8 @@
 import $axios from "../axios.config";
 
 class Contacts {
-  getContactDetails = (params, id) =>
-    $axios.get(`api/v1/contact/${id}`, { params });
+  getContactDetails = ( id) =>
+    $axios.get(`api/v1/contact/${id}`);
 
   postUpdateContactProfile = (data, igs_id) =>
     $axios.post(`api/v1/contact/profile/${igs_id}`, data);

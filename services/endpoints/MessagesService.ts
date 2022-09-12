@@ -1,8 +1,8 @@
 import $axios from "../axios.config";
 
 class Messages {
-  getCreateMessage = (params) =>
-    $axios.get(`contact-services/api/v1/message/`, { params });
+  postMessage = (from_page_id,to_contact_igs_id, data ) =>
+    $axios.post(`api/v1/message/send/${from_page_id}/${to_contact_igs_id}`, data);
 
   getArchive = (params, page_id, contact_id) =>
     $axios.get(`api/v1/message/archive/${page_id}/${contact_id}`, { params });

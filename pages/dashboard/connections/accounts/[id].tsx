@@ -15,6 +15,7 @@ import Avatar from "components/Avatar/Avatar";
 import TriggersService from "services/endpoints/TriggersService";
 import ChatflowService from "services/endpoints/ChatflowService";
 import { tokenObj } from "helpers/token";
+import AccountsService from "../../../../services/endpoints/AccountsService";
 
 const AccountDetailsPage: NextPage = () => {
   const { accountList } = useAppSelector((state) => ({
@@ -25,7 +26,7 @@ const AccountDetailsPage: NextPage = () => {
   const { id } = router.query;
 
   const [accountInfo, setAccountInfo] = useState(null);
-  const [connections, setConections] = useState([]);
+  const [connections, setConnections] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [triggerOptions, setTriggerOptions] = useState([]);
   const [chatflowOptions, setChatflowOptions] = useState([]);
@@ -42,13 +43,6 @@ const AccountDetailsPage: NextPage = () => {
   ];
 
   useEffect(() => {
-    if (accountList.length > 0) {
-      const info = accountList.find((item) => item.id === id);
-      setAccountInfo(info);
-    } else {
-      router.push("/dashboard/connections/accounts");
-    }
-
     (async () => {
       try {
         getData();
@@ -78,13 +72,17 @@ const AccountDetailsPage: NextPage = () => {
 
   const getData = async () => {
     try {
+      const responseDetail: AxiosResponse = await AccountsService.getAccount(
+        id
+      );
+      setAccountInfo(responseDetail.data);
       const params = {
         account_id: id,
       };
       const response: AxiosResponse = await ConnectionService.getConnections(
         params
       );
-      setConections(response.data);
+      setConnections(response.data);
     } catch (e) {}
   };
   const modalHandler = () => {
@@ -121,13 +119,39 @@ const AccountDetailsPage: NextPage = () => {
       <TopMenu items={updateConnectionMenu} />
       <div className="content basis-full ">
         {accountInfo && (
-          <div className="flex flex-wrap mb-5">
-            <div className="basis-1/2 flex">
+          <div className="flex flex-wrap mb-5  border-b border-b-gray-300 border-solid p-4 border-t-0 border-x-0">
+            <div className=" flex">
               {/* <h3 className="mb-5 mx-5">{t("account-info")}</h3> */}
-              <div className="flex mx-4 my-auto w-32 h-32" >
-                <Avatar imageUrl={accountInfo.profile_image_url} />
+              <div className="flex mx-4 my-auto w-32 h-32">
+                <Avatar imageUrl={accountInfo?.profile_image} />
               </div>
-              <h2 className="my-auto mx-5">{accountInfo.username}</h2>
+              <div className="flex rtl:mr-16 ltr:ml-16 my-3 flex-col">
+                <span className="mt-3 text-xl">{accountInfo?.username}</span>
+                <div className="flex mt-3">
+                  {accountInfo?.information?.followers_count && (
+                    <span className="ltr:mr-3 rtl:ml-3">
+                      <b>{accountInfo?.information?.followers_count}</b>{" "}
+                      {t("followers")}
+                    </span>
+                  )}
+
+                  <span className="mx-16">
+                    <b>{accountInfo?.information?.follows_count}</b>{" "}
+                    {t("following")}
+                  </span>
+                </div>
+
+                {accountInfo?.information?.name && (
+                  <span className="ltr:mr-3 rtl:ml-3">
+                    <b>{accountInfo?.information?.name}</b>{" "}
+                  </span>
+                )}
+                {accountInfo?.information?.biography && (
+                  <span className=" ">
+                    <b>{accountInfo?.information?.biography}</b>{" "}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="basis-1/2 flex">
               {/*TODO <button
@@ -139,8 +163,9 @@ const AccountDetailsPage: NextPage = () => {
             </div>
           </div>
         )}
-        <div className="flex mt-5">
-          <h3 className="block m-5">{t("connections")}</h3>
+
+        <div className="flex ">
+          <h3 className="block mx-5 mt-0">{t("connections")}</h3>
         </div>
 
         <div className="flex flex-wrap">
@@ -155,7 +180,7 @@ const AccountDetailsPage: NextPage = () => {
                 <SocialBox
                   removeable={true}
                   data={item}
-                  imageUrlKey="profile_image_url"
+                  imageUrlKey="profile_image"
                   titleKey="name"
                   descriptionKey="description"
                   buttonText={t("edit")}

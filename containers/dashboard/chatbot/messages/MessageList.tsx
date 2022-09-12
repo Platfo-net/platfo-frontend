@@ -1,12 +1,21 @@
 import MessageBox from "components/MessageBox/MessageBox";
 import {  useAppSelector } from "hooks/reduxHooks";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import MessagesService from "services/endpoints/MessagesService";
+import Input from "../../../../components/Input/Input";
+import useTranslation from "next-translate/useTranslation";
+import {useForm} from "react-hook-form";
 
 
 type MessageListProps = {};
 
+type FormData = {
+  text: "string";
+};
+
 const MessageList: React.FC<MessageListProps> = () => {
+  const { register, handleSubmit, reset } = useForm<FormData>();
+  const {t} = useTranslation("common")
   const { selectedAccount, selectedUser } = useAppSelector(
     (state) => ({
       selectedAccount: state.message.selectedAccount,
@@ -14,7 +23,39 @@ const MessageList: React.FC<MessageListProps> = () => {
     })
   );
   const [messages, setMessages] = useState([]);
+  const [timeInterval, setTimeInterval] = useState(0);
 
+  setTimeout(() => {
+    setTimeInterval(timeInterval + 1);
+  }, 5000);
+
+  const onSubmit = async (values) => {
+    try {
+      const data = {
+        ...values,
+      };
+      await MessagesService.postMessage( selectedUser.user_page_id, selectedUser.contact_igs_id , data);
+      onClear();
+    } catch (e) {}
+  }
+
+  const onClear = () => {
+     reset({
+       text: "",
+     });
+  };
+
+  const getMessagesData = async () => {
+    try {
+      const response = await MessagesService.getArchive(
+          null,
+          selectedUser.user_page_id,
+          selectedUser.contact_igs_id
+      );
+        setMessages(response.data);
+
+    } catch (e) {}
+  }
 
   useEffect(() => {
     (async () => {
@@ -23,36 +64,31 @@ const MessageList: React.FC<MessageListProps> = () => {
       }
     })();
   }, [selectedAccount]);
-
   useEffect(() => {
-    (async () => {
-      if (selectedUser) {
-        try {
-          const response = await MessagesService.getArchive(
-            null,
-            selectedUser.user_page_id,
-            selectedUser.contact_igs_id
-          );
-          setMessages(response.data);
-        } catch (e) {}
-      }
-    })();
-  }, [selectedUser]);
+    if (selectedUser ) {
+       getMessagesData()
+    }
+  }, [timeInterval]);
+
 
   useEffect(() => {
     if(messages.length > 0) {
       let objDiv = document.getElementById("message-list");
-      objDiv.scrollTop = objDiv.scrollHeight;
+       // objDiv.scrollTop = objDiv.scrollHeight;
     }
 
   }, [messages]);
 
 
+
+
   return (
     <div className="message-container flex flex-col h-full">
-      {messages.length > 0 && (
+      {messages.length > 0   && (
         <div id="message-list" className="w-full flex flex-col card h-full  overflow-y-auto">
-          {messages.reverse()?.map((item) => {
+          {messages?.map((item) => {
+            console.log(item?.content.message)
+
             return (
               <MessageBox
                 key={item.id}
@@ -67,6 +103,17 @@ const MessageList: React.FC<MessageListProps> = () => {
           })}
         </div>
       )}
+      <div className="pt-2">
+        <form
+            className="w-full flex flex-wrap my-3 card"
+            onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="basis-9/12 sm:w-full px-2">
+            <Input label={t("connection-name")} {...register("text")} />
+          </div>
+          <button  type="submit" className="basis-3/12 secondary mt-auto mb-3"> send </button>
+        </form>
+      </div>
     </div>
   );
 };

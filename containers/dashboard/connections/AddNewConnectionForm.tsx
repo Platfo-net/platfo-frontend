@@ -143,7 +143,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
       className="w-full  flex flex-wrap my-3"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="basis-1/2 sm:w-full px-2">
+      <div className="w-ful sm:w-full px-2">
         <Input label={t("connection-name")} {...register("name")} />
       </div>
       <div className="w-full  px-2">
@@ -169,7 +169,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
         <button
           type="button"
           onClick={onAddToList}
-          className="secondary icon-only mt-auto mr-auto"
+          className="secondary icon-only mt-auto rtl:mr-auto ltr:ml-auto"
         >
           <PlusIcon />
         </button>
@@ -209,7 +209,7 @@ const AddNewConnectionForm: React.FC<AddNewConnectionProps> = ({
               <button
                 type="button"
                 onClick={() => remove(index)}
-                className=" px-4 mt-auto mr-auto icon-only"
+                className=" px-4 mt-auto rtl:mr-auto ltr:ml-auto icon-only"
               >
                 <CrossIcon />
               </button>

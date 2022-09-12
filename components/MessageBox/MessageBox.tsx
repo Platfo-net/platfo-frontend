@@ -6,7 +6,7 @@ type MessageBoxProps = {
 };
 
 const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
-  if (data?.content?.widget_type === "MESSAGE" || data?.content.message) {
+  if ( data?.content.message) {
     return (
       <div
         className={`w-full flex flex-col h-min my-4 ${

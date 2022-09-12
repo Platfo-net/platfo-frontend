@@ -2,16 +2,17 @@ import { NextPage } from "next";
 import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
 import ChatbotMenu from "assets/contents/chatbotMenu";
 import TopMenu from "components/TopMenu/TopMenu";
-import SocialBox from "../../../components/SocialBox/SocialBox";
+import SocialBox from "../../../../components/SocialBox/SocialBox";
 import { useEffect, useState } from "react";
 import useTranslation from "next-translate/useTranslation";
-import AccountsService from "../../../services/endpoints/AccountsService";
-import ContactsService from "../../../services/endpoints/ContactsService";
-import Avatar from "../../../components/Avatar/Avatar";
+import AccountsService from "../../../../services/endpoints/AccountsService";
+import ContactsService from "../../../../services/endpoints/ContactsService";
+import Avatar from "../../../../components/Avatar/Avatar";
 import {
   getFormattedDate,
   getFormattedTime,
-} from "../../../helpers/dateAndTimeHelper";
+} from "../../../../helpers/dateAndTimeHelper";
+import {useRouter} from "next/router";
 
 const ContactsPage: NextPage = () => {
   const [contacts, setContacts] = useState([]);
@@ -19,9 +20,17 @@ const ContactsPage: NextPage = () => {
   const [selectedAccount, setSelectedAccount] = useState(null);
   const { t } = useTranslation("common");
 
+  const router = useRouter();
   const onSelectAccount = async (item) => {
     setSelectedAccount(item);
   };
+
+  const onClickContact = (item) => {
+    router.push(
+        "/dashboard/chatbot/contacts/[id]",
+        `/dashboard/chatbot/contacts/${item.id}`
+    );
+  }
 
   useEffect(() => {
     (async () => {
@@ -74,17 +83,17 @@ const ContactsPage: NextPage = () => {
       <TopMenu items={ChatbotMenu} />
 
       <div className="content basis-full ">
-        <div className="flex flex-nowrap">
+        <div className="flex flex-nowrap card">
           <div className="w-full flex flex-wrap">
             {accounts.map((item) => {
               return (
                 <div className="account-list px-2 " key={item.id}>
                   <button
-                    className="p-0 h-auto w-32 h-32"
+                    className="p-0  w-16 h-16 my-auto"
                     onClick={() => onSelectAccount(item)}
                   >
                     <Avatar
-                      imageUrl={item.profile_image_url}
+                      imageUrl={item.profile_image}
                       className={`${
                         item.id === selectedAccount?.id
                           ? "active chatbot"
@@ -97,7 +106,7 @@ const ContactsPage: NextPage = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-wrap mt-5">
+        <div className="flex flex-wrap mt-2">
           {contacts?.map((item) => {
             return (
               <div className="basis-1/6" key={item.id}>
@@ -107,8 +116,9 @@ const ContactsPage: NextPage = () => {
                   removeable={false}
                   data={item}
                   titleKey="username"
-                  descriptionKey="date"
+
                   buttonText={t("details")}
+                  onClick={onClickContact}
                 />
               </div>
             );
