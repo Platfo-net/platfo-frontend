@@ -151,6 +151,7 @@ const AccountDetailsPage: NextPage = () => {
                     <b>{accountInfo?.information?.biography}</b>{" "}
                   </span>
                 )}
+
               </div>
             </div>
             <div className="basis-1/2 flex">

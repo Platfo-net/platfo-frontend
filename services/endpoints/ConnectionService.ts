@@ -11,6 +11,9 @@ class Connection {
     $axios.get(`api/v1/connectionrelated_chatflow/${page_id}/${trigger_name}`, {
       params,
     });
+
+  putStateChatflow = (state, pageId, data) => $axios.put(`api/v1/connection/chatflow/${state}/${pageId}/`, data);
+
 }
 
 const ConnectionService = new Connection();

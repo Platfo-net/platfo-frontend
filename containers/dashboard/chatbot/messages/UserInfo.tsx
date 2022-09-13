@@ -50,10 +50,22 @@ const UserInfo: React.FC<UserInfoProps> = () => {
           </div>
           <div className="w-Full flex flex-col rtl:text-right ltr:text-left">
 
-            <span >  <b> {data.information.name} </b></span>
-            <span className="mt-2">
+            <span className="text-center">  <b> {data.information.name} </b></span>
+            <span className="mt-2 text-center">
               <b> {data.information.followers_count} </b> {t("followers")}
             </span>
+            <div className="flex  mt-5">
+              <span className={`rounded-full w-3 h-3 mt-1 ${data?.information?.is_verified_user ? "bg-green-300" : 'bg-red-400'}`}/>
+              <span className="rlt:mr-1  ltr:ml-1">{t('is_verified_user')}</span>
+            </div>
+            <div className="flex  mt-3">
+              <span className={`rounded-full w-3 h-3 mt-1 ${data?.information?.is_user_follow_business ? "bg-green-300" : 'bg-red-400'}`}/>
+              <span className="rlt:mr-1 ltr:ml-1">{t('is_user_follow_business')}</span>
+            </div>
+            <div className="flex  mt-3">
+              <span className={`rounded-full w-3 h-3 mt-1 ${data?.information?.is_business_follow_user ? "bg-green-300" : 'bg-red-400'}`}/>
+              <span className="rlt:mr-1 ltr:ml-1">{t('is_business_follow_user')}</span>
+            </div>
           </div>
         </div>
       )}

@@ -18,6 +18,8 @@ import { tokenObj } from "helpers/token";
 import AccountsService from "../../../../services/endpoints/AccountsService";
 import ContactsService from "../../../../services/endpoints/ContactsService";
 import ChatbotMenu from "../../../../assets/contents/chatbotMenu";
+import MessageList from "../../../../containers/dashboard/chatbot/messages/MessageList";
+import ContactMessages from "../../../../containers/dashboard/chatbot/contacts/ContactMessages";
 
 const ContactDetailsPage: NextPage = () => {
   const { t } = useTranslation("common");
@@ -82,13 +84,25 @@ const ContactDetailsPage: NextPage = () => {
                   )}
 
                 </div>
+                <div className="flex  mt-3">
+
+                <span className={`rounded-full w-3 h-3 mt-1 ${accountInfo?.information?.is_verified_user ? "bg-green-300" : 'bg-red-400'}`}/>
+                  <span className="rlt:mr-1 rtl:ml-16 ltr:ml-1 ltr:mr-16">{t('is_verified_user')}</span>
+
+                  <span className={`rounded-full w-3 h-3 mt-1 ${accountInfo?.information?.is_user_follow_business ? "bg-green-300" : 'bg-red-400'}`}/>
+                  <span className="rlt:mr-1 rtl:ml-16 ltr:ml-1 ltr:mr-16">{t('is_user_follow_business')}</span>
+
+                  <span className={`rounded-full w-3 h-3 mt-1 ${accountInfo?.information?.is_business_follow_user ? "bg-green-300" : 'bg-red-400'}`}/>
+                  <span className="rlt:mr-1 rtl:ml-16 ltr:ml-1 ltr:mr-16">{t('is_business_follow_user')}</span>
+                </div>
               </div>
             </div>
 
           </div>
         )}
-
+        <ContactMessages userData={accountInfo} />
       </div>
+
 
     </DashboardLayout>
   );
