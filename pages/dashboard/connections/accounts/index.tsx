@@ -39,7 +39,7 @@ const AccountsPage: NextPage = () => {
             console.log("User cancelled login or did not fully authorize.");
           }
         },
-        { scope: "public_profile,email,pages_show_list,pages_manage_metadata,pages_read_engagement" }
+        { scope: "public_profile,email,pages_show_list,pages_manage_metadata,pages_read_engagement,instagram_manage_messages,instagram_basic" }
       );
     } catch (e) {
       //TODO handle error
