@@ -91,7 +91,7 @@ const MessageList: React.FC<MessageListProps> = () => {
   useEffect(() => {
     if (messages.length > 0) {
       let objDiv = document.getElementById("message-list");
-      //objDiv.scrollTop = objDiv.scrollHeight;
+      objDiv.scrollTop = objDiv.scrollHeight;
     }
   }, [messages]);
 

@@ -37,7 +37,7 @@ const ContactMessages: React.FC<ContactMessagesProps> = ({userData}) => {
     useEffect(() => {
         if(messages.length > 0) {
             let objDiv = document.getElementById("message-list");
-            // objDiv.scrollTop = objDiv.scrollHeight;
+             objDiv.scrollTop = objDiv.scrollHeight;
         }
 
     }, [messages]);
