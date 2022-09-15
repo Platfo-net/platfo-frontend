@@ -29,7 +29,7 @@ const MessageList: React.FC<MessageListProps> = () => {
 
   setTimeout(() => {
     setTimeInterval(timeInterval + 1);
-  }, 5000);
+  }, 2000);
 
   const onSubmit = async (values) => {
     try {
