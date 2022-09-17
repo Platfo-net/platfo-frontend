@@ -1,6 +1,6 @@
 import MessageBox from "components/MessageBox/MessageBox";
 import { useAppSelector } from "hooks/reduxHooks";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MessagesService from "services/endpoints/MessagesService";
 import Input from "../../../../components/Input/Input";
 import useTranslation from "next-translate/useTranslation";
@@ -54,7 +54,7 @@ const MessageList: React.FC<MessageListProps> = () => {
   const onClickStatus = async () => {
     try {
       const status = state === "enable" ? "disable" : "enable";
-      const response = await ConnectionService.putStateChatflow(
+       await ConnectionService.putStateChatflow(
         status,
         selectedUser.user_page_id,
           null
@@ -100,7 +100,7 @@ const MessageList: React.FC<MessageListProps> = () => {
       if (selectedUser) {
         try {
           const status = "enable";
-          const response = await ConnectionService.putStateChatflow(
+          await ConnectionService.putStateChatflow(
             status,
             selectedUser.user_page_id,
               null
