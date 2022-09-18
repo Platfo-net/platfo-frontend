@@ -24,7 +24,7 @@ const MessageList: React.FC<MessageListProps> = () => {
     selectedUser: state.message.selectedUser,
   }));
   const [messages, setMessages] = useState([]);
-  const [change, setChange] = useState(false);
+  const [change, setChange] = useState(true);
   const [state, setState] = useState("enable");
   const [timeInterval, setTimeInterval] = useState(0);
 
@@ -71,13 +71,15 @@ const MessageList: React.FC<MessageListProps> = () => {
         selectedUser.user_page_id,
         selectedUser.contact_igs_id
       );
-      setMessages(response.data);
-      if(response.data.length !== messages.length) {
-        setChange(true)
-      } else {
-        setChange(false)
 
+      if(response.data.length > 0 && messages.length > 0) {
+        if(response.data[response.data.length -1].id != messages[messages.length - 1].id) {
+          setChange(true)
+        } else {
+          setChange(false)
+        }
       }
+
     } catch (e) {}
   };
 
@@ -98,9 +100,13 @@ const MessageList: React.FC<MessageListProps> = () => {
   useEffect(() => {
     if (change) {
       let objDiv = document.getElementById("message-list");
-      objDiv.scrollTop = objDiv.scrollHeight;
+      if(objDiv) {
+        objDiv.scrollTop = objDiv.scrollHeight;
+
+      }
     }
   }, [change]);
+
 
   useEffect(() => {
     (async () => {
@@ -135,7 +141,6 @@ const MessageList: React.FC<MessageListProps> = () => {
                     : "user"
                 }`}
                 data={item}
-                change={change}
               />
             );
           })}
