@@ -18,7 +18,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
   const [isImage, setIsImage] = useState(null);
 
   const getImage = () => {
-    checkImage(data?.content?.url + "#"+ Math.random(), () => setIsImage(data?.content?.url) , () => setIsImage(null))
+    checkImage(data?.content?.url, () => setIsImage(data?.content?.url) , () => setIsImage(null))
 
   }
 

@@ -24,6 +24,7 @@ const MessageList: React.FC<MessageListProps> = () => {
     selectedUser: state.message.selectedUser,
   }));
   const [messages, setMessages] = useState([]);
+  const [change, setChange] = useState(false);
   const [state, setState] = useState("enable");
   const [timeInterval, setTimeInterval] = useState(0);
 
@@ -71,6 +72,12 @@ const MessageList: React.FC<MessageListProps> = () => {
         selectedUser.contact_igs_id
       );
       setMessages(response.data);
+      if(response.data.length !== messages.length) {
+        setChange(true)
+      } else {
+        setChange(false)
+
+      }
     } catch (e) {}
   };
 
@@ -89,11 +96,11 @@ const MessageList: React.FC<MessageListProps> = () => {
   }, [timeInterval]);
 
   useEffect(() => {
-    if (messages.length > 0) {
+    if (change) {
       let objDiv = document.getElementById("message-list");
       objDiv.scrollTop = objDiv.scrollHeight;
     }
-  }, [messages]);
+  }, [change]);
 
   useEffect(() => {
     (async () => {
