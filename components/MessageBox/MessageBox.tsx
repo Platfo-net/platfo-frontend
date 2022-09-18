@@ -46,6 +46,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
   }
   if(data?.content?.widget_type === "MENU") {
     return (
+
         <div
             className={`widget-menu w-full flex flex-col h-min my-4 ${
                 className.includes("user") ? "justify-end": "justify-start"
