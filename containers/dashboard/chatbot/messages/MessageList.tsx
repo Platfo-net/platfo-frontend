@@ -135,6 +135,7 @@ const MessageList: React.FC<MessageListProps> = () => {
                     : "user"
                 }`}
                 data={item}
+                change={change}
               />
             );
           })}

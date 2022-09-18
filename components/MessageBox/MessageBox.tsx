@@ -4,17 +4,18 @@ import {useState} from "react";
 type MessageBoxProps = {
   className: string;
   data: any;
+  change: any;
 };
 
 function checkImage(imageSrc, good, bad) {
   var img = new Image();
   img.onload = good
-  img.onerror = bad
+   img.onerror = bad
   img.src = imageSrc;
 }
 
 
-const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
+const MessageBox: React.FC<MessageBoxProps> = ({ data, className, change }) => {
   const [isImage, setIsImage] = useState(null);
 
   const getImage = () => {
@@ -73,9 +74,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
     );
   }
   if(data?.content?.widget_type === "STORY_MENTION") {
-    setTimeout(() => {
-      getImage()
-    }, 5000);
+
 
      // console.log(isImage)
     return  <div
@@ -86,7 +85,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       <div className={`${className} message-box ${
           className.includes("user") ? "mr-auto": "ml-auto"
       }`}>
-        {isImage ? <img src={data?.content?.url} alt="" /> : "No longer Availible"}
+         <img src={data?.content?.url} alt="No longer Availible" />
       </div>
       <div className={` message-date ${
           className.includes("user") ? "mr-auto": "ml-auto"
@@ -96,10 +95,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
     </div>
   }
   if(data?.content?.widget_type === "STORY_REPLY") {
-
-      getImage()
-
-
     return  <div
         className={`w-full flex flex-col h-min my-4 ${
             className.includes("user") ? "justify-end": "justify-start"
@@ -111,7 +106,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
         <div className="flex flex-col">
         <div className=" mb-3 border-y-0  border-indigo-200  border-solid rtl:pr-3 ltr:pl-3 rtl:border-l-0 ltr:border-r-0">
           <p className="text-sm text-gray-500"> Reply to: </p>
-          {isImage ? <img src={data?.content?.url} alt="" /> : <p>No longer Availible</p>}
+           <img src={data?.content?.url} alt="No longer Availible" />
         </div>
           <div ><hr/></div>
          <p>{data?.content?.message}</p>
