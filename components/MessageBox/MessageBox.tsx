@@ -72,7 +72,10 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
     );
   }
   if(data?.content?.widget_type === "STORY_MENTION") {
-    getImage()
+    setTimeout(() => {
+      getImage()
+    }, 5000);
+
      // console.log(isImage)
     return  <div
         className={`w-full flex flex-col h-min my-4 ${
@@ -91,7 +94,35 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       </div>
     </div>
   }
+  if(data?.content?.widget_type === "STORY_REPLY") {
+    setTimeout(() => {
+      getImage()
+    }, 5000);
 
+    return  <div
+        className={`w-full flex flex-col h-min my-4 ${
+            className.includes("user") ? "justify-end": "justify-start"
+        }`}
+    >
+      <div className={`${className} message-box ${
+          className.includes("user") ? "mr-auto": "ml-auto"
+      }`}>
+        <div className="flex flex-col">
+        <div className=" mb-3 border-y-0  border-indigo-200  border-solid rtl:pr-3 ltr:pl-3 rtl:border-l-0 ltr:border-r-0">
+          <p className="text-sm text-gray-500"> Reply to: </p>
+          {isImage ? <img src={data?.content?.url} alt="" /> : <p>No longer Availible</p>}
+        </div>
+          <div ><hr/></div>
+         <p>{data?.content?.message}</p>
+</div>
+      </div>
+      <div className={` message-date ${
+          className.includes("user") ? "mr-auto": "ml-auto"
+      }`}>
+        {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
+      </div>
+    </div>
+  }
   return "unknown";
 };
 
