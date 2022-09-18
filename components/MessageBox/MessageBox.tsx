@@ -1,12 +1,30 @@
 import {getFormattedDate, getFormattedTime} from "../../helpers/dateAndTimeHelper";
+import {useState} from "react";
 
 type MessageBoxProps = {
   className: string;
   data: any;
 };
 
+function checkImage(imageSrc, good, bad) {
+  var img = new Image();
+  img.onload = good
+  img.onerror = bad
+  img.src = imageSrc;
+}
+
+
 const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
-  if ( data?.content.message) {
+  const [isImage, setIsImage] = useState(null);
+
+  const getImage = () => {
+    checkImage(data?.content?.url + "#"+ Math.random(), () => setIsImage(data?.content?.url) , () => setIsImage(null))
+
+  }
+
+
+
+  if ( data?.content.widget_type === "TEXT") {
     return (
       <div
         className={`w-full flex flex-col h-min my-4 ${
@@ -26,7 +44,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       </div>
     );
   }
-
   if(data?.content?.widget_type === "MENU") {
     return (
         <div
@@ -54,8 +71,28 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
         </div>
     );
   }
+  if(data?.content?.widget_type === "STORY_MENTION") {
+    getImage()
+     // console.log(isImage)
+    return  <div
+        className={`w-full flex flex-col h-min my-4 ${
+            className.includes("user") ? "justify-end": "justify-start"
+        }`}
+    >
+      <div className={`${className} message-box ${
+          className.includes("user") ? "mr-auto": "ml-auto"
+      }`}>
+        {isImage ? <img src={data?.content?.url} alt="" /> : "No longer Availible"}
+      </div>
+      <div className={` message-date ${
+          className.includes("user") ? "mr-auto": "ml-auto"
+      }`}>
+        {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
+      </div>
+    </div>
+  }
 
-  return <div/>;
+  return "unknown";
 };
 
 export default MessageBox;

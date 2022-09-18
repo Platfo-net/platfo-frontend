@@ -7,6 +7,9 @@
     display: flex;
     height: fit-content;
     width: fit-content;
+    img {
+      max-width: 200px;
+    }
     &.user {
       background: $chatbot;
       border-radius: $border-radius $border-radius $border-radius 0;
