@@ -4,7 +4,6 @@ import {useState} from "react";
 type MessageBoxProps = {
   className: string;
   data: any;
-  change: any;
 };
 
 function checkImage(imageSrc, good, bad) {
@@ -15,7 +14,7 @@ function checkImage(imageSrc, good, bad) {
 }
 
 
-const MessageBox: React.FC<MessageBoxProps> = ({ data, className, change }) => {
+const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
   const [isImage, setIsImage] = useState(null);
 
   const getImage = () => {
