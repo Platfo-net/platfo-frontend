@@ -95,9 +95,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
     </div>
   }
   if(data?.content?.widget_type === "STORY_REPLY") {
-    setTimeout(() => {
+
       getImage()
-    }, 5000);
+
 
     return  <div
         className={`w-full flex flex-col h-min my-4 ${
