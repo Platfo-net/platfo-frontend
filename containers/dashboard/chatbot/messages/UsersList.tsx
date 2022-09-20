@@ -39,6 +39,7 @@ const UsersList: React.FC<UsersListProps> = () => {
       } catch (e) {}
     }
   }
+
   useEffect(() => {
     (async () => {
       await getUsers();
@@ -47,7 +48,7 @@ const UsersList: React.FC<UsersListProps> = () => {
 
   return (
       <div className="flex flex-col card user-list overflow-y-auto ">
-      <button className="primary" onclick={onRefresh}>Refresh</button>
+      <button className="primary" onClick={onRefresh}>Refresh</button>
       {users.length > 0 ? (
           <div className="items flex flex-col ">
             {users.map((item) => {
