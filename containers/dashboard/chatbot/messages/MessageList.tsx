@@ -122,7 +122,7 @@ const MessageList: React.FC<MessageListProps> = () => {
 
   return (
     <div className="message-container flex flex-col h-full">
-      {messages.length > 0 && (
+      {(messages.length > 0 && selectedUser) ? (
         <div
           id="message-list"
           className="w-full flex flex-col card h-full  overflow-y-auto"
@@ -132,7 +132,7 @@ const MessageList: React.FC<MessageListProps> = () => {
               <MessageBox
                 key={item.id}
                 className={`${
-                  selectedUser.user_page_id === item.from_page_id
+                  selectedUser?.user_page_id === item.from_page_id
                     ? "bot"
                     : "user"
                 }`}
@@ -141,7 +141,8 @@ const MessageList: React.FC<MessageListProps> = () => {
             );
           })}
         </div>
-      )}
+      ) : <div className="flex message-container flex flex-col h-full bg-white rounded-3xl">
+        <span className="m-auto text-gray-400">No Message </span></div>}
       <div className="pt-2">
         <form
           className="w-full flex flex-wrap my-3 card"

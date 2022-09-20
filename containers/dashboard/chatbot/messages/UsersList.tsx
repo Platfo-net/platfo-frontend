@@ -17,27 +17,38 @@ const UsersList: React.FC<UsersListProps> = () => {
     dispatch(selectUser(item));
   };
 
-  useEffect(() => {
-    (async () => {
-      if (selectedAccount) {
-        try {
-          const response = await ContactsService.getContacts(
+  const onRefresh = async() => {
+    await getUsers();
+
+  }
+
+  const getUsers = async () => {
+    if (selectedAccount) {
+      try {
+        const response = await ContactsService.getContacts(
             null,
             selectedAccount.page_id
-          );
-          if (response.data.length > 0) {
-            dispatch(selectUser(response.data[0]));
-          }
-          setUsers(response.data);
-        } catch (e) {}
-      }
+        );
+        if (response.data.length > 0) {
+          dispatch(selectUser(response.data[0]));
+        }
+        else {
+          dispatch(selectUser(null))
+        }
+        setUsers(response.data);
+      } catch (e) {}
+    }
+  }
+  useEffect(() => {
+    (async () => {
+      await getUsers();
     })();
   }, [selectedAccount]);
 
   return (
-    <>
-      {users.length > 0 && (
-        <div className="flex flex-col card user-list overflow-y-auto ">
+      <div className="flex flex-col card user-list overflow-y-auto ">
+      <button className="primary" onclick={onRefresh}>Refresh</button>
+      {users.length > 0 ? (
           <div className="items flex flex-col ">
             {users.map((item) => {
               return (
@@ -51,9 +62,11 @@ const UsersList: React.FC<UsersListProps> = () => {
               );
             })}
           </div>
-        </div>
+      ) : (
+
+            <span className="m-auto text-gray-400">No User </span>
       )}
-    </>
+    </div>
   );
 };
 

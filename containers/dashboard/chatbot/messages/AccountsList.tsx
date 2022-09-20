@@ -19,27 +19,33 @@ const AccountsList: React.FC<AccountsListProps> = () => {
 
     return (
         <div className="flex flex-nowrap card mb-4">
-            <div className="w-full flex flex-wrap">
-                {accountList.map((item) => {
-                    return (
-                        <div className="flex account-list px-2 " key={item.id}>
-                            <button
-                                className="p-0 h-auto h-14 w-14 my-auto"
-                                onClick={() => onSelectAccount(item)}
-                            >
-                                <Avatar
-                                    imageUrl={item.profile_image}
-                                    className={`${
-                                        item.id === selectedAccount?.id
-                                            ? "active chatbot"
-                                            : "opacity-60"
-                                    }`}
-                                />
-                            </button>
-                        </div>
-                    );
-                })}
-            </div>
+            {accountList.length > 0 ? (
+                <div className="w-full flex flex-wrap">
+                    {accountList.map((item) => {
+                        return (
+                            <div className="flex account-list px-2 " key={item.id}>
+                                <button
+                                    className="p-0 h-auto h-14 w-14 my-auto"
+                                    onClick={() => onSelectAccount(item)}
+                                >
+                                    <Avatar
+                                        imageUrl={item.profile_image}
+                                        className={`${
+                                            item.id === selectedAccount?.id
+                                                ? "active chatbot"
+                                                : "opacity-60"
+                                        }`}
+                                    />
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            ) : (
+                <div className="flex w-full card ">
+                    <span className="m-auto text-gray-400">No Account </span></div>
+            )}
+
         </div>
     );
 };

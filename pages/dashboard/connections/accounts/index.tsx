@@ -10,17 +10,21 @@ import ConnectionMenu from "assets/contents/connectionMenu";
 import { useAppDispatch, useAppSelector } from "hooks/reduxHooks";
 import { getAccounts } from "stores/actions";
 import AccountsService from "../../../../services/endpoints/AccountsService";
+import {useState} from "react";
+import BackdropLoading from "../../../../components/BackdropLoading"
 
 const AccountsPage: NextPage = () => {
   const { accountList } = useAppSelector((state) => ({
     accountList: state.connections.accountList,
   }));
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { t } = useTranslation("common");
   const router = useRouter();
 
   const onClickAddAccount = () => {
     try {
+      setLoading(true)
       window.FB.login(
         async (response) => {
           if (response.authResponse) {
@@ -35,13 +39,17 @@ const AccountsPage: NextPage = () => {
             FB.api("/me", function (response) {
               console.log("Good to see you, " + response.name + ".");
             });
+            setLoading(false)
           } else {
             console.log("User cancelled login or did not fully authorize.");
+            setLoading(false)
+
           }
         },
         { scope: "public_profile,email,pages_show_list,pages_manage_metadata,pages_read_engagement,instagram_manage_messages,instagram_basic" }
-      );
+      )
     } catch (e) {
+      setLoading(false)
       //TODO handle error
     }
   };
@@ -70,6 +78,7 @@ const AccountsPage: NextPage = () => {
 
   return (
     <DashboardLayout>
+      {loading && <BackdropLoading/>}
       <TopMenu items={ConnectionMenu} />
       <div className="content basis-full ">
         <div className="flex flex-wrap">
