@@ -149,7 +149,7 @@ const MessageList: React.FC<MessageListProps> = () => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex w-full px-2">
-            <Input label={t("connection-name")} {...register("text")} />
+            <Input label={"Type your message"} {...register("text")} />
             <button
               type="submit"
               className=" secondary mt-auto icon-only mb-3 mx-2"
