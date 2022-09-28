@@ -195,6 +195,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
                 {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> : <img src={selectedUrl.url} alt="No longer Availible" />}
             </Modal>
         </div>
+            
           <div ><hr/></div>
          <p>{data?.content?.message}</p>
 </div>
