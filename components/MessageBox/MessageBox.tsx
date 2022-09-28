@@ -1,5 +1,6 @@
 import {getFormattedDate, getFormattedTime} from "../../helpers/dateAndTimeHelper";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import Modal from "../../components/Modal/Modal"
 
 type MessageBoxProps = {
   className: string;
@@ -13,16 +14,35 @@ function checkImage(imageSrc, good, bad) {
   img.src = imageSrc;
 }
 
+function getMediaType(url) {
+    return fetch(url, {method: 'HEAD'}).then(res => {
+        return res.headers.get('Content-Type')
+    })
+}
 
 const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
   const [isImage, setIsImage] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUrl, setSelectedUrl] = useState({type: "", url: ""});
 
-  const getImage = () => {
-    checkImage(data?.content?.url, () => setIsImage(data?.content?.url) , () => setIsImage(null))
 
+  const onShowStory = async (url) => {
+      try {
+          setShowModal(true);
+          const mediaType = await getMediaType(url)
+          let data = {
+              type:"",
+              url:url
+          }
+          if(mediaType?.startsWith('video')) {
+              data.type = 'video';
+          } else {
+              data.type = 'image';
+          }
+          console.log(data)
+              setSelectedUrl(data)
+      } catch (e) {}
   }
-
-
 
   if ( data?.content.widget_type === "TEXT") {
     return (
@@ -35,6 +55,70 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
             className.includes("user") ? "mr-auto": "ml-auto"
         }`}>
           {data.content.message}
+        </div>
+        <div className={` message-date ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+          {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
+        </div>
+      </div>
+    );
+  }
+  if ( data?.content.widget_type === "VIDEO") {
+    return (
+      <div
+        className={`w-full flex flex-col h-min my-4 ${
+          className.includes("user") ? "justify-end": "justify-start"
+        }`}
+      >
+        <div className={`${className} message-box ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+            <video controls src={data?.content.url} style={{ width: "200px" }} />
+        </div>
+        <div className={` message-date ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+          {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
+        </div>
+      </div>
+    );
+  }
+  if ( data?.content.widget_type === "IMAGE") {
+    return (
+      <div
+        className={`w-full flex flex-col h-min my-4 ${
+          className.includes("user") ? "justify-end": "justify-start"
+        }`}
+      >
+        <div className={`${className} message-box ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+            <img src={data?.content.url} alt="No longer Availible" />
+        </div>
+        <div className={` message-date ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+          {getFormattedTime(data.send_at)} - {getFormattedDate(data.send_at)}
+        </div>
+      </div>
+    );
+  }
+  if ( data?.content.widget_type === "AUDIO") {
+    return (
+      <div
+        className={`w-full flex flex-col h-min my-4 ${
+          className.includes("user") ? "justify-end": "justify-start"
+        }`}
+      >
+        <div className={`${className} message-box ${
+            className.includes("user") ? "mr-auto": "ml-auto"
+        }`}>
+            <audio controls >
+                <source src={data?.content.url}/>
+
+                        Your browser does not support the audio element.
+            </audio>
         </div>
         <div className={` message-date ${
             className.includes("user") ? "mr-auto": "ml-auto"
@@ -73,9 +157,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
     );
   }
   if(data?.content?.widget_type === "STORY_MENTION") {
-
-
-     // console.log(isImage)
     return  <div
         className={`w-full flex flex-col h-min my-4 ${
             className.includes("user") ? "justify-end": "justify-start"
@@ -84,7 +165,11 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       <div className={`${className} message-box ${
           className.includes("user") ? "mr-auto": "ml-auto"
       }`}>
-         <img src={data?.content?.url} alt="No longer Availible" />
+
+          <button onClick={() => onShowStory(data?.content?.url)} className="primary" >Show</button>
+          <Modal open={showModal} onCancel={() => setShowModal(false)}>
+              {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> : <img src={selectedUrl.url} alt="No longer Availible" />}
+          </Modal>
       </div>
       <div className={` message-date ${
           className.includes("user") ? "mr-auto": "ml-auto"
@@ -105,7 +190,10 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
         <div className="flex flex-col">
         <div className=" mb-3 border-y-0  border-indigo-200  border-solid rtl:pr-3 ltr:pl-3 rtl:border-l-0 ltr:border-r-0">
           <p className="text-sm text-gray-500"> Reply to: </p>
-           <img src={data?.content?.url} alt="No longer Availible" />
+            <button onClick={() => onShowStory(data?.content?.url)} className="primary" >Show</button>
+            <Modal open={showModal} onCancel={() => setShowModal(false)}>
+                {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> : <img src={selectedUrl.url} alt="No longer Availible" />}
+            </Modal>
         </div>
           <div ><hr/></div>
          <p>{data?.content?.message}</p>
@@ -118,6 +206,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       </div>
     </div>
   }
+
   return "unknown";
 };
 

@@ -16,11 +16,9 @@ export const loggedOut = () => (dispatch) => {
 };
 
 export const loggedIn = (data) => async (dispatch) => {
-  try {
     const response = await AuthService.postLoginAccessToken(data);
     tokenObj.setToken(response.data.access_token);
     dispatch({ type: actionTypes.LOGGED_IN });
-  } catch (e) {}
 };
 
 export const registerUser = (data) => async () => {
