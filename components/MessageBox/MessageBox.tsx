@@ -1,7 +1,7 @@
 import {getFormattedDate, getFormattedTime} from "../../helpers/dateAndTimeHelper";
 import {useState, useEffect} from "react";
 import Modal from "../../components/Modal/Modal"
-
+import  NextImage from 'next/image';
 type MessageBoxProps = {
   className: string;
   data: any;
@@ -15,8 +15,12 @@ function checkImage(imageSrc, good, bad) {
 }
 
 function getMediaType(url) {
-    return fetch(url, {method: 'HEAD'}).then(res => {
+    return fetch(url, { headers: {  Accept: '*/*' }  }).then(res => {
         return res.headers.get('Content-Type')
+    }).catch(e => {
+        fetch(url, {mode: 'no-cors' }).then(res => {
+            return 'image/jpeg'
+        })
     })
 }
 
@@ -29,7 +33,8 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
   const onShowStory = async (url) => {
       try {
           setShowModal(true);
-          const mediaType = await getMediaType(url)
+          const mediaType = await getMediaType(url);
+          console.log(mediaType)
           let data = {
               type:"",
               url:url
@@ -39,7 +44,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
           } else {
               data.type = 'image';
           }
-          console.log(data)
               setSelectedUrl(data)
       } catch (e) {}
   }
@@ -167,8 +171,13 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       }`}>
 
           <button onClick={() => onShowStory(data?.content?.url)} className="primary" >Show</button>
+
           <Modal open={showModal} onCancel={() => setShowModal(false)}>
-              {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> : <img src={selectedUrl.url} alt="No longer Availible" />}
+              {selectedUrl.type !== "" && <>
+                  {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> :
+                      <img src={selectedUrl.url} alt="No longer Availible" width={200} height={355}/>}
+              </> }
+
           </Modal>
       </div>
       <div className={` message-date ${
@@ -192,7 +201,8 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
           <p className="text-sm text-gray-500"> Reply to: </p>
             <button onClick={() => onShowStory(data?.content?.url)} className="primary" >Show</button>
             <Modal open={showModal} onCancel={() => setShowModal(false)}>
-                {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> : <img src={selectedUrl.url} alt="No longer Availible" />}
+                {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> :
+                    <img src={selectedUrl.url} alt="No longer Availible" width={200} height={355}/>}
             </Modal>
         </div>
             
