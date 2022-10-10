@@ -34,7 +34,6 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
       try {
           setShowModal(true);
           const mediaType = await getMediaType(url);
-          console.log(mediaType)
           let data = {
               type:"",
               url:url
@@ -42,7 +41,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
           if(mediaType?.startsWith('video')) {
               data.type = 'video';
           } else {
+              const uniqUrl = url + "#" + Date.now() + Math.random();
               data.type = 'image';
+              data.url = uniqUrl;
           }
               setSelectedUrl(data)
       } catch (e) {}
@@ -175,7 +176,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({ data, className }) => {
           <Modal open={showModal} onCancel={() => setShowModal(false)}>
               {selectedUrl.type !== "" && <>
                   {selectedUrl.type === 'video' ?  <video controls src={selectedUrl.url} style={{ width: "200px" }} /> :
-                      <img src={selectedUrl.url} alt="No longer Availible" width={200} height={355}/>}
+                      <img src={selectedUrl.url } alt="No longer Availible" width={200} height={355}/>}
               </> }
 
           </Modal>
