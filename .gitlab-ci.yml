@@ -22,7 +22,7 @@ Staging Job:
     - chmod 400 $SSH_KEY
   script:
     - echo "Staging job started."
-    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY "root@$SERVER_IP" -p $SERVER_PORT "
+    - ssh -o StrictHostKeyChecking=no -i $SSH_KEY "root@$DEV_SERVER_IP" -p $DEV_SERVER_PORT "
         cd frontend/$PROJECT_NAME &&
         ls -al &&
         git pull https://$RUNNER_USERNAME:$RUNNER_PASSWORD@gitlab.aimedic.co/botinow/front-end/botinow-frontend.git &&
