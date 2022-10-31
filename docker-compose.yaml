@@ -10,6 +10,6 @@ services:
         BASE_URL: https://api.botinow.com/
         FACEBOOK_ID: 448865257100176
     ports:
-      - '3012:3000'
+      - '3000:3000'
     env_file:
       - .env
