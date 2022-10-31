@@ -30,16 +30,6 @@
     "object-curly-newline": "off",
     "prettier/prettier": 1,
     "implicit-arrow-linebreak": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
     "operator-linebreak": "off",
     "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
     "comma-dangle": 0,

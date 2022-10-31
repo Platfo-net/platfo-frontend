@@ -48,12 +48,14 @@ class BaseApi {
         return response;
       },
       (error) => {
+        const RES400 = error?.response?.status === 400 || false;
         const RES401 = error?.response?.status === 401 || false;
         const RES403 = error?.response?.status === 403 || false;
-        const RES400 = error?.response?.status === 400 || false;
-        const RES422 = error?.response?.status === 422 || false;
-        const RES500 = error?.response?.status === 500 || false;
+        const RES404 = error?.response?.status === 404 || false;
         const RES409 = error?.response?.status === 409 || false;
+        const RES422 = error?.response?.status === 422 || false;
+
+        const RES500 = error?.response?.status >= 500 || false;
 
         if (RES401) {
           showNotify({
@@ -63,7 +65,15 @@ class BaseApi {
         }
 
         if (RES422) {
-          //TODO : notification
+          showNotify({
+            text: error?.response?.data.detail,
+          } as SnackbarSettings);
+        }
+
+        if (RES404) {
+          showNotify({
+            text: error?.response?.data.detail,
+          } as SnackbarSettings);
         }
 
         if (RES403) {
@@ -73,16 +83,28 @@ class BaseApi {
         }
 
         if (RES409) {
-          //TODO : notification
+          showNotify({
+            text: error?.response?.data.detail,
+          } as SnackbarSettings);
         }
 
         if (RES400) {
-          //TODO : notification
+          showNotify({
+            text: error?.response?.data.detail,
+          } as SnackbarSettings);
         }
-
         if (RES500) {
           showNotify({
-            text: 'Haji Backende ;)',
+            text: 'Haji Backende 😁',
+          } as SnackbarSettings);
+          throw error;
+        }
+
+        if (!error.response) {
+          showNotify({
+            text:
+              'Check your Network!' +
+              '\nagar net ok bood. Mohamad token expire mishe ye error dige bede ',
           } as SnackbarSettings);
           throw error;
         }

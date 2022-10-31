@@ -138,6 +138,7 @@ const snackbar = () => {
     if (options.duration) {
       setTimeout(
         function () {
+          // @ts-ignore
           if (Snackbar.current === this) {
             Snackbar.current.style.opacity = 0;
             Snackbar.current.style.top = '-100px';

@@ -43,6 +43,14 @@ export interface IInformation {
 
 export type Res_Account_Id = {
   id: string;
+  facebook_page_id: string;
+  facebook_page_token: string;
+  instagram_page_id: string;
+  instagram_username: string;
+  instagram_profile_picture_url: string;
+  facebook_user_long_lived_token: string;
+  facebook_user_id: string;
+  user_id: string;
   username: string;
   platform: string;
   profile_image: string;
