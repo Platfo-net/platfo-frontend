@@ -9,8 +9,6 @@ stages:
 Test Job:
   stage: test
   image: rastasheep/ubuntu-sshd
-  before_script:
-    - chmod 400 $SSH_KEY
   script: 
     - echo "Testing..."
     - echo "Test job finished."
