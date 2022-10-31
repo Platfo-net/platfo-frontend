@@ -48,6 +48,6 @@ COPY --from=builder /app/next-i18next.config.js ./next-i18next.config.js
 
 #USER nextjs
 
-EXPOSE 3000
+EXPOSE 3003
 
 CMD ["yarn", "start"]
