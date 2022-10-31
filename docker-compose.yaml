@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  botinow-front:
+    container_name: botinow-front
+    domainname: botinow-front
+    build:
+      context: .
+      args:
+        BASE_URL: https://dev.api.botinow.com
+        FACEBOOK_ID: 448865257100176
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env

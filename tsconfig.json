@@ -1,21 +1,36 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "incremental": true,
     "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "strict": true,
+    "composite": true,
+    "resolveJsonModule": true,
+    "noImplicitReturns": true,
     "jsx": "preserve",
-    "incremental": true
+    "allowJs": true,
+    "checkJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "baseUrl": ".",
+    "noImplicitThis": false,
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["types/**/*.ts","next-env.d.ts", "**/*.ts", "**/*.tsx", "components/Avatar"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", ".next", "out", "storybook-static", ".storybook"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.mjs",
+    "**/*.jsx"
+  ]
 }

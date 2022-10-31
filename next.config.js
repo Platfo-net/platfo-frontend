@@ -1,29 +1,25 @@
 /** @type {import('next').NextConfig} */
-const nextTranslate = require("next-translate");
-const path = require('path');
+const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
-  ...nextTranslate(),
-  images: {
-    domains: ['*.fbcdn.net','scontent-frt3-2.cdninstagram.com','scontent-frt3-1.cdninstagram.com', 'scontent-frt3-1.xx.fbcdn.net', 'scontent-lhr8-1.xx.fbcdn.net', 'scontent-ams2-1.cdninstagram.com', 'en.wikipedia.org']
-  },
+  i18n,
+  reactStrictMode: false,
+  swcMinify: true,
   publicRuntimeConfig: {
     BASE_URL: process.env.BASE_URL
   },
-  reactStrictMode: false,
-  swcMinify: true,
-  trailingSlash: true,
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')]
+  env: {
+    BASE_URL: process.env.BASE_URL,
+    FACEBOOK_ID: process.env.FACEBOOK_ID
   },
-  typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
-    // !! WARN !!
-    ignoreBuildErrors: true,
-  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.fbcdn.net'
+      }
+    ]
+  }
+};
 
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;

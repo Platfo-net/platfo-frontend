@@ -1,76 +1,96 @@
-import axios from "axios";
-import getConfig from "next/config";
-import { tokenObj } from "../helpers/token";
+import axios, { AxiosInstance } from 'axios';
+import getConfig from 'next/config';
+import { tokenObj } from '@/lib/token';
+import { clear } from '@/lib/LocalStorage';
+import showNotify, {
+  SnackbarSettings,
+} from '@/components/feedback/Notification/snackbar';
+import { Path } from '@/constants/enums';
 const { publicRuntimeConfig } = getConfig();
 
-const isServer = !process.browser;
+type constructorType = {
+  suffix?: string;
+  baseUrl?: string;
+};
 
-export const AxiosCancel = axios.CancelToken;
+class BaseApi {
+  protected $axios: AxiosInstance;
 
-const $axios = axios.create({
-  baseURL: publicRuntimeConfig.BASE_URL,
-});
-
-$axios.interceptors.request.use(
-  (config) => {
-    // if (isServer) return config;
-    const token = tokenObj.getAccessToken();
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    } else {
-      config.headers.Authorization = `Bearer token`;
-    }
-    return config;
-  },
-  (error) => {
-    Promise.reject(error);
+  constructor({
+    suffix,
+    baseUrl = publicRuntimeConfig.BASE_URL,
+  }: constructorType) {
+    this.$axios = axios.create({
+      baseURL: `${baseUrl}${suffix ? `/${suffix}` : ''}`,
+    });
+    this.requestInterceptors();
+    this.responseInterceptors();
   }
-);
 
-$axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    const RES401 = error?.response?.status === 401 || false;
-    const RES403 = error?.response?.status === 403 || false;
-    const RES400 = error?.response?.status === 400 || false;
-    const RES422 = error?.response?.status === 422 || false;
-    const RES500 = error?.response?.status === 500 || false;
-    const RES409 = error?.response?.status === 409 || false;
+  requestInterceptors() {
+    this.$axios.interceptors.request.use(
+      (config) => {
+        const token = tokenObj.getAccessToken();
+        if (token && config.headers) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        Promise.reject(error);
+      }
+    );
+  }
 
-    if (isServer && RES401) {
-      // TODO: redirect to login page
-      return Promise.reject(error);
-    }
+  responseInterceptors() {
+    this.$axios.interceptors.response.use(
+      (response) => {
+        return response;
+      },
+      (error) => {
+        const RES401 = error?.response?.status === 401 || false;
+        const RES403 = error?.response?.status === 403 || false;
+        const RES400 = error?.response?.status === 400 || false;
+        const RES422 = error?.response?.status === 422 || false;
+        const RES500 = error?.response?.status === 500 || false;
+        const RES409 = error?.response?.status === 409 || false;
 
-    if (RES422) {
-      if (isServer) {
+        if (RES401) {
+          showNotify({
+            text: error?.response?.data.detail,
+          } as SnackbarSettings);
+          throw error;
+        }
+
+        if (RES422) {
+          //TODO : notification
+        }
+
+        if (RES403) {
+          tokenObj.removeToken();
+          clear();
+          location.replace(Path.Login);
+        }
+
+        if (RES409) {
+          //TODO : notification
+        }
+
+        if (RES400) {
+          //TODO : notification
+        }
+
+        if (RES500) {
+          showNotify({
+            text: 'Haji Backende ;)',
+          } as SnackbarSettings);
+          throw error;
+        }
+
         return Promise.reject(error);
       }
-      //TODO : notification
-    }
-
-    if (RES403) {
-      tokenObj.removeToken();
-      localStorage.clear();
-      location.replace("/auth/login");
-    }
-
-    if (RES409) {
-      //TODO : notification
-    }
-
-    if (RES400) {
-      //TODO : notification
-    }
-
-    if (RES500) {
-      //TODO : notification
-    }
-
-    return Promise.reject(error);
+    );
   }
-);
+}
 
-export default $axios;
+export default BaseApi;
