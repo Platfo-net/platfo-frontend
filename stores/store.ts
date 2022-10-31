@@ -1,30 +1,12 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from '@/stores/reducers';
 
-import { authReducer } from "./reducers/authReducer";
-import { connectionsReducer } from "./reducers/connectionsReducer";
-import { messageReducer } from "./reducers/messageReducer";
-
-export function makeStore() {
-  return configureStore({
-    reducer: {
-      auth: authReducer,
-      connections: connectionsReducer,
-      message: messageReducer,
-    },
-  });
-}
-
-const store = makeStore();
+export const store = configureStore({
+  reducer: rootReducer,
+});
 
 export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action<string>
->;
-
-export default store;
+export type RequestState = 'pending' | 'fulfilled' | 'rejected';

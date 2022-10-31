@@ -1,50 +1,38 @@
-import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import "../styles/index.scss";
+import type { AppProps } from 'next/app';
+import '@/styles/globals.css';
+import { NextPageWithLayout } from '@/types/next';
+import { appWithTranslation } from 'next-i18next';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { setLanguageDirection } from '@/styles/globals';
+import { Provider } from 'react-redux';
+import { store } from '@/stores/store';
 
-import store from "../stores/store";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import Script from "next/script";
-import Head from "next/head";
+interface AppPropsWithLayout extends AppProps {
+  Component: NextPageWithLayout;
+}
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
-
+  if (typeof window !== 'undefined') {
+    const style = ['color: Violet', 'font-size: 1.5em'].join(';');
+    // eslint-disable-next-line no-console
+    console.log(
+      '%c👋🏻 As a member of Botinow family, I welcome you to our site 💜 \n\nNow console is yours 😉',
+      style
+    );
+  }
   useEffect(() => {
-    let dir = router.locale === "fa-IR" ? "rtl" : "ltr";
-    document.querySelector("html").setAttribute("dir", dir);
-    document.querySelector("body").style.direction = dir;
+    if (router.locale) {
+      setLanguageDirection(router.locale);
+    }
   }, [router.locale]);
 
-  useEffect(() => {
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: "551990259962247",
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: "v14.0",
-      });
-    };
-  }, []);
+  const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <Provider store={store}>
-      <Head>
-        <meta
-          name="facebook-domain-verification"
-          content="7a2nqcelnwc5f7l2j8fpcldnbzoaja"
-        />
-      </Head>
-      <Component {...pageProps} />
-      <Script
-        async
-        defer
-        crossOrigin="anonymous"
-        src="https://connect.facebook.net/en_US/sdk.js"
-      />
-    </Provider>
+    <Provider store={store}>{getLayout(<Component {...pageProps} />)}</Provider>
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp as React.FC);

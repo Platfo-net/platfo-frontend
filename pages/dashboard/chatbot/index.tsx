@@ -1,116 +1,125 @@
-import { NextPage } from "next";
-import DashboardLayout from "hoc/DashboardLayout/DashboardLayout";
-import { useRouter } from "next/router";
-import ChatbotMenu from "assets/contents/chatbotMenu";
-import TopMenu from "components/TopMenu/TopMenu";
-import SocialBox from "../../../components/SocialBox/SocialBox";
-import {useEffect, useRef, useState} from "react";
-import chatflowService from "../../../services/endpoints/ChatflowService";
-import useTranslation from "next-translate/useTranslation";
-import {getFormattedDate, getFormattedTime} from "../../../helpers/dateAndTimeHelper";
-import ChatflowService from "../../../services/endpoints/ChatflowService";
-import Modal from "../../../components/Modal/Modal";
-import AddNewChatflowForm from "../../../containers/dashboard/chatbot/AddNewChatflowForm";
+import { NextPageWithLayout } from '@/types/next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { DashboardLayout } from '@/components/layouts/DashboardLayout';
+import { chatbotMenu } from '@/constants/dashboardMenu';
+import { Tile } from '@/components/dataDisplay/Tile';
+import { Avatar } from '@/components/dataDisplay/Avatar';
+import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
+import { IChatflow, Res_BotBuilder_Chatflow_All } from '@/types/api';
+import { Typography } from '@/components/general/Typography';
+import TileButton from '@/components/general/TileButton/TileButton';
+import BotBuilderService from '@/services/endpoints/BotBuilderService';
+import { Application } from '@/constants/enums';
+import { getFormattedDate, getFormattedTime } from '@/lib/dateAndTimeHelper';
+import BackdropLoading from '@/components/feedback/BackdropLoading/BackdropLoading';
 
-const ChatbotPage: NextPage = () => {
-  const [chatflowList, setChatflowList] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-  const { t } = useTranslation("common");
-  const submitRef = useRef();
+const { Text } = Typography;
 
-  const router = useRouter();
+const ChatbotPage: NextPageWithLayout = () => {
+  const { t } = useTranslation('common');
+  const [loading, setLoading] = useState(false);
+  const [chatflows, setChatflows] = useState<Res_BotBuilder_Chatflow_All>([]);
 
-  const onClickRemove = async (value) => {
-    try{
-       await ChatflowService.deleteChatflow(value.id);
-      await getChatFlowList()
-    }catch (e) {
-
-    }
-
-  };
-  const onClickChatflow = (chatflowData) => {
-    router.push("/dashboard/chatbot/[id]", `/dashboard/chatbot/${chatflowData.id}`);
-  };
-
-  const getChatFlowList = async  () => {
+  const getChatflows = async () => {
     try {
-      const response = await chatflowService.getUserChatflows(null);
-      const newList = response.data.map((item) => ({
+      setLoading(true);
+      const response: AxiosResponse<Res_BotBuilder_Chatflow_All> =
+        await BotBuilderService.getChatflows();
+      const changeData = response.data.map((item) => ({
         ...item,
         date:
-            getFormattedTime(item.updated_at) +
-            " - " +
-            getFormattedDate(item.updated_at),
+          getFormattedDate(item.updated_at) +
+          ' - ' +
+          getFormattedTime(item.updated_at),
       }));
-      setChatflowList(newList);
-    } catch (e) {}
-  }
+      setChatflows(changeData);
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
+  };
+
+  const removeChatflow = async (chatflow: IChatflow) => {
+    try {
+      setLoading(true);
+      await BotBuilderService.deleteChatflow(chatflow.id);
+      await getChatflows();
+      setLoading(false);
+    } catch (e) {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    (async () => {
-      await getChatFlowList()
-    })();
+    getChatflows();
   }, []);
 
-  const modalHandler = () => {
-    setOpenModal(!openModal);
-  };
-
-  const onSubmit = () => {
-    submitRef.current.click();
-  };
-
-  const onSuccess = (chatflowId) => {
-    router.push("/dashboard/chatbot/[id]", `/dashboard/chatbot/${chatflowId}`);
-    modalHandler()
-  }
-
   return (
-    <DashboardLayout className="chatbot">
-      <TopMenu items={ChatbotMenu} />
-      <div className="content basis-full ">
-        <div className="flex flex-wrap">
-          <SocialBox
-            className="chatbot"
-            empty
-            onClick={modalHandler}
-            title={t("add-new-chatflow")}
+    <>
+      <BackdropLoading loading={loading} />
+      <div className="flex flex-wrap">
+        <div className="basis-1/6 m-3 ">
+          <TileButton
+            onClick={() => {}}
+            title={t('add-new-account')}
+            color="chatbot"
           />
-          {chatflowList?.map((item) => {
-            return (
-              <div className="basis-1/6" key={item.id}>
-                <SocialBox
-                  className="chatbot"
-                  removeable={true}
-                  data={item}
-                  iconKey={"BOT_BUILDER"}
-                  titleKey="name"
-                  descriptionKey="date"
-                  buttonText={t("details")}
-                  onClick={onClickChatflow}
-                  onClickRemove={onClickRemove}
-                />
-              </div>
-            );
-          })}
         </div>
+        {chatflows?.map((chatflow) => {
+          return (
+            <div className="basis-1/6 m-3" key={chatflow.id}>
+              <Tile
+                data={chatflow}
+                avatar={
+                  <Avatar
+                    icon={Application.BOT_BUILDER}
+                    size={6}
+                    type="icon"
+                    click={() => {}}
+                  />
+                }
+                width="255px"
+                height="255px"
+                click={() => {}}
+                clickColor="chatbot"
+                clickLabel={t('details')}
+                remove={removeChatflow}
+              >
+                <div className="flex flex-col text-center">
+                  <Text weight="semiBold"> {chatflow.name} </Text>
+                  <Text weight="light" color="nonActive">
+                    {chatflow.date}
+                  </Text>
+                </div>
+              </Tile>
+            </div>
+          );
+        })}
       </div>
-      <Modal
-          open={openModal}
-          onCancel={modalHandler}
-          title={ t("add-new-chatflow")}
-          size="md"
-          onSubmit={onSubmit}
-      >
-        <AddNewChatflowForm
-            submitRef={submitRef}
-            onSuccess={onSuccess}
-            status={openModal}
-        />
-      </Modal>
-    </DashboardLayout>
+    </>
   );
 };
 
 export default ChatbotPage;
+
+export const getStaticProps = async ({ locale }: { locale: string }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
+};
+
+ChatbotPage.getLayout = (page) => {
+  return (
+    <DashboardLayout
+      topMenu={chatbotMenu}
+      meta={{ title: 'Chat Bot' }}
+      color="chatbot"
+    >
+      {page}
+    </DashboardLayout>
+  );
+};

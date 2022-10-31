@@ -1,23 +1,18 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
-  content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}", "./hoc/**/*.{js,ts,jsx,tsx}", "./containers/**/*.{js,ts,jsx,tsx}"],
-  // darkMode: false, // or 'media' or 'class'
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class',
   theme: {
-    extend: {
-      zIndex: {
-        '100': '100',
-      }
+    screens: {
+      xs: '375px',
+      sm: '600px',
+      md: '900px',
+      lg: '1200px',
+      xl: '1536px',
     },
   },
-  plugins: [
-    require("tailwindcss-rtl"),
-    require('tailwindcss'),
-    require('precss'),
-    require('autoprefixer')],
-  corePlugins: {
-    preflight: false,
-  },
+  plugins: [],
 };

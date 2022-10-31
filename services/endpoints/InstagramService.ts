@@ -1,12 +1,11 @@
-import $axios from "../axios.config";
+import { Body_Instagram } from '@/types/api';
+import BaseApi from '../axios.config';
 
-class Instagram {
-  postConnectInstagram = (data) => $axios.post(`api/v1/instagram`, data);
-
-  deleteFacebookDisconnectPage = () =>
-    $axios.delete(`api/v1/instagram`);
-
-  getInstagramAccountData = (id) => $axios.get(`api/v1/instagram/get/${id}`);
+class Instagram extends BaseApi {
+  constructor() {
+    super({ suffix: 'api/v1/instagram' });
+  }
+  postToConnectInstagram = (data: Body_Instagram) => this.$axios.post('', data);
 }
 
 const InstagramService = new Instagram();

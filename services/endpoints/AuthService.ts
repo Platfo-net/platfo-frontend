@@ -1,17 +1,12 @@
-import $axios from "../axios.config";
+import { Body_Auth_AccessToken } from '@/types/api';
+import BaseApi from '../axios.config';
 
-class Auth {
-  postLoginAccessToken = (data) =>
-    $axios.post(`api/v1/auth/access-token`, data);
-
-  postLoginAccessTokenSwagger = (data) =>
-    $axios.post(`api/v1/auth/token-swagger`, data);
-
-  postTestToken = (data) =>
-    $axios.post(`api/v1/auth/check`, data);
-
-  postHashPassword = (data) =>
-    $axios.post(`api/v1/auth/hash-password`, data);
+class Auth extends BaseApi {
+  constructor() {
+    super({ suffix: 'api/v1/auth' });
+  }
+  postLogin = (data: Body_Auth_AccessToken) =>
+    this.$axios.post(`access-token`, data);
 }
 
 const AuthService = new Auth();

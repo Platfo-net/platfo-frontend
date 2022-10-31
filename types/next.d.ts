@@ -1,15 +1,13 @@
-import type { NextComponentType, NextPageContext } from "next";
-import type { Session } from "next-auth";
-import type { Router } from "next/router";
+import { NextPage } from 'next';
+import { ComponentType, ReactElement, ReactNode } from 'react';
 
-declare module "next/app" {
-  type AppProps<P = Record<string, unknown>> = {
-    Component: NextComponentType<NextPageContext, any, P>;
-    router: Router;
-    __N_SSG?: boolean;
-    __N_SSP?: boolean;
-    pageProps: P & {
-      session?: Session;
-    };
-  };
+import common from '../public/locales/en/common.json';
+
+export type NextPageWithLayout<P = {}> = NextPage<P> & {
+  getLayout?: (_page: ReactElement) => ReactNode;
+  layout?: ComponentType;
+};
+
+export interface Resources {
+  common: typeof common;
 }

@@ -1,9 +1,0 @@
-{
-  "locales": ["en", "fa-IR"],
-  "defaultLocale": "en",
-  "localeDetection": false,
-  "pages": {
-    "*": ["common"],
-    "/about": ["about"]
-  }
-}
