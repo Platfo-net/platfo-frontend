@@ -7,9 +7,9 @@ services:
     build:
       context: .
       args:
-        BASE_URL: https://dev.api.botinow.com/
+        BASE_URL: https://dev.api.botinow.com
         FACEBOOK_ID: 448865257100176
     ports:
-      - '3003:3003'
+      - '3003:3000'
     env_file:
       - .env
