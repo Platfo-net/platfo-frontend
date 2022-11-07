@@ -14,19 +14,23 @@ interface AppPropsWithLayout extends AppProps {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
-  if (typeof window !== 'undefined') {
-    const style = ['color: Violet', 'font-size: 1.5em'].join(';');
-    // eslint-disable-next-line no-console
-    console.log(
-      '%c👋🏻 As a member of Botinow family, I welcome you to our site 💜 \n\nNow console is yours 😉',
-      style
-    );
-  }
+
   useEffect(() => {
     if (router.locale) {
       setLanguageDirection(router.locale);
     }
   }, [router.locale]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const style = ['color: Violet', 'font-size: 1.5em'].join(';');
+      // eslint-disable-next-line no-console
+      console.log(
+        '%c👋🏻 As a member of Botinow family, I welcome you to our site 💜 \n\nNow console is yours 😉',
+        style
+      );
+    }
+  }, []);
 
   const getLayout = Component.getLayout || ((page) => page);
 

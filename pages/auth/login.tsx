@@ -80,12 +80,12 @@ const LoginPage: NextPageWithLayout = () => {
             className="mb-4"
             isLoading={requestState === 'pending'}
           />
-          <Button
+          {/* <Button
             type="button"
             onClick={() => router.push('/auth/register')}
             title={t('register')}
             variant="text"
-          />
+          />*/}
         </div>
       </form>
     </div>

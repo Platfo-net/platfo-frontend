@@ -11,7 +11,6 @@ import AccountService from '@/services/endpoints/AccountService';
 import { Res_Account_Id, Res_Connection_All } from '@/types/api';
 import ConnectionService from '@/services/endpoints/ConnectionService';
 import { Avatar } from '@/components/dataDisplay/Avatar';
-import Divider from '@/components/general/Divider/Divider';
 import { useTranslation } from 'next-i18next';
 import { Typography } from '@/components/general/Typography';
 import TileButton from '@/components/general/TileButton/TileButton';
@@ -76,24 +75,21 @@ const AccountDetailsPage: NextPageWithLayout = () => {
     <>
       <BackdropLoading loading={loading} />
       {accountInfo && (
-        <>
-          <InfoSection
-            username={accountInfo.username}
-            follows={accountInfo.information.follows_count}
-            name={accountInfo.information.name}
-            avatar={
-              <Avatar
-                type="image"
-                url={accountInfo.profile_image}
-                size={7}
-                click={() => {}}
-              />
-            }
-            description={accountInfo.information.biography}
-            followers={accountInfo.information.followers_count}
-          />
-          <Divider />
-        </>
+        <InfoSection
+          username={accountInfo.username}
+          follows={accountInfo.information.follows_count}
+          name={accountInfo.information.name}
+          avatar={
+            <Avatar
+              type="image"
+              url={accountInfo.profile_image}
+              size={7}
+              click={() => {}}
+            />
+          }
+          description={accountInfo.information.biography}
+          followers={accountInfo.information.followers_count}
+        />
       )}
 
       <div className="flex m-5">

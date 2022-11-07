@@ -6,11 +6,14 @@ import styled from '@emotion/styled';
 import { Button } from '@/components/general/Button';
 import { settings } from '@/styles/Settings';
 import { css } from '@emotion/react';
+import { getIsRtl } from '@/styles/globals';
 
 interface ITopBar {
   data: IMenu[];
-  color?: 'secondary' | 'chatbot' | 'liveChat';
+  color?: 'secondary' | 'chatbot' | 'liveChat' | 'postman';
 }
+
+const isRtl = getIsRtl();
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,6 +21,7 @@ const Wrapper = styled.div`
   height: fit-content;
   justify-content: center;
   padding-top: 20px;
+  position: relative;
 `;
 const StyledButton = styled(Button)`
   margin: 0 8px;
@@ -59,6 +63,19 @@ const StyledButton = styled(Button)`
       filter: unset !important;
     `};
   }
+  &:disabled {
+    border: none;
+    background: transparent;
+    &:hover {
+      color: ${({ theme }) => theme.font.nonActive} !important;
+    }
+  }
+`;
+
+const ActionWrapper = styled.div`
+  position: absolute !important;
+  right: ${isRtl ? 'unset' : '1rem'};
+  left: ${isRtl ? '1rem' : 'unset'};
 `;
 
 export const TopBar: FC<ITopBar> = ({ data, color = 'secondary' }) => {
@@ -73,6 +90,9 @@ export const TopBar: FC<ITopBar> = ({ data, color = 'secondary' }) => {
 
   return (
     <Wrapper>
+      <ActionWrapper>
+        {/*<NotificationButton notifications={[]} />*/}
+      </ActionWrapper>
       {data.map((item) => {
         return (
           <StyledButton

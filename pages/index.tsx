@@ -1,6 +1,6 @@
 import { NextPageWithLayout } from '@/types/next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { AuthLayout } from '@/components/layouts/AuthLayout';
+import { MainLayout } from '@/components/layouts/MainLayout';
 
 const Home: NextPageWithLayout = () => {
   return <div />;
@@ -18,13 +18,13 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
 
 Home.getLayout = (page) => {
   return (
-    <AuthLayout
+    <MainLayout
       meta={{
         title: '',
         description: undefined,
       }}
     >
       {page}
-    </AuthLayout>
+    </MainLayout>
   );
 };

@@ -54,7 +54,6 @@ class BaseApi {
         const RES404 = error?.response?.status === 404 || false;
         const RES409 = error?.response?.status === 409 || false;
         const RES422 = error?.response?.status === 422 || false;
-
         const RES500 = error?.response?.status >= 500 || false;
 
         if (RES401) {
@@ -66,32 +65,37 @@ class BaseApi {
 
         if (RES422) {
           showNotify({
-            text: error?.response?.data.detail,
+            text: 'Haji Backende 😁',
           } as SnackbarSettings);
+          throw error;
         }
 
         if (RES404) {
           showNotify({
             text: error?.response?.data.detail,
           } as SnackbarSettings);
+          throw error;
         }
 
         if (RES403) {
           tokenObj.removeToken();
           clear();
           location.replace(Path.Login);
+          throw error;
         }
 
         if (RES409) {
           showNotify({
             text: error?.response?.data.detail,
           } as SnackbarSettings);
+          throw error;
         }
 
         if (RES400) {
           showNotify({
             text: error?.response?.data.detail,
           } as SnackbarSettings);
+          throw error;
         }
         if (RES500) {
           showNotify({
@@ -102,9 +106,7 @@ class BaseApi {
 
         if (!error.response) {
           showNotify({
-            text:
-              'Check your Network!' +
-              '\nagar net ok bood. Mohamad token expire mishe ye error dige bede ',
+            text: 'Check your Network!',
           } as SnackbarSettings);
           throw error;
         }

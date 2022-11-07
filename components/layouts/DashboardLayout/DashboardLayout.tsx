@@ -19,7 +19,7 @@ interface IDashboardLayout {
   children: ReactNode;
   meta: Meta;
   topMenu?: IMenu[];
-  color?: 'secondary' | 'chatbot' | 'liveChat';
+  color?: 'secondary' | 'chatbot' | 'liveChat' | 'postman';
   className?: string;
 }
 

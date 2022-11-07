@@ -46,6 +46,7 @@ const authSlice = createSlice({
       ...state,
       token: payload.access_token,
       requestState: 'fulfilled',
+      error: undefined,
     }));
     builder.addCase(logout.fulfilled, () => initialState);
 

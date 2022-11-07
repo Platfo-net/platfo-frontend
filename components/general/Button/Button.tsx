@@ -5,6 +5,7 @@ import {
   getSize,
   Size,
   Variant,
+  TypographySize,
 } from '@/styles/globals';
 import styled from '@emotion/styled';
 import React, { MouseEvent } from 'react';
@@ -19,6 +20,7 @@ export interface IButton {
   title: string;
   color?: Color;
   size?: Size;
+  iconSize?: TypographySize;
   variant?: Variant;
   icon?: AvailableIcons;
   isDisable?: boolean;
@@ -82,6 +84,7 @@ export const Button: React.FC<IButton> = ({
   onClick,
   type = 'button',
   className = '',
+  iconSize,
 }) => {
   return (
     <StyledButton
@@ -103,7 +106,13 @@ export const Button: React.FC<IButton> = ({
         />
       ) : (
         <>
-          {icon && <StyledIcon name={icon} color="currentColor" size={size} />}
+          {icon && (
+            <StyledIcon
+              name={icon}
+              color="currentColor"
+              size={iconSize ? iconSize : size}
+            />
+          )}
         </>
       )}
       <Typography.Text size={size} color={'currentColor'} weight="medium">

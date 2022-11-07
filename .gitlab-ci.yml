@@ -2,14 +2,14 @@ variables:
   PROJECT_NAME: botinow-frontend
   BRANCH_NAME: $CI_COMMIT_BRANCH
 
-stages:         
+stages:
   - test
   - deploy
 
 Test Job:
   stage: test
   image: rastasheep/ubuntu-sshd
-  script: 
+  script:
     - echo "Testing..."
     - echo "Test job finished."
 
@@ -21,10 +21,10 @@ Staging Job:
   script:
     - echo "Staging job started."
     - ssh -o StrictHostKeyChecking=no -i $SSH_KEY "root@$DEV_SERVER_IP" -p $DEV_SERVER_PORT "
-        cd frontend/$PROJECT_NAME &&
-        ls -al &&
-        git pull https://$RUNNER_USERNAME:$RUNNER_PASSWORD@gitlab.aimedic.co/botinow/front-end/botinow-frontend.git &&
-        docker compose down &&
-        docker compose up -d --build " 
+      cd frontend/$PROJECT_NAME &&
+      ls -al &&
+      git pull https://$RUNNER_USERNAME:$RUNNER_PASSWORD@gitlab.aimedic.co/botinow/front-end/botinow-frontend.git &&
+      docker compose down &&
+      docker compose up -d --build "
     - echo "Staging job finished."
   when: manual

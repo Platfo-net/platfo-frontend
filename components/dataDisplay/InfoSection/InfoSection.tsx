@@ -4,11 +4,12 @@ import { Typography } from '@/components/general/Typography';
 import { useTranslation } from 'next-i18next';
 import { getIsRtl } from '@/styles/globals';
 import { css } from '@emotion/react';
+import { Tile } from '@/components/dataDisplay/Tile';
 
 const { Text, Paragraph } = Typography;
 export interface IInfoSection {
   avatar?: ReactElement;
-  username: string;
+  username?: string;
   followers?: string | number;
   follows?: string | number;
   name?: string;
@@ -20,7 +21,7 @@ const isRtl = getIsRtl();
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 2rem;
+  width: 100%;
 `;
 
 const AvatarWrapper = styled.div`
@@ -47,31 +48,33 @@ const InfoSection: React.FC<IInfoSection> = ({
 }) => {
   const { t } = useTranslation('common');
   return (
-    <Wrapper>
-      {avatar && <AvatarWrapper>{avatar}</AvatarWrapper>}
+    <Tile>
+      <Wrapper>
+        {avatar && <AvatarWrapper>{avatar}</AvatarWrapper>}
 
-      <InfoWrapper>
-        <Text size="xl">{username}</Text>
-        <div>
-          {followers && (
-            <>
-              <Text weight="semiBold">{followers}</Text>
-              <Text className="mr-16"> {t('followers')}</Text>
-            </>
-          )}
+        <InfoWrapper>
+          <Text size="xl">{username}</Text>
+          <div>
+            {followers && (
+              <>
+                <Text weight="semiBold">{followers}</Text>
+                <Text className="mr-16"> {t('followers')}</Text>
+              </>
+            )}
 
-          {follows && (
-            <>
-              <Text weight="semiBold">{follows}</Text>
-              <Text> {t('followers')}</Text>
-            </>
-          )}
-        </div>
+            {follows && (
+              <>
+                <Text weight="semiBold">{follows}</Text>
+                <Text> {t('followers')}</Text>
+              </>
+            )}
+          </div>
 
-        {name && <Text weight="semiBold">{name}</Text>}
-        {description && <Paragraph>{description}</Paragraph>}
-      </InfoWrapper>
-    </Wrapper>
+          {name && <Text weight="semiBold">{name}</Text>}
+          {description && <Paragraph>{description}</Paragraph>}
+        </InfoWrapper>
+      </Wrapper>
+    </Tile>
   );
 };
 

@@ -16,6 +16,7 @@ export interface ITile {
   clickLabel?: string;
   clickColor?: Color;
   className?: string;
+  isClickDisable?: boolean;
   // eslint-disable-next-line no-unused-vars
   remove?: (data: any) => void;
   // eslint-disable-next-line no-unused-vars
@@ -72,6 +73,7 @@ export const Tile: FC<ITile> = ({
   clickLabel = '',
   clickColor = 'primary',
   className = '',
+  isClickDisable = false,
 }) => {
   const { t } = useTranslation('common');
   const [isVisible, setIsVisible] = useState(false);
@@ -126,6 +128,7 @@ export const Tile: FC<ITile> = ({
             title={clickLabel}
             onClick={() => click(data)}
             width="100%"
+            isDisable={isClickDisable}
           />
         </Footer>
       )}

@@ -19,6 +19,7 @@ export const colorOptions = [
   'success',
   'chatbot',
   'liveChat',
+  'postman',
 ] as const;
 export type Color = typeof colorOptions[number];
 export const typographySizeOptions = {

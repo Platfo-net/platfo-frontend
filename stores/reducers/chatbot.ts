@@ -45,6 +45,7 @@ const chatbotSlice = createSlice({
       ...state,
       accounts: payload,
       requestState: 'fulfilled',
+      error: undefined,
     }));
 
     builder

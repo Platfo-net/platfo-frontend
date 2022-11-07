@@ -14,6 +14,7 @@ const dark = {
     success: '#60d6a4',
     chatbot: '#fec823',
     liveChat: '#666fc1',
+    postman: '#50bfe8',
     shadow1: 'rgba(0, 0, 0, 0.25)',
     shadow2: 'rgba(0, 0, 0, 0.22)',
     active: '#e4ebf5',
@@ -36,6 +37,7 @@ const dark = {
     Facebook: '#4267b2',
     Chatbot: '#fec823',
     LiveChat: '#666fc1',
+    Postman: '#50bfe8',
   },
 };
 
@@ -53,6 +55,7 @@ const light: AppTheme = {
     success: '#60d6a4',
     chatbot: '#fec823',
     liveChat: '#666fc1',
+    postman: '#50bfe8',
     shadow1: 'rgba(170, 170, 170, 0.25)',
     shadow2: 'rgba(120, 120, 120, 0.12)',
     active: '#e4ebf5',
@@ -75,6 +78,7 @@ const light: AppTheme = {
     Facebook: '#4267b2',
     Chatbot: '#fec823',
     LiveChat: '#666fc1',
+    Postman: '#50bfe8',
   },
 };
 

@@ -30,6 +30,14 @@ export const sidebarMenu: Menu = {
       color: 'liveChat',
       icon: 'LiveChat',
     },
+    {
+      key: 'postman',
+      path: Path.PostmanContacts,
+      isDisable: false,
+      type: 'link',
+      color: 'postman',
+      icon: 'Postman',
+    },
   ],
   tools: [
     {
@@ -85,5 +93,22 @@ export const chatbotMenu: IMenu[] = [
     key: 'contacts',
     path: Path.Contacts,
     isDisable: true,
+  },
+];
+
+export const postmanMenu: IMenu[] = [
+  {
+    key: 'campaign',
+    path: Path.Chatbot,
+    isDisable: true,
+  },
+  {
+    key: 'archive',
+    path: Path.Archive,
+    isDisable: true,
+  },
+  {
+    key: 'contacts',
+    path: Path.PostmanContacts,
   },
 ];

@@ -1,5 +1,12 @@
 import { Application, Platform } from '@/constants/enums';
 
+export type Pagination = {
+  page: number;
+  total_pages: number;
+  page_size: number;
+  total_count: number;
+};
+
 export type Body_Auth_AccessToken = {
   email: string;
   password: string;
@@ -84,13 +91,42 @@ export interface IChatflow {
 }
 export type Res_BotBuilder_Chatflow_All = IChatflow[];
 
+export interface IParams_Pagination {
+  page: number;
+  page_size: number;
+}
+
+export interface INotification {
+  id: string;
+  title: string;
+  description: string;
+  created_at: string;
+  is_readed: boolean;
+}
+
+export type Body_Livechat_Contact_All_FacebookPageId = {
+  field: string;
+  operator: string;
+  value: number;
+}[];
+
 export interface IContact {
   id: string;
   user_id: string;
   contact_igs_id: boolean;
   user_page_id: string;
+  comment_count: number;
+  message_count: number;
+  live_comment_count: number;
+  //Todo ask type
+  first_impression?: string;
   last_message_at: string;
   information: IInformation;
   last_message?: string;
 }
-export type Res_LiveChat_Contact_Page_PageId = IContact[];
+export type Res_LiveChat_Contact_All_PageId = {
+  items: IContact[];
+  pagination: Pagination;
+};
+
+export type Res_LiveChat_Contact_Id = IContact;
