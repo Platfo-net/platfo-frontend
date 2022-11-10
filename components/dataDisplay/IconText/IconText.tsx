@@ -25,7 +25,7 @@ const StyledText = styled(Text)`
   margin: 4px auto;
 `;
 
-const IconText: React.FC<IIconText> = ({ icon, title, size = 'xl' }) => {
+const IconText: React.FC<IIconText> = ({ icon, title, size = 'lg' }) => {
   return (
     <Wrapper>
       <StyledIcon name={icon} size={size} />

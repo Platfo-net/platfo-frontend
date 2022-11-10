@@ -1,7 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import getConfig from 'next/config';
 import { tokenObj } from '@/lib/token';
-import { clear } from '@/lib/LocalStorage';
 import showNotify, {
   SnackbarSettings,
 } from '@/components/feedback/Notification/snackbar';
@@ -79,7 +78,6 @@ class BaseApi {
 
         if (RES403) {
           tokenObj.removeToken();
-          clear();
           location.replace(Path.Login);
           throw error;
         }

@@ -12,7 +12,7 @@ import { IAccount, Res_Account_All } from '@/types/api';
 import { Typography } from '@/components/general/Typography';
 import TileButton from '@/components/general/TileButton/TileButton';
 import { useRouter } from 'next/router';
-import { Path } from '@/constants/enums';
+import { Path, Platform } from '@/constants/enums';
 import InstagramService from '@/services/endpoints/InstagramService';
 import BackdropLoading from '@/components/feedback/BackdropLoading/BackdropLoading';
 
@@ -103,7 +103,11 @@ const AccountsPage: NextPageWithLayout = () => {
                     url={account.profile_image}
                     size={6}
                     type="image"
-                    click={() => {}}
+                    icon={
+                      Platform[
+                        account.platform as unknown as keyof typeof Platform
+                      ]
+                    }
                   />
                 }
                 width="255px"

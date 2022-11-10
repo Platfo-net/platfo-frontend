@@ -15,10 +15,9 @@ export enum Path {
   Profile = '/dashboard/profile',
 }
 
-/* Todo: check with mohamad
 export enum Platform {
-  Instagram = 'instagram',
-}*/
+  INSTAGRAM = 'Instagram',
+}
 
 export enum Application {
   BOT_BUILDER = 'Chatbot',

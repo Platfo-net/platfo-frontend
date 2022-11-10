@@ -18,7 +18,7 @@ import BackdropLoading from '@/components/feedback/BackdropLoading/BackdropLoadi
 import AccountService from '@/services/endpoints/AccountService';
 import LiveChatService from '@/services/endpoints/LiveChatService';
 import IconText from '@/components/dataDisplay/IconText/IconText';
-import { Path } from '@/constants/enums';
+import { Path, Platform } from '@/constants/enums';
 import { useRouter } from 'next/router';
 
 const { Text } = Typography;
@@ -91,7 +91,7 @@ const ContactsPage: NextPageWithLayout = () => {
       <BackdropLoading loading={loading} />
       {accounts.length > 0 && (
         <Tile className="m-3" width="auto">
-          <div className="flex w-full space-x-2 justify-start overflow-x-auto">
+          <div className="flex w-full space-x-4 justify-start overflow-x-auto">
             {accounts.map((account) => {
               return (
                 <Avatar
@@ -102,6 +102,12 @@ const ContactsPage: NextPageWithLayout = () => {
                   data={account}
                   isActive={account.id === selectedAccount?.id}
                   color="postman"
+                  icon={
+                    Platform[
+                      account.platform as unknown as keyof typeof Platform
+                    ]
+                  }
+                  title={account.username}
                 />
               );
             })}
@@ -120,7 +126,6 @@ const ContactsPage: NextPageWithLayout = () => {
                     url={contact.information.profile_image}
                     size={6}
                     type="image"
-                    click={() => {}}
                   />
                 }
                 width="280px"
@@ -128,7 +133,6 @@ const ContactsPage: NextPageWithLayout = () => {
                 click={changeRoute}
                 clickColor="postman"
                 clickLabel={t('details')}
-                isClickDisable={true}
               >
                 <div className="flex flex-col text-center w-full">
                   <Text weight="semiBold"> {contact.information.name} </Text>

@@ -43,9 +43,9 @@ export interface IInformation {
   name?: string;
   username?: string;
   profile_image?: string;
-  is_verified_user?: string;
-  is_user_follow_business?: string;
-  is_business_follow_user?: string;
+  is_verified_user?: boolean;
+  is_user_follow_business?: boolean;
+  is_business_follow_user?: boolean;
 }
 
 export type Res_Account_Id = {

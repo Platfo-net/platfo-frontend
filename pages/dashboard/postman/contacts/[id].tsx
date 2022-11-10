@@ -12,8 +12,14 @@ import { GetStaticPaths } from 'next';
 import BackdropLoading from '@/components/feedback/BackdropLoading/BackdropLoading';
 import LiveChatService from '@/services/endpoints/LiveChatService';
 import { IContact, Res_LiveChat_Contact_Id } from '@/types/api';
+import { useTranslation } from 'next-i18next';
+import { Dot } from '@/components/feedback/Dot';
+import { Typography } from '@/components/general/Typography';
+
+const { Text } = Typography;
 
 const ContactDetailsPage: NextPageWithLayout = () => {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const { id } = router.query;
 
@@ -56,6 +62,39 @@ const ContactDetailsPage: NextPageWithLayout = () => {
           }
           description={contactInfo.information.biography}
           followers={contactInfo.information.followers_count}
+          extra={
+            <ul className="flex flex-col justify-between h-full">
+              {contactInfo.information.is_verified_user !== undefined && (
+                <li className="flex space-x-2 ">
+                  <Dot
+                    isTrue={contactInfo.information.is_verified_user}
+                    className="my-1"
+                  />
+                  <Text>{t('is_verified_user')}</Text>
+                </li>
+              )}
+              {contactInfo.information.is_user_follow_business !==
+                undefined && (
+                <li className="flex space-x-2">
+                  <Dot
+                    isTrue={contactInfo.information.is_user_follow_business}
+                    className="my-1"
+                  />
+                  <Text>{t('is_user_follow_business')}</Text>
+                </li>
+              )}
+              {contactInfo.information.is_business_follow_user !==
+                undefined && (
+                <li className="flex space-x-2">
+                  <Dot
+                    isTrue={contactInfo.information.is_business_follow_user}
+                    className="my-1"
+                  />
+                  <Text>{t('is_business_follow_user')}</Text>
+                </li>
+              )}
+            </ul>
+          }
         />
       )}
     </>

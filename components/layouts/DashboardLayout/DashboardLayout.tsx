@@ -30,6 +30,7 @@ const Content = styled.main`
   position: relative;
   z-index: 60;
   padding: 0.8rem;
+  overflow: auto;
   ${({ theme }) => css`
     background: ${theme.components.background};
     border-radius: ${isRtl

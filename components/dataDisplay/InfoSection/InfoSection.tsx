@@ -14,6 +14,7 @@ export interface IInfoSection {
   follows?: string | number;
   name?: string;
   description?: string;
+  extra?: ReactElement;
 }
 
 const isRtl = getIsRtl();
@@ -37,6 +38,10 @@ const InfoWrapper = styled.div`
   padding: 0.5rem;
   justify-content: space-between;
 `;
+const ExtraWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const InfoSection: React.FC<IInfoSection> = ({
   avatar,
@@ -45,35 +50,38 @@ const InfoSection: React.FC<IInfoSection> = ({
   follows,
   name,
   description,
+  extra,
 }) => {
   const { t } = useTranslation('common');
   return (
     <Tile>
-      <Wrapper>
-        {avatar && <AvatarWrapper>{avatar}</AvatarWrapper>}
+      <>
+        <Wrapper>
+          {avatar && <AvatarWrapper>{avatar}</AvatarWrapper>}
+          <InfoWrapper>
+            <Text size="xl">{username}</Text>
+            <div>
+              {followers && (
+                <>
+                  <Text weight="semiBold">{followers}</Text>
+                  <Text className="mr-16"> {t('followers')}</Text>
+                </>
+              )}
 
-        <InfoWrapper>
-          <Text size="xl">{username}</Text>
-          <div>
-            {followers && (
-              <>
-                <Text weight="semiBold">{followers}</Text>
-                <Text className="mr-16"> {t('followers')}</Text>
-              </>
-            )}
+              {follows && (
+                <>
+                  <Text weight="semiBold">{follows}</Text>
+                  <Text> {t('followers')}</Text>
+                </>
+              )}
+            </div>
 
-            {follows && (
-              <>
-                <Text weight="semiBold">{follows}</Text>
-                <Text> {t('followers')}</Text>
-              </>
-            )}
-          </div>
-
-          {name && <Text weight="semiBold">{name}</Text>}
-          {description && <Paragraph>{description}</Paragraph>}
-        </InfoWrapper>
-      </Wrapper>
+            {name && <Text weight="semiBold">{name}</Text>}
+            {description && <Paragraph>{description}</Paragraph>}
+          </InfoWrapper>
+        </Wrapper>
+        {extra && <ExtraWrapper>{extra}</ExtraWrapper>}
+      </>
     </Tile>
   );
 };
