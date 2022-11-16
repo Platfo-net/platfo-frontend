@@ -130,3 +130,23 @@ export type Res_LiveChat_Contact_All_PageId = {
 };
 
 export type Res_LiveChat_Contact_Id = IContact;
+
+export interface IContactGroup {
+  id: string;
+  name: string;
+  description: string;
+}
+export type Res_Postman_Group_FacebookPageId = {
+  items: IContactGroup[];
+  pagination: Pagination;
+};
+
+export type Body_Postman_Group = {
+  name: string;
+  description: string;
+  facebook_page_id: string;
+  contacts: {
+    contact_igs_id: string;
+    contact_id: string;
+  }[];
+};

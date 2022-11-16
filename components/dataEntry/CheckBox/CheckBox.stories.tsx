@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import CheckBox from './CheckBox';
+import { CheckBox, ICheckBox } from './CheckBox';
+import { mockCheckBoxProps } from '@/components/dataEntry/CheckBox/Checkbox.mock';
 
 export default {
   title: 'dataEntry/CheckBox',
@@ -12,4 +13,6 @@ const Template: ComponentStory<typeof CheckBox> = (args) => (
 
 export const BasicCheckBox = Template.bind({});
 
-BasicCheckBox.args = {};
+BasicCheckBox.args = {
+  ...mockCheckBoxProps.base,
+} as ICheckBox;

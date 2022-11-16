@@ -71,8 +71,11 @@ class BaseApi {
 
         if (RES404) {
           showNotify({
-            text: error?.response?.data.detail,
+            text: 'Haji Backende 😁',
           } as SnackbarSettings);
+          // showNotify({
+          //   text: error?.response?.data.detail,
+          // } as SnackbarSettings);
           throw error;
         }
 

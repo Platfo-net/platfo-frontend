@@ -31,7 +31,8 @@ export interface IInput {
   value?: string;
   placeholder?: string;
   width?: string;
-  color?: 'danger' | 'warning' | 'success' | 'default';
+  status?: 'danger' | 'warning' | 'success' | 'default';
+  color?: Color;
   size?: Size;
   variant?: Variant;
   type?: InputType;
@@ -45,6 +46,7 @@ type StyledInputType = {
   placeholder?: string;
   width?: string;
   color?: Color;
+  status?: 'danger' | 'warning' | 'success' | 'default';
   inputSize?: Size;
   variant?: Variant;
   type?: InputType;
@@ -57,7 +59,7 @@ const StyledInput = styled.input<StyledInputType>`
   padding-left: ${({ icon, inputSize }) =>
     icon && inputSize ? IconSize[inputSize] + 0.2 : 1}rem;
   ${({ inputSize, width }) => getSize(inputSize, width)}
-  ${({ variant, theme, color }) => getColors(color, variant, theme)}
+  ${({ variant, theme, status }) => getColors(status, variant, theme)}
   ${({ theme }) =>
     getBoxShadow(theme.components.shadow1, theme.components.shadow2)};
   color: ${({ theme }) => theme.font.regular};
@@ -70,7 +72,7 @@ const StyledInput = styled.input<StyledInputType>`
   }
   &:focus,
   &:hover {
-    ${({ variant, theme }) => getColors('primary', variant, theme)}
+    ${({ variant, theme, color }) => getColors(color, variant, theme)}
     ~ svg {
       color: ${({ theme }) => theme.components.primary};
     }
@@ -115,7 +117,8 @@ export const Input: React.FC<IInput> = forwardRef(
       feedback,
       icon,
       variant = 'outlined',
-      color = 'default',
+      status = 'default',
+      color = 'primary',
       size = 'md',
       className = '',
       ...rest
@@ -134,6 +137,7 @@ export const Input: React.FC<IInput> = forwardRef(
             width={width}
             variant={variant}
             color={color}
+            status={status}
             icon={icon}
             inputSize={size}
             {...rest}
@@ -143,7 +147,7 @@ export const Input: React.FC<IInput> = forwardRef(
           )}
         </div>
 
-        <Feedback size={'sm'} color={color === 'default' ? 'regular' : color}>
+        <Feedback size={'sm'} color={status === 'default' ? 'regular' : status}>
           {feedback}
         </Feedback>
       </Wrapper>

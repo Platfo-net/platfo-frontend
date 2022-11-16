@@ -10,6 +10,7 @@ export enum Path {
   Contacts = '/dashboard/chatbot/contacts',
   LiveChat = '/dashboard/liveChat',
   Postman = '/dashboard/postman',
+  PostmanGroups = '/dashboard/postman/groups',
   PostmanContacts = '/dashboard/postman/contacts',
   Accounts = '/dashboard/accounts',
   Profile = '/dashboard/profile',

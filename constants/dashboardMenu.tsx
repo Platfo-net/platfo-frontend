@@ -103,9 +103,9 @@ export const postmanMenu: IMenu[] = [
     isDisable: true,
   },
   {
-    key: 'archive',
-    path: Path.Archive,
-    isDisable: true,
+    key: 'groups',
+    path: Path.PostmanGroups,
+    isDisable: false,
   },
   {
     key: 'contacts',

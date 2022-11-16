@@ -9,6 +9,7 @@ import { useTranslation } from 'next-i18next';
 
 export interface IModal {
   isVisible: boolean;
+  isLoading?: boolean;
   title?: string;
   width?: string;
   height?: string;
@@ -16,6 +17,7 @@ export interface IModal {
   children?: ReactElement;
   submitKey?: string;
   cancelKey?: string;
+  submitType?: 'button' | 'submit';
   submit?: any;
   cancel?: any;
 }
@@ -103,11 +105,13 @@ const Main = styled.main`
 
 export const Modal: FC<IModal> = ({
   isVisible = false,
+  isLoading = false,
   title,
   width = '100%',
   height = 'auto',
   submitKey = 'save',
   cancelKey = 'cancel',
+  submitType = 'button',
   children,
   cancel,
   submit,
@@ -148,13 +152,15 @@ export const Modal: FC<IModal> = ({
           </header>
         )}
         <Main>{children}</Main>
-        {submit && (
+        {((submit && submitType) || submitType === 'submit') && (
           <Footer>
             <Button
               size="sm"
               title={t(submitKey)}
               onClick={submit}
               color="secondary"
+              type={submitType}
+              isLoading={isLoading}
             />
             <Button size="sm" title={t(cancelKey)} onClick={cancel} />
           </Footer>
