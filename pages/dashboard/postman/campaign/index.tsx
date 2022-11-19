@@ -8,24 +8,22 @@ import { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import {
   IAccount,
-  IContactGroup,
+  ICampaign,
   Res_Account_All,
-  Res_Postman_Group_FacebookPageId,
+  Res_Postman_Campaign_FacebookPageId,
 } from '@/types/api';
 import { Typography } from '@/components/general/Typography';
 import BackdropLoading from '@/components/feedback/BackdropLoading/BackdropLoading';
 import AccountService from '@/services/endpoints/AccountService';
 import { Platform } from '@/constants/enums';
 import PostmanService from '@/services/endpoints/PostmanService';
-import ContactGroupForm from '@/components/pages/ContactGroupForm';
-import { AvatarGroup } from '@/components/dataDisplay/AvatarGroup';
 
 const { Text } = Typography;
 
-const GroupsPage: NextPageWithLayout = () => {
+const CampaignsPage: NextPageWithLayout = () => {
   const [loading, setLoading] = useState(false);
   const [accounts, setAccounts] = useState<Res_Account_All>([]);
-  const [groups, setGroups] = useState<IContactGroup[]>([]);
+  const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
   const [selectedAccount, setSelectedAccount] = useState<IAccount>();
 
   const getAccounts = async () => {
@@ -47,12 +45,12 @@ const GroupsPage: NextPageWithLayout = () => {
     }
   };
 
-  const getGroups = async (pageId: string) => {
+  const getCampaigns = async (pageId: string) => {
     try {
       setLoading(true);
-      const response: AxiosResponse<Res_Postman_Group_FacebookPageId> =
-        await PostmanService.getGroups(pageId);
-      setGroups(response.data.items);
+      const response: AxiosResponse<Res_Postman_Campaign_FacebookPageId> =
+        await PostmanService.getCampaigns(pageId);
+      setCampaigns(response.data.items);
       setLoading(false);
     } catch (e) {
       setLoading(false);
@@ -60,19 +58,8 @@ const GroupsPage: NextPageWithLayout = () => {
   };
 
   const changeSelectedAccount = async (account: IAccount) => {
-    await getGroups(account.page_id);
+    await getCampaigns(account.page_id);
     setSelectedAccount(account);
-  };
-
-  const removeGroup = async (group: IContactGroup) => {
-    try {
-      setLoading(true);
-      await PostmanService.deleteGroup(group.id);
-      await getAccounts();
-      setLoading(false);
-    } catch (e) {
-      setLoading(false);
-    }
   };
 
   useEffect(() => {
@@ -80,9 +67,9 @@ const GroupsPage: NextPageWithLayout = () => {
       const firstAccount = await getAccounts();
       if (firstAccount) {
         setSelectedAccount(firstAccount);
-        await getGroups(firstAccount.page_id);
+        await getCampaigns(firstAccount.page_id);
       } else {
-        setGroups([]);
+        setCampaigns([]);
       }
     })();
   }, []);
@@ -119,39 +106,28 @@ const GroupsPage: NextPageWithLayout = () => {
       <div className="flex flex-wrap">
         {selectedAccount && (
           <div className="basis-1/6 m-3 ">
-            <ContactGroupForm
-              pageId={selectedAccount.page_id}
-              change={() => getGroups(selectedAccount.page_id)}
-            />
+            {/*<ContactGroupForm*/}
+            {/*  pageId={selectedAccount.page_id}*/}
+            {/*  change={() => getGroups(selectedAccount.page_id)}*/}
+            {/*/>*/}
           </div>
         )}
 
-        {groups?.map((group) => {
+        {campaigns?.map((campaign) => {
           return (
-            <div className="basis-1/6 m-3" key={group.id}>
+            <div className="basis-1/6 m-3" key={campaign.id}>
               <Tile
-                data={group}
-                avatar={
-                  <AvatarGroup
-                    urlKey="profile_image"
-                    size={5}
-                    count={10}
-                    data={group.contacts}
-                    nameKey="username"
-                    className="mt-5"
-                  />
-                }
+                data={campaign}
                 width="255px"
                 height="255px"
                 // click={changeRoute}
                 // clickColor="postman"
                 // clickLabel={t('details')}
-                remove={removeGroup}
               >
                 <div className="flex flex-col text-center w-full">
-                  <Text weight="semiBold"> {group.name} </Text>
+                  <Text weight="semiBold"> {campaign.name} </Text>
                   <Text weight="light" color="nonActive">
-                    {group.description}
+                    {campaign.description}
                   </Text>
                 </div>
               </Tile>
@@ -163,7 +139,7 @@ const GroupsPage: NextPageWithLayout = () => {
   );
 };
 
-export default GroupsPage;
+export default CampaignsPage;
 
 export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
@@ -173,11 +149,11 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
   };
 };
 
-GroupsPage.getLayout = (page) => {
+CampaignsPage.getLayout = (page) => {
   return (
     <DashboardLayout
       topMenu={postmanMenu}
-      meta={{ title: 'Groups' }}
+      meta={{ title: 'Campaigns' }}
       color="postman"
     >
       {page}

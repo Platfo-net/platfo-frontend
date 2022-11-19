@@ -8,11 +8,12 @@ import { Typography } from '@/components/general/Typography';
 
 const { Text } = Typography;
 
-export type AvatarType = 'icon' | 'image';
+export type AvatarType = 'icon' | 'image' | 'text';
 export interface IAvatar {
   type: AvatarType;
   size?: number;
   icon?: BrandsIcon;
+  text?: string;
   url?: string;
   data?: any;
   color?: Color;
@@ -94,6 +95,17 @@ const WrapperIcon = styled.div<WrapperIconType>`
 }
 `;
 
+const WrapperText = styled.div`
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.components.border};
+  border-radius: 9999px;
+  span {
+    margin: auto;
+  }
+`;
+
 type WrapperSmallAvatarType = Pick<IAvatar, 'icon'>;
 const WrapperSmallAvatar = styled.div<WrapperSmallAvatarType>`
   position: absolute;
@@ -134,6 +146,7 @@ export const Avatar: React.FC<IAvatar> = ({
   color,
   isActive,
   title,
+  text,
   click,
 }) => {
   return (
@@ -150,6 +163,13 @@ export const Avatar: React.FC<IAvatar> = ({
           <WrapperIcon icon={icon}>
             <Icon name={icon} size="6xl" />
           </WrapperIcon>
+        )}
+        {type === 'text' && (
+          <WrapperText>
+            <Typography.Text weight="semiBold" size="lg">
+              {text}
+            </Typography.Text>
+          </WrapperText>
         )}
         {type === 'image' && url && icon && (
           <WrapperSmallAvatar icon={icon}>

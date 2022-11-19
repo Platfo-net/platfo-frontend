@@ -135,6 +135,7 @@ export interface IContactGroup {
   id: string;
   name: string;
   description: string;
+  contacts: { profile_image: string, username: string }[];
 }
 export type Res_Postman_Group_FacebookPageId = {
   items: IContactGroup[];
@@ -149,4 +150,18 @@ export type Body_Postman_Group = {
     contact_igs_id: string;
     contact_id: string;
   }[];
+};
+
+export interface ICampaign {
+  id: string;
+  name: string;
+  description: string;
+  created_at: string;
+  status: string;
+  is_draft: boolean;
+  group_name: string;
+}
+export type Res_Postman_Campaign_FacebookPageId = {
+  items: ICampaign[];
+  pagination: Pagination;
 };

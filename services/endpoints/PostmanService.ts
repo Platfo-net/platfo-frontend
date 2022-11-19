@@ -11,6 +11,9 @@ class Postman extends BaseApi {
   postGroup = (data: Body_Postman_Group) => this.$axios.post(`group`, data);
 
   deleteGroup = (id: string) => this.$axios.delete(`group/${id}`);
+
+  getCampaigns = (page_id: string, params?: IParams_Pagination) =>
+    this.$axios.get(`campaign/${page_id}`, { params });
 }
 
 const PostmanService = new Postman();
