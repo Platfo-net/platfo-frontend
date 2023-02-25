@@ -39,9 +39,9 @@ const DashboardLayout: NextPage<Props> = ({
   return (
     <Fragment>
       <Head>
-        <title>Botinow</title>
+        <title>Platfo</title>
         {/* TODO */}
-        <meta name="description" content="Botinow" />
+        <meta name="description" content="Platfo" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

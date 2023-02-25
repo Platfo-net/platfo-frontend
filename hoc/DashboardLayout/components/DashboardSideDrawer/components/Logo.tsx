@@ -1,12 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import BotinowLogo1 from "../../../../../assets/svg/botinow-logo1.svg";
+import PlatfoLogo1 from "../../../../../assets/svg/Platfo-logo1.svg";
 
 const Logo = ({href = "/"}) => {
   return (
     <Link href={href}>
       <span className="logo flex-col items-center justify-center  w-full ">
-        <BotinowLogo1 />
+        <PlatfoLogo1 />
       </span>
     </Link>
   );

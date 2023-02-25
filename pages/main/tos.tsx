@@ -22,7 +22,7 @@ const PrivacyPage: NextPage = () => {
                         <h2>1. Definitions&nbsp;</h2>
 
                         <p>
-                            When we say “we,” “us”, “our,” and “BOTINOW,” we are
+                            When we say “we,” “us”, “our,” and “Platfo,” we are
                             referring to AIMedic Inc.
                         </p>
 
@@ -334,7 +334,7 @@ const PrivacyPage: NextPage = () => {
                             When you add a Mailing List or create an email with
                             the Services, we may access the data on your list
                             and the contents of the email you are sending using
-                            the BOTINOW service.
+                            the Platfo service.
                         </p>
 
                         <h2>5.5. Web beacons</h2>
@@ -380,7 +380,7 @@ const PrivacyPage: NextPage = () => {
                             ability to provide relevant marketing and content to
                             you and to develop and provide you with more
                             relevant product features, and
-                            services.&nbsp;BOTINOW does not collect, retain or
+                            services.&nbsp;Platfo does not collect, retain or
                             share end-user information including unique user
                             identifiers, or personally identifiable information
                             gathered on sites or apps not owned by AIMedic.
@@ -409,7 +409,7 @@ const PrivacyPage: NextPage = () => {
                             you. We use this Anonymous Information to analyze
                             request and usage patterns so that we may enhance
                             the content of our Services and improve website
-                            navigation. BOTINOW reserves the right to use
+                            navigation. Platfo reserves the right to use
                             Anonymous Information for any purpose and disclose
                             Anonymous Information to third parties at its sole
                             discretion.
@@ -540,11 +540,11 @@ const PrivacyPage: NextPage = () => {
                             You may delete individual Subscribers upon their
                             request at any time. In addition, individual
                             Subscribers may contact us directly to request
-                            deletion of their data from individual BOTINOW
-                            user’s accounts or across multiple BOTINOW users’
+                            deletion of their data from individual Platfo
+                            user’s accounts or across multiple Platfo users’
                             accounts (to the extent the Subscriber is on more
-                            than one BOTINOW user’s list). It is important to
-                            remember that BOTINOW lists work independently of
+                            than one Platfo user’s list). It is important to
+                            remember that Platfo lists work independently of
                             each other, and deleting a Subscriber from one list
                             does not ensure that the same email address will
                             also be deleted from other lists where it may be
@@ -553,16 +553,16 @@ const PrivacyPage: NextPage = () => {
 
                         <p>
                             <strong>Right to rectification</strong>: You may
-                            access and update your BOTINOW account settings at
+                            access and update your Platfo account settings at
                             any time to correct or complete your account
                             information/ subscriber/contact information upon
                             their request at any time. You may also contact
-                            BOTINOW at any time to access, correct, amend or
+                            Platfo at any time to access, correct, amend or
                             delete information that we hold about you. In
                             addition, any data subject (including your
-                            subscribers and contacts) may contact BOTINOW
+                            subscribers and contacts) may contact Platfo
                             directly to access, correct, and/or delete
-                            information that BOTINOW may hold about the data
+                            information that Platfo may hold about the data
                             subject.
                         </p>
 
@@ -613,7 +613,7 @@ const PrivacyPage: NextPage = () => {
                         <p>
                             You should ensure that you are keeping accurate
                             records of your subscribers’ and contacts’ consent
-                            permitting you and BOTINOW to send them emails,
+                            permitting you and Platfo to send them emails,
                             store and use their personal data, and any other
                             processing activities which you are undertaking.
                         </p>
@@ -652,13 +652,13 @@ const PrivacyPage: NextPage = () => {
                             A Mailing List can be created in a number of ways,
                             including by importing Contacts, such as through CSV
                             or directly from your email client. Your Mailing
-                            Lists are stored on a secure BOTINOW server. We do
+                            Lists are stored on a secure Platfo server. We do
                             not, under any circumstances, sell your Mailing
                             Lists. If someone on your Mailing List complains or
                             contacts us, we might then contact that person. Only
                             authorized employees to have access to view Mailing
                             Lists. You may export (download) your Mailing Lists
-                            from BOTINOW at any time.
+                            from Platfo at any time.
                         </p>
 
                         <p>
@@ -669,7 +669,7 @@ const PrivacyPage: NextPage = () => {
                         <h2>10. Members and subscribers email tracking</h2>
 
                         <p>
-                            BOTINOW servers do not record email addresses of
+                            Platfo servers do not record email addresses of
                             visitors or Members unless expressly specified for
                             purposes such as means of identification for a
                             service or tool available for registered and/or
@@ -677,22 +677,22 @@ const PrivacyPage: NextPage = () => {
                         </p>
 
                         <p>
-                            BOTINOW will not sell or share Member’s email
+                            Platfo will not sell or share Member’s email
                             address with the third parties. Email addresses and
                             other associated information generated by the
                             Members are held in strict confidence.
                         </p>
 
                         <p>
-                            BOTINOW keeps Member’s email addresses in order to
+                            Platfo keeps Member’s email addresses in order to
                             send Members follow-up messages or company news,
-                            email addresses may be used also to market BOTINOW
+                            email addresses may be used also to market Platfo
                             products directly to the customers.
                         </p>
 
                         <p>
                             However, if you wish to avoid receiving any future
-                            email news from BOTINOW, please:
+                            email news from Platfo, please:
                         </p>
 
                         <ul>
@@ -800,12 +800,12 @@ const PrivacyPage: NextPage = () => {
                             AIMedic Company does not monitor, review or read
                             such information without the permission of the
                             owner, except to the extent required to assure the
-                            proper functioning of all BOTINOW service-related
+                            proper functioning of all Platfo service-related
                             systems.
                         </p>
 
                         <p>
-                            Your Mailing Lists are stored on a secure BOTINOW
+                            Your Mailing Lists are stored on a secure Platfo
                             server. We do not, under any circumstances, sell
                             your Mailing Lists. If someone on your Mailing List
                             complains or contacts us, we might then contact that
@@ -855,7 +855,7 @@ const PrivacyPage: NextPage = () => {
                         </p>
 
                         <p>
-                            BOTINOW does not store individual Internet account
+                            Platfo does not store individual Internet account
                             passwords in the accessible format, and will not
                             divulge or change any passwords on any account
                             without proper authorization from the account owner
@@ -892,7 +892,7 @@ const PrivacyPage: NextPage = () => {
                         </p>
 
                         <p>
-                            BOTINOW guarantees that any actions regarding
+                            Platfo guarantees that any actions regarding
                             Personal Data are carried out in full compliance
                             with this Policy and the principles set forth in the
                             EU GDPR.

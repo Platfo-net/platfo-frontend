@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  botinow-front:
-    container_name: botinow-front
-    domainname: botinow-front
+  Platfo-front:
+    container_name: Platfo-front
+    domainname: Platfo-front
     build: .
     ports:
       - "3000:3000"
