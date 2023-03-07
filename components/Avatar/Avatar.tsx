@@ -1,6 +1,6 @@
 import InstaIcon from "../../assets/svg/icons/instagram.svg";
 import BotBuilderIcon from "../../assets/svg/icons/comment-code.svg";
-import ErrorImage from "../../assets/img/botinow_g.png";
+import ErrorImage from "../../assets/img/platfo_g.png";
 
 /* eslint-disable @next/next/no-img-element */
 type AvatarProps = {};

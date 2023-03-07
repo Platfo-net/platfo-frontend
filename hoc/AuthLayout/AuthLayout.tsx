@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import React, { ReactNode } from 'react';
 import Link from 'next/link';
-import BotinowLogo1 from '../../assets/svg/botinow-logo1.svg';
+import PlatfoLogo1 from '../../assets/svg/platfo-logo1.svg';
 interface Props {
   children: ReactNode;
   className?: string;
@@ -12,7 +12,7 @@ const AuthLayout: NextPage<Props> = ({ children, className }) => {
       <div className="authBodyFrom m-auto">
         <Link href="/">
           <span className="logo flex-col items-center justify-center w-32 mx-auto mt-8">
-            <BotinowLogo1 />
+            <PlatfoLogo1 />
           </span>
         </Link>
         {children}

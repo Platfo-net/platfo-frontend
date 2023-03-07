@@ -2,8 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import landingMenu from 'assets/contents/landingMenu';
-import Logo from '../../../assets/svg/botinow-logo.svg';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image'
+import img from 'assets/img/platfo-logo-N.png'
+
 
 type LandingHeaderProps = {};
 
@@ -32,8 +34,8 @@ const LandingHeader: React.FC<LandingHeaderProps> = () => {
       <div className="logo px-4">
         <Link href="/">
           <a href="replace" className="flex justify-center items-center">
-            <Logo className="w-12 px-1 mx-1" />
-            <p className="font-extrabold text-xl pt-2">Botinow</p>
+            <Image src={img.src} width={40} height={40} className="w-12 px-1 mx-1" />
+            <p className="font-extrabold text-xl pt-2">Platfo</p>
           </a>
         </Link>
       </div>
