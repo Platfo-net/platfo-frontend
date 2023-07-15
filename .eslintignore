@@ -1,0 +1,4 @@
+!.storybook
+*.d.ts
+constants/enums.ts
+next.config.js
